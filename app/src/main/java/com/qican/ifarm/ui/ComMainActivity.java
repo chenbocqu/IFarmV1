@@ -55,12 +55,6 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     private List<ChangeColorIconWithText> mTabIndicators = new ArrayList<ChangeColorIconWithText>();
     private CommonTools myTool;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-    }
-
     @AfterViews
     void doSomeThing() {
         initView();

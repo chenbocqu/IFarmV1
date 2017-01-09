@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ifarm="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_view"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:layout_gravity="bottom">
+
+    <com.qican.ifarm.view.CircleImageView
+        android:id="@+id/iv_headimg"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_head_female"
+        ifarm:civ_border_color="@color/gray"
+        ifarm:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_nickname"
+        style="@style/Wrapper"
+        android:layout_below="@id/iv_headimg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="@null"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_usersex"
+            style="@style/Menu_Icon"
+            android:src="@drawable/female" />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            style="@style/MyText.Large"
+            android:layout_marginLeft="10dp"
+            android:text="小微牙"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_signature"
+        style="@style/MyText.Small"
+        android:layout_below="@id/ll_nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="淋了一场雨，看清了整个世界！"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/LabelText"
+            android:text="种蘑菇" />
+
+        <TextView
+            style="@style/LabelText"
+            android:background="@drawable/label_bg"
+            android:text="养鱼" />
+
+        <TextView
+            style="@style/LabelText"
+            android:background="@drawable/label_bg"
+            android:text="种植大豆" />
+    </LinearLayout>
+
+</RelativeLayout>

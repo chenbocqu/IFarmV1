@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/MyText.Large"
+        android:text="控制功能"
+        android:textSize="50sp" />
+
+    <TextView
+        style="@style/MyText.Large"
+        android:layout_marginTop="20dp"
+        android:text="该节点的相关控制操作\n（@与主页面的控制功能有点重复）"
+        android:textColor="@color/refresh_text_color_gray" />
+
+</LinearLayout>

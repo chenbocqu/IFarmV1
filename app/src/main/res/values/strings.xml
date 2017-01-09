@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">智能农场</string>
+
+    <string name="bottom_monitor">监测</string>
+    <string name="bottom_control">控制</string>
+    <string name="bottom_map">地图</string>
+    <string name="bottom_mine">我的</string>
+    <!--下拉刷新资源-->
+    <string name="xw_ptr_pull_to_refresh">下拉刷新</string>
+    <string name="xw_ptr_release_to_refresh">释放立即刷新</string>
+    <string name="xw_ptr_refreshing">正在刷新&#8230;</string>
+    <string name="xw_ptr_refresh_succeeded">刷新成功</string>
+    <string name="xw_ptr_refresh_failed">刷新失败</string>
+    <string name="xw_ptr_pull_up_to_load">上拉加载更多</string>
+    <string name="xw_ptr_release_to_load">释放立即加载</string>
+    <string name="xw_ptr_loading">正在加载&#8230;</string>
+    <string name="xw_ptr_load_succeeded">加载成功</string>
+    <string name="xw_ptr_load_failed">加载失败</string>
+
+    <string name="infowindow_navigation">导航</string>
+    <string name="infowindow_call">电话</string>
+    <string name="agent_addr">地址：%1$s</string>
+    <string name="infowindow_monitor">视频</string>
+    <string name="tabmenu1">数据</string>
+    <string name="tabmenu2">曲线</string>
+    <string name="tabmenu3">控制</string>
+
+</resources>

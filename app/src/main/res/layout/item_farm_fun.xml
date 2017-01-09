@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_selector"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/iv_img"
+            style="@style/MyImg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/MyText.Large.Black" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="@style/MyText"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:maxLines="2"
+                android:text="场描述农场描述农场描述农场描述农场描述农场描述农农场描述农场描述"
+                android:textColor="@color/text_light" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        style="@style/SplitLine"
+        android:layout_marginTop="10dp" />
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:horizontalSpacing="0dp"
+        android:listSelector="@null"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0dp" />
+    s
+</LinearLayout>

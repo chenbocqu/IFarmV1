@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_item_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_nodename"
+                style="@style/MyText"
+                android:layout_centerVertical="true"
+                android:text="花园新村"
+                android:textColor="@color/text_green" />
+
+            <LinearLayout
+                style="@style/LabelText"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/online" />
+
+                <TextView
+                    style="@style/MyText.Small"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:text="在线"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical">
+            <!-- 左边的图像-->
+            <RelativeLayout
+                android:id="@+id/rl_img_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_node_img"
+                    style="@style/MyImg" />
+
+                <TextView
+                    style="@style/MyText.Small"
+                    android:layout_below="@id/iv_node_img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="ID:10000132" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rl_img_info"
+                android:orientation="vertical">
+
+                <LinearLayout style="@style/MyPbItem">
+
+                    <TextView
+                        style="@style/MyText.LeftOfPb"
+                        android:text="湿度" />
+
+                    <cn.bingoogolapple.progressbar.BGAProgressBar
+                        android:id="@+id/pb_humidity"
+                        style="@style/MyProgressBar"
+                        app:bga_pb_isHiddenText="true"
+                        app:bga_pb_mode="horizontal"
+                        app:bga_pb_reachedColor="@color/reachcolor_humidity"
+                        app:bga_pb_reachedHeight="@dimen/progress_height"
+                        app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+                        app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+                    <TextView
+                        android:id="@+id/tv_humidity"
+                        style="@style/MyText.RightOfPb"
+                        android:text="63.9%" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/MyPbItem"
+                    android:layout_marginTop="@dimen/pbItemMargen">
+
+                    <TextView
+                        style="@style/MyText.LeftOfPb"
+                        android:text="温度1" />
+
+                    <cn.bingoogolapple.progressbar.BGAProgressBar
+                        android:id="@+id/pb_temperature1"
+                        style="@style/MyProgressBar"
+                        android:progress="23"
+                        app:bga_pb_isHiddenText="true"
+                        app:bga_pb_mode="horizontal"
+                        app:bga_pb_reachedColor="@color/reachcolor_temperature1"
+                        app:bga_pb_reachedHeight="@dimen/progress_height"
+                        app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+                        app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+                    <TextView
+                        android:id="@+id/tv_temperature1"
+                        style="@style/MyText.RightOfPb"
+                        android:text="63.9%" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/MyPbItem"
+                    android:layout_marginTop="@dimen/pbItemMargen">
+
+                    <TextView
+                        style="@style/MyText.LeftOfPb"
+                        android:text="温度2" />
+
+                    <cn.bingoogolapple.progressbar.BGAProgressBar
+                        android:id="@+id/pb_temperature2"
+                        style="@style/MyProgressBar"
+                        android:progress="67"
+                        app:bga_pb_isHiddenText="true"
+                        app:bga_pb_mode="horizontal"
+                        app:bga_pb_reachedColor="@color/reachcolor_temperature2"
+                        app:bga_pb_reachedHeight="@dimen/progress_height"
+                        app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+                        app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+                    <TextView
+                        android:id="@+id/tv_temperature2"
+                        style="@style/MyText.RightOfPb"
+                        android:text="63.9%" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/MyPbItem"
+                    android:layout_marginTop="@dimen/pbItemMargen">
+
+                    <TextView
+                        style="@style/MyText.LeftOfPb"
+                        android:text="土壤水" />
+
+                    <cn.bingoogolapple.progressbar.BGAProgressBar
+                        android:id="@+id/pb_watercontent"
+                        style="@style/MyProgressBar"
+                        android:progress="92"
+                        app:bga_pb_isHiddenText="true"
+                        app:bga_pb_mode="horizontal"
+                        app:bga_pb_reachedColor="@color/reachcolor_watercontent"
+                        app:bga_pb_reachedHeight="@dimen/progress_height"
+                        app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+                        app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+                    <TextView
+                        android:id="@+id/tv_watercontent"
+                        style="@style/MyText.RightOfPb"
+                        android:text="63.9%" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_light"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="6dp"
+                android:layout_height="match_parent"
+                android:background="@color/yellow" />
+
+            <TextView
+                android:id="@+id/tv_gengxin"
+                style="@style/MyText.Small"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="更新时间：" />
+
+            <TextView
+                android:id="@+id/tv_updatetime"
+                style="@style/MyText.Small"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tv_gengxin"
+                android:text="2015/2/21 下午1:32:21" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MyText.Small"
+                    android:text="详细信息" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/more" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

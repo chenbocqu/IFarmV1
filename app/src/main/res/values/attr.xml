@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bgColor" format="color|reference" />
+    <attr name="progressColor" format="color|reference" />
+    <attr name="radius" format="dimension" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="bGstrokeWidth" format="dimension" />
+
+    <declare-styleable name="ChangeColorIconWithText">
+        <attr name="bottom_icon" format="reference"></attr>
+        <attr name="bottom_color" format="color"></attr>
+        <attr name="bottom_text" format="string"></attr>
+        <attr name="bottom_text_size" format="dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgress">
+        <attr name="android:textColor" />
+        <attr name="bgColor" />
+        <attr name="progressColor" />
+        <attr name="radius" />
+        <attr name="strokeWidth" />
+        <attr name="bGstrokeWidth" />
+    </declare-styleable>
+
+    <!-- 圆形头像控件-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+    <!-- 滚轮控件-->
+    <declare-styleable name="WheelPicker">
+        <attr name="wp_maxvalue" format="integer" />
+        <attr name="wp_unit" format="string" />
+    </declare-styleable>
+
+    <!--广告展示-->
+    <declare-styleable name="Banner">
+        <attr name="default_image" format="reference" />
+        <attr name="delay_time" format="integer" />
+        <attr name="is_auto_play" format="boolean" />
+        <attr name="title_background" format="color|reference" />
+        <attr name="title_textcolor" format="color" />
+        <attr name="title_textsize" format="dimension" />
+        <attr name="title_height" format="dimension" />
+        <attr name="indicator_width" format="dimension" />
+        <attr name="indicator_height" format="dimension" />
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_drawable_selected" format="reference" />
+        <attr name="indicator_drawable_unselected" format="reference" />
+        <attr name="image_scale_type" format="enum">
+            <enum name="fit_xy" value="0" />
+            <enum name="center_crop" value="1" />
+        </attr>
+        <!-- <attr name="indicator_animator" format="reference" /> -->
+        <!-- <attr name="indicator_animator_reverse" format="reference" /> -->
+    </declare-styleable>
+
+    <declare-styleable name="FlikerProgressBar">
+
+        <attr name="textSize" format="dimension" />
+        <attr name="loadingColor" format="color" />
+        <attr name="stopColor" format="color" />
+        <attr name="flikerpb_radius" format="dimension" />
+        <attr name="borderWidth" format="dimension" />
+
+    </declare-styleable>
+    <!--下拉放大View-->
+    <declare-styleable name="DragScaleImageView">
+        <attr name="scale_image" format="reference|color" />
+    </declare-styleable>
+</resources>

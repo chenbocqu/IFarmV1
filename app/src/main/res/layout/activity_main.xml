@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xuedi="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 顶部titleBar-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_color">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <ImageView
+                style="@style/Menu_Icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                style="@style/MyText"
+                android:layout_gravity="center"
+                android:text="登录"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.qican.ifarm.view.MyViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></com.qican.ifarm.view.MyViewPager>
+    <!-- 底部tab -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/tab_bg"
+        android:orientation="horizontal">
+
+        <com.qican.ifarm.view.ChangeColorIconWithText
+            android:id="@+id/id_indicator_one"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            xuedi:bottom_color="@color/main_color"
+            xuedi:bottom_icon="@drawable/near"
+            xuedi:bottom_text="附近的人"
+            xuedi:bottom_text_size="12sp" />
+
+        <com.qican.ifarm.view.ChangeColorIconWithText
+            android:id="@+id/id_indicator_two"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            xuedi:bottom_color="@color/main_color"
+            xuedi:bottom_icon="@drawable/farm"
+            xuedi:bottom_text="我的农场"
+            xuedi:bottom_text_size="12sp" />
+
+        <com.qican.ifarm.view.ChangeColorIconWithText
+            android:id="@+id/id_indicator_three"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            xuedi:bottom_color="@color/main_color"
+            xuedi:bottom_icon="@drawable/tab_valve"
+            xuedi:bottom_text="控制"
+            xuedi:bottom_text_size="12sp" />
+
+        <com.qican.ifarm.view.ChangeColorIconWithText
+            android:id="@+id/id_indicator_four"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            xuedi:bottom_color="@color/main_color"
+            xuedi:bottom_icon="@drawable/mine"
+            xuedi:bottom_text="@string/bottom_mine"
+            xuedi:bottom_text_size="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

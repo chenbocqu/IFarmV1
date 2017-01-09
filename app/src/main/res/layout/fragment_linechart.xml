@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:paddingBottom="5dp">
+
+        <EditText
+            style="@style/MyText.Small"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_bg"
+            android:gravity="center|left"
+            android:hint="Please Select..."
+            android:text="" />
+
+        <Button
+            style="@style/MyText.Small"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.3"
+            android:background="@drawable/roundbtn_bg"
+            android:text="确认搜索"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:shadowColor="@color/light_gray"
+        app:arrowTint="@color/main_color"
+        app:textTint="@color/text_color" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:paddingRight="10dp" />
+
+</LinearLayout>

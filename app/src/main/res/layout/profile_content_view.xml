@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+    <!-- 昵称-->
+    <RelativeLayout
+        android:id="@+id/rl_userinfo"
+        style="@style/MenuWrapper"
+        android:layout_marginTop="@dimen/menuMargin">
+
+        <ImageView
+            android:id="@+id/iv_help"
+            style="@style/Menu_Icon.Left"
+            android:src="@drawable/userinfo" />
+
+        <TextView
+            style="@style/MenuText"
+            android:layout_toRightOf="@id/iv_help"
+            android:text="我的信息" />
+
+        <ImageView style="@style/ArrowRight" />
+    </RelativeLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_farm"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_farm"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/myfarm" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_farm"
+                android:text="我的农场" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+        <!-- 昵称-->
+        <RelativeLayout
+            android:id="@+id/rl_valve"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_valve"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/valve" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_valve"
+                android:text="控制功能" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_friend"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_friend"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/friend"
+                android:tint="@color/main_color" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_friend"
+                android:text="我的好友" />
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rl_concern"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_concern"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/concern" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_concern"
+                android:text="我的关注" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_comquestion"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_comquestion"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/comquestion"
+                android:tint="@color/yellow" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_comquestion"
+                android:text="常见问题" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+        <!-- 昵称-->
+        <RelativeLayout
+            android:id="@+id/rl_service"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_service"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/servicer" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_service"
+                android:text="客服在线" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_setting"
+            style="@style/MenuWrapper"
+            android:layout_marginTop="@dimen/menuMargin">
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/setting" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_setting"
+                android:text="设置" />
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+        <!-- 昵称-->
+        <RelativeLayout
+            android:id="@+id/rl_logout"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_logout"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/logout" />
+
+            <ImageView style="@style/ArrowRight" />
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_logout"
+                android:text="注销当前账户" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+</LinearLayout>

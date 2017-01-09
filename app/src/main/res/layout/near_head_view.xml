@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ifarm="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_view"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:layout_gravity="bottom">
+
+    <View
+        android:id="@+id/v_centerline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/tv_signature"
+        style="@style/MyText.Small"
+        android:layout_below="@id/v_centerline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="淋了一场雨，看清了整个世界！"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/rl_headimg"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_above="@id/v_centerline"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp">
+
+        <com.qican.ifarm.view.CircleImageView
+            android:id="@+id/iv_headimg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_head_female"
+            ifarm:civ_border_color="@color/gray"
+            ifarm:civ_border_width="2dp" />
+
+        <ImageView
+            style="@style/Menu_Icon.Small"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/female" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_menu"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_trans"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_concern"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/trans_btn_selector"
+            android:gravity="center"
+            android:text="关注"
+            android:textColor="@color/white" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_sendmsg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/trans_btn_selector"
+            android:gravity="center"
+            android:text="发消息"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ll_menu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_label1"
+            style="@style/LabelText"
+            android:layout_marginLeft="0dp"
+            android:text="种蘑菇" />
+
+        <TextView
+            android:id="@+id/tv_label2"
+            style="@style/LabelText"
+            android:text="养鱼" />
+
+        <TextView
+            android:id="@+id/tv_label3"
+            style="@style/LabelText"
+            android:text="黄瓜" />
+
+        <TextView
+            android:id="@+id/tv_label4"
+            style="@style/LabelText"
+            android:text="大豆" />
+    </LinearLayout>
+</RelativeLayout>

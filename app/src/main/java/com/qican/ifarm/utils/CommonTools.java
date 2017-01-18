@@ -17,26 +17,15 @@ import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-//import com.qican.ygj.R;
-//import com.qican.ygj.bean.Camera;
-//import com.qican.ygj.bean.Pond;
-//import com.qican.ygj.bean.Pump;
-//import com.qican.ygj.listener.LoggingListener;
-//import com.qican.ygj.ui.login.LoginActivity;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.listener.LoggingListener;
-import com.qican.ifarm.view.CircleImageView;
+import com.qican.ifarm.ui.login.LoginActivity;
 import com.zhy.base.cache.disk.DiskLruCacheHelper;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -44,8 +33,6 @@ import com.zhy.http.okhttp.callback.BitmapCallback;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
@@ -189,9 +176,9 @@ public class CommonTools {
     /**
      * 带参数的启动
      *
-     * @param o
-     * @param activity
-     * @return
+     * @param o        传递参数
+     * @param activity 要启动的avtivity
+     * @return 当前实例
      */
     public CommonTools startActivity(Serializable o, Class<?> activity) {
         try {
@@ -221,8 +208,8 @@ public class CommonTools {
     /**
      * 得到上一页面传递过来的参数
      *
-     * @param o
-     * @return
+     * @param o 已经实例化的类型传递参数
+     * @return 上一页面传递过来的参数
      */
     public Serializable getParam(@NonNull Serializable o) {
         Bundle bundle = ((Activity) mContext).getIntent().getExtras();
@@ -234,7 +221,7 @@ public class CommonTools {
     /**
      * 启动activity,得到返回结果
      *
-     * @param activity
+     * @param activity 要启动的activity
      */
     public void startActivityForResult(Class<?> activity, int requestCode) {
         try {
@@ -257,9 +244,9 @@ public class CommonTools {
     /**
      * 带参数的启动
      *
-     * @param o
-     * @param activity
-     * @return
+     * @param o        xx
+     * @param activity XXX
+     * @return 当前实例
      */
     public CommonTools startActivityForResult(Serializable o, Class<?> activity, int requestCode) {
         try {
@@ -395,8 +382,7 @@ public class CommonTools {
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
-                            showInfo("没登录，跳转待实现");
-//                            startActivity(LoginActivity.class);
+                            startActivity(LoginActivity.class);
                             sDialog.dismissWithAnimation();
                         }
                     })
@@ -544,8 +530,8 @@ public class CommonTools {
     /**
      * 通过用户Id存储用户信息到本地
      *
-     * @param userInfo
-     * @return
+     * @param userInfo 要保存用户信息
+     * @return 当前实例
      */
     public CommonTools setComUserInfoById(String userId, ComUser userInfo) {
         log("存入用户信息，key:" + ConstantValue.KEY_COMUSERINFO + userId + ",value:" + userInfo.toString());
@@ -553,4 +539,41 @@ public class CommonTools {
         return this;
     }
 
+    public CommonTools showDefaultHeadImgBySex(ImageView ivHeadImg, String sex) {
+        if (sex == null) {//为空就直接返回了避免错误
+            return this;
+        }
+        Bitmap female = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_head_female);
+        Bitmap male = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_head_male);
+        //设置性别图标
+        switch (sex) {
+            case "男":
+                ivHeadImg.setImageBitmap(male);
+                break;
+            case "女":
+                ivHeadImg.setImageBitmap(female);
+                break;
+            default:
+                log("显示默认头像不成功:sex[" + sex + "]");
+                break;
+        }
+        return this;
+    }
+
+    public void showTokenLose() {
+        // 未登录则提示
+        new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Token失效")
+                .setContentText("token失效了哦（账号在远程登录，确认是否为本人操作，为保证账号安全，可及时修改密码）!")
+                .setConfirmText("重新登录")
+                .setCancelText("取  消")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        startActivity(LoginActivity.class);
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .show();
+    }
 }

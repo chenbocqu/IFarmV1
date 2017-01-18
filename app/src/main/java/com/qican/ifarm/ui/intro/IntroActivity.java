@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.WindowManager;
 
 import com.github.paolorotolo.appintro.AppIntro;
-import com.qican.ifarm.ui.ComMainActivity;
+import com.qican.ifarm.ui.ComMainActivity_;
 import com.qican.ifarm.utils.CommonTools;
 
 public class IntroActivity extends AppIntro {
@@ -70,12 +70,12 @@ public class IntroActivity extends AppIntro {
         if (msg == null) msg = "null";
         switch (msg) {
             case "firstIn":
-                myTool.startActivity(ComMainActivity.class);
+                myTool.startActivity(ComMainActivity_.class);
                 break;
             case "notFirstIn":
                 break;
             default:
-                myTool.startActivity(ComMainActivity.class);
+                myTool.startActivity(ComMainActivity_.class);
         }
         finish();
     }

@@ -246,7 +246,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                 }.start();
                                 toLoginEm();//登录环信账号
                                 break;
-                            case "error":
+                            case "wrong":
+                                mLoginDialog.setTitleText("登录失败")
+                                        .setContentText("密码或用户名错误,请重新输入！")
+                                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                            @Override
+                                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                                sweetAlertDialog.dismissWithAnimation();
+                                                edtPassword.setText("");
+                                            }
+                                        })
+                                        .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                 break;
                             case "errorToken":
                                 myTool.log("errorToken");

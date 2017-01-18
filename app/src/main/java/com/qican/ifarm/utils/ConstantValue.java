@@ -61,4 +61,6 @@ public interface ConstantValue {
     String KEY_TOKEN = "KEY_TOKEM";
     String KEY_ISEMCOUNTEXIST = "KEY_ISEMCOUNTEXIST";
     String KEY_COMUSERINFO = "INFO_";//普通用户信息
+    String LABEL_SPLIT = ",";
+    String TOKEN_LOSE = "lose efficacy";
 }

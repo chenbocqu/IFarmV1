@@ -114,7 +114,6 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
 
     private void initView() {
         myTool = new CommonTools(this);
-
         // 拿到底部的四个自定义View
         ChangeColorIconWithText indicatorHomePage = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
         ChangeColorIconWithText indicatorNearby = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
@@ -135,7 +134,6 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
         //默认是首页设置为选中状态，默认首页title
         indicatorHomePage.setIconAlpha(1.0f);
         setUITitle(0);
-        myTool.log("Hello Android Annotations!");
     }
 
     @Override

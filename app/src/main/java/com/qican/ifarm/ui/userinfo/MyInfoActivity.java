@@ -29,9 +29,11 @@ import com.qican.ifarm.beanfromzhu.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.listener.OnDialogListener;
 import com.qican.ifarm.listener.OnSexDialogListener;
+import com.qican.ifarm.listener.TokenListener;
 import com.qican.ifarm.ui.intro.IntroActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
+import com.qican.ifarm.utils.IFarmData;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -166,6 +168,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                 break;
         }
     }
+
     /**
      * 性别更新
      */
@@ -182,7 +185,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         pbUploadHead.setVisibility(View.VISIBLE);
 
         String url = ConstantValue.SERVICE_ADDRESS + "user/uploadImage";
-        //上传池塘头像
+        //上传用户头像
         OkHttpUtils.post().url(url)
                 .addParams("userId", myTool.getUserId())
                 .addParams("flag", ConstantValue.UPLOAD_HEADIMG)//flag=0表示上次头像
@@ -230,6 +233,10 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         myTool.log("查询用户信息失败，异常为：" + e.toString());
+                        if (e.getClass().getSimpleName().equals("JsonSyntaxException"))
+                        {
+                            myTool.showTokenLose();
+                        }
                     }
 
                     @Override

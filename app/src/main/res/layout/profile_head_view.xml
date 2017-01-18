@@ -61,12 +61,12 @@
 
         <TextView
             style="@style/LabelText"
-            android:background="@drawable/label_bg"
+            android:background="@drawable/label_bg_fill"
             android:text="养鱼" />
 
         <TextView
             style="@style/LabelText"
-            android:background="@drawable/label_bg"
+            android:background="@drawable/label_bg_fill"
             android:text="种植大豆" />
     </LinearLayout>
 

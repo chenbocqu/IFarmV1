@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
@@ -47,9 +52,10 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
     //下拉刷新
     private PullToRefreshLayout mRefreshLayout;
     private PullListView mListView;
-    private final int REFRESH_CNT = 20;
+    private final int REFRESH_CNT = 20;//每次刷新多少个数据
     Bitmap female;
     Bitmap male;
+    RelativeLayout rlNodata;
 
     @Nullable
     @Override
@@ -68,9 +74,17 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
     }
 
     private void initDatas() {
-        female = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.female);
-        male = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.male);
+        female = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.default_head_female);
+        male = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.default_head_male);
         mDatas = new ArrayList<>();
+        mAdpater = new UserAdapter(getActivity(), mDatas, R.layout.item_near_person);
+        mListView.setAdapter(mAdpater);
+        showNoData();
+        refreshData();
+//        mDatas = IFarmFakeData.getUserList();
+    }
+
+    private void refreshData() {
         OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -81,19 +95,54 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         myTool.log("用户列表获取异常：" + e.toString());
+                        mRefreshLayout.refreshFinish(true);
                     }
 
                     @Override
                     public void onResponse(List<User> users, int id) {
+                        mRefreshLayout.refreshFinish(true);
+                        if (users.isEmpty()) {
+                            myTool.showInfo("没有查询到数据！");
+                            return;
+                        }
+                        mDatas.clear();
                         for (int i = 0; i < users.size(); i++) {
                             mDatas.add(new ComUser(users.get(i)));
                             myTool.log(users.get(i).toString());
                         }
-                        mAdpater = new UserAdapter(getActivity(), mDatas, R.layout.item_near_person);
-                        mListView.setAdapter(mAdpater);
+                        notifyData();
                     }
                 });
-//        mDatas = IFarmFakeData.getUserList();
+    }
+
+    private void notifyData() {
+        mAdpater.notifyDataSetChanged();
+//        rlNodata.setVisibility(mDatas.isEmpty() ? View.VISIBLE : View.GONE);//直接显示
+        if (mDatas.isEmpty()) {
+            showNoData();
+        } else {
+            hideNoData();
+        }
+    }
+
+    private void hideNoData() {
+        YoYo.with(Techniques.FadeOut)
+                .withListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        rlNodata.setVisibility(View.GONE);
+                    }
+                })
+                .duration(100)
+                .playOn(rlNodata);
+    }
+
+    private void showNoData() {
+        rlNodata.setVisibility(View.VISIBLE);
+        YoYo.with(Techniques.FadeIn)
+                .duration(1000)
+                .playOn(rlNodata);
     }
 
     private void initEvent() {
@@ -103,33 +152,44 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
     private void initView(View v) {
         mRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.pullToRefreshLayout);
         mListView = (PullListView) v.findViewById(R.id.pullListView);
-
+        rlNodata = (RelativeLayout) v.findViewById(R.id.rl_nodata);
         myTool = new CommonTools(getActivity());
     }
 
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-        mRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mDatas.clear();
-                mDatas.addAll(IFarmFakeData.getUserList());
-                mAdpater.notifyDataSetChanged();
-                mRefreshLayout.refreshFinish(true);
-            }
-        }, 1000);
+        refreshData();
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-        mRefreshLayout.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mDatas.addAll(IFarmFakeData.getUserList());
-                mAdpater.notifyDataSetChanged();
-                mRefreshLayout.loadMoreFinish(true);
-            }
-        }, 1000);
+        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
+                .addParams("userId", myTool.getUserId())
+                .addParams("signature", myTool.getToken())
+                .addParams("beginIndex", String.valueOf(mDatas.size()))
+                .addParams("count", String.valueOf(REFRESH_CNT))
+                .build()
+                .execute(new BeanCallBack<List<User>>() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        myTool.log("用户列表获取异常：" + e.toString());
+                        mRefreshLayout.loadMoreFinish(true);
+                    }
+
+                    @Override
+                    public void onResponse(List<User> users, int id) {
+                        mRefreshLayout.loadMoreFinish(true);
+                        if (users.isEmpty()) {
+                            myTool.showInfo("没有更多数据了！");
+                            return;
+                        }
+                        for (int i = 0; i < users.size(); i++) {
+                            mDatas.add(new ComUser(users.get(i)));
+                            myTool.log(users.get(i).toString());
+                        }
+                        notifyData();
+                    }
+                });
     }
 
 

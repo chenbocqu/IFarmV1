@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_selector"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        style="@style/MyImg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/Wrapper"
+            android:layout_gravity="center_vertical"
+            android:background="@null">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/MyText.Large.Black" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/MyText.Small"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_light" />
+        </RelativeLayout>
+
+        <LinearLayout
+            style="@style/Wrapper"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/tv_name"
+            android:background="@null"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvLabel1"
+                style="@style/LabelText1"
+                android:layout_marginLeft="0dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvLabel2"
+                style="@style/LabelText1"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvLabel3"
+                style="@style/LabelText1"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="···"
+                android:textColor="@color/yellow"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_desc"
+            style="@style/MyText"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="center|left"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="场描述农场描述农场描述农场描述农场描述农场描述农农场描述农场描述农场描述农场描述农场描述"
+            android:textColor="@color/text_light" />
+    </LinearLayout>
+
+</LinearLayout>

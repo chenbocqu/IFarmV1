@@ -1,14 +1,81 @@
+/**
+ * 农场
+ */
 package com.qican.ifarm.bean;
 
-/**
- * Created by Administrator on 2016/12/27 0027.
- */
-public class Farm {
+import com.qican.ifarm.utils.ConstantValue;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class Farm implements Serializable {
     private String id;
     private String name;
     private String desc;
     private String time;
     private String imgUrl;
+    private String labels;
+    private List<String> labelList;
+    private Label label;
+
+    public Farm() {
+    }
+
+    public Farm(com.qican.ifarm.beanfromzhu.Farm farm) {
+        setId(String.valueOf(farm.getFarmId()));
+        setName(farm.getFarmName());
+        setDesc(farm.getFarmDescribe());
+        setTime(farm.getFarmCreateTime());
+        setImgUrl(farm.getFarmImageUrl());
+        setLabels(farm.getFarmLabel());
+        if (farm.getFarmLabel() != null) {
+            Label label = new Label(farm.getFarmLabel());
+            setLabel(label);
+            setLabelList(label.getLabelList());
+        }
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    /**
+     * 添加标签
+     *
+     * @param label
+     */
+    public void addLabel(String label) {
+        if (this.labels != null && this.labels != "") {
+            labels = labels + ConstantValue.LABEL_SPLIT + label;
+        } else {
+            labels = label;
+        }
+        this.labelList.clear();
+        String tempLabels[] = this.labels.split(ConstantValue.LABEL_SPLIT);
+        for (int i = 0; i < tempLabels.length; i++) {
+            this.labelList.add(tempLabels[i]);
+        }
+    }
+
+    public String getLabels() {
+        return labels;
+    }
+
+    public void setLabels(String labels) {
+        this.labels = labels;
+    }
+
+    public List<String> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<String> labelList) {
+        this.labelList = labelList;
+    }
 
     public String getId() {
         return id;
@@ -85,5 +152,19 @@ public class Farm {
         public Farm build() {
             return farm;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Farm{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", time='" + time + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", labels='" + labels + '\'' +
+                ", labelList=" + labelList +
+                ", label=" + label +
+                '}';
     }
 }

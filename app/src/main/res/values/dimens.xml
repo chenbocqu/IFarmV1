@@ -31,5 +31,10 @@
     <dimen name="mapTypeBtnLeft">10dp</dimen>
     <dimen name="sidemargin">50dp</dimen>
     <dimen name="edittextRadius">10dp</dimen>
+    <dimen name="labelPadding">8dp</dimen>
+    <dimen name="roundLabel">3dp</dimen>
+    <dimen name="labeTop">5dp</dimen>
+    <dimen name="linePaddingTop">3dp</dimen>
+    <dimen name="linePaddingLeft">12dp</dimen>
 
 </resources>

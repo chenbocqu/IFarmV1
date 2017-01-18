@@ -111,8 +111,7 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                 myTool.showInfo("关注待实现");
                 break;
             case R.id.tv_sendmsg:
-                startActivity(new Intent(this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, "15025316896"));
-                myTool.showInfo("即时通讯待实现");
+                startActivity(new Intent(this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, friend.getId()));
                 break;
         }
     }

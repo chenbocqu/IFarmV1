@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#0682fd</color>
     <color name="colorPrimaryDark">#0373e2</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#19c901</color>
     <color name="white">#ffffff</color>
 
     <color name="main_color">@color/colorPrimary</color>
@@ -14,6 +14,7 @@
     <color name="text_green">#05ab03</color>
 
     <color name="yellow">#f78b38</color>
+    <color name="yellow_trans">#66f78b38</color>
     <color name="gray_light">#f4f4f4</color>
     <color name="reachcolor_humidity">#FFC73B</color>
     <color name="unreachcolor_humidity">#ECF0F1</color>
@@ -42,5 +43,7 @@
     <color name="text_gray">#d0d0d0</color>
     <color name="gray_bg">#e0e0e0</color>
     <color name="trans">#00000000</color>
+    <color name="green">#25ab2e</color>
+    <color name="green_trans">#6625ab2e</color>
 
 </resources>

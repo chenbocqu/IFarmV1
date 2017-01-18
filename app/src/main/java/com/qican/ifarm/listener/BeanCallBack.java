@@ -24,7 +24,7 @@ public abstract class BeanCallBack<T> extends Callback<T> {
                 //如果是String类型，直接返回字符串
                 return (T) response.body().string();
             } else {
-                //如果是 Bean List Map ，则解析完后返回
+                // 如果是 Bean List Map ，则解析完后返回
                 return new Gson().fromJson(response.body().string(), beanType);
             }
         } else {

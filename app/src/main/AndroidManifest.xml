@@ -119,10 +119,20 @@
             android:name=".ui.login.ResetPwdActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.farm.AddFarmActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.AddLabelActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.FarmListActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--android:windowSoftInputMode="stateHidden|adjustResize" />-->
 
         <service android:name="com.amap.api.location.APSService"></service>
 

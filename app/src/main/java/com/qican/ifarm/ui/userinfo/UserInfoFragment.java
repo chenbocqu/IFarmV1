@@ -19,6 +19,9 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.listener.OnFragmentListener;
 import com.qican.ifarm.ui.chat.MainActivity;
+import com.qican.ifarm.ui.farm.AddFarmActivity_;
+import com.qican.ifarm.ui.farm.FarmListActivity;
+import com.qican.ifarm.ui.farm.FarmListActivity_;
 import com.qican.ifarm.ui.login.LoginActivity;
 import com.qican.ifarm.ui.myfriend.MyFriendActivity;
 import com.qican.ifarm.utils.CommonTools;
@@ -30,11 +33,12 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
 
     private CommonTools myTool;
     private PullToZoomScrollViewEx scrollView;
-    private RelativeLayout llMyInfo, rlSetting, rlService, rlComQuestion, rlFriend, rlLogout;
+    private RelativeLayout llMyInfo, rlSetting, rlService, rlComQuestion, rlFriend, rlLogout, rlFarm;
     private OnFragmentListener mCallBack;
     private ComUser userInfo;
     private TextView tvNickName, tvSignature;
     private ImageView ivHeadImg, ivSex;
+
 
     @Nullable
     @Override
@@ -80,6 +84,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
                             .equals(userInfo.getSex()) ?
                             R.drawable.default_head_male :
                             R.drawable.default_head_female);
+        } else {
+            myTool.showDefaultHeadImgBySex(ivHeadImg, userInfo.getSex());//显示默认头像
         }
     }
 
@@ -101,6 +107,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         rlComQuestion = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_comquestion);
         rlFriend = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_friend);
         rlLogout = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_logout);
+        rlFarm = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_farm);
 
         tvNickName = (TextView) scrollView.getRootView().findViewById(R.id.tv_nickname);
         tvSignature = (TextView) scrollView.getRootView().findViewById(R.id.tv_signature);
@@ -117,6 +124,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         rlFriend.setOnClickListener(this);
         rlLogout.setOnClickListener(this);
         ivHeadImg.setOnClickListener(this);
+        rlFarm.setOnClickListener(this);
     }
 
     @Override
@@ -157,6 +165,9 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
             case R.id.iv_headimg:
                 myTool.startActivity(HeadInfoActivity.class);
                 getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                break;
+            case R.id.rl_farm:
+                myTool.startActivity(FarmListActivity_.class);
                 break;
         }
     }

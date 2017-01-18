@@ -63,6 +63,10 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="FarmLabel" parent="LabelText1">
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="LabelInput" parent="LabelText">
         <item name="android:background">@drawable/label_input_bg</item>
         <item name="android:textColor">@color/text_gray</item>
@@ -75,8 +79,7 @@
     <style name="MyImg">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">80dp</item>
-        <item name="android:src">@drawable/image_placeholder</item>
-        <item name="android:tint">@color/gray_light</item>
+        <item name="android:src">@drawable/img_holder</item>
     </style>
 
     <style name="MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">

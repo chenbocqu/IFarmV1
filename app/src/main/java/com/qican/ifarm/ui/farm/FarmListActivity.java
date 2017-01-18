@@ -2,6 +2,8 @@ package com.qican.ifarm.ui.farm;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,7 +19,6 @@ import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.BeanCBWithTkCk;
-import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.view.refresh.PullListView;
@@ -28,7 +29,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.ViewsById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +47,7 @@ public class FarmListActivity extends Activity {
     PullListView mListView;
     private FarmAdaper mAdapter;
     private List<Farm> mDatas;
+    private Bitmap defaultFarmPic;
 
     @AfterViews
     void main() {
@@ -55,6 +56,8 @@ public class FarmListActivity extends Activity {
     }
 
     private void initData() {
+        defaultFarmPic = BitmapFactory.decodeResource(getResources(), R.mipmap.default_farmpic);
+
         mDatas = new ArrayList<>();
         mAdapter = new FarmAdaper(this, mDatas, R.layout.item_farm_activity);
         mListView.setAdapter(mAdapter);
@@ -67,9 +70,10 @@ public class FarmListActivity extends Activity {
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
-                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromzhu.Farm>>(this) {
+                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromzhu.Farm>>() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        e.printStackTrace();
                         myTool.log("农场列表e：" + e.getMessage());
                     }
 
@@ -129,13 +133,20 @@ public class FarmListActivity extends Activity {
 
         @Override
         public void convert(ViewHolder helper, Farm item) {
+
+            myTool.log("convert URL:" + item.getImgUrl());
+
             if (item.getImgUrl() != null) {
                 helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
+            } else {
+                ((ImageView) helper.getView(R.id.iv_img)).setImageBitmap(defaultFarmPic);
             }
             helper.setText(R.id.tv_name, item.getName());
             helper.setText(R.id.tv_time, item.getTime());
             helper.setText(R.id.tv_desc, item.getDesc());
-            setLabel(helper, item.getLabel());//设置农场标签
+            if (item.getLabel() != null) {
+                setLabel(helper, item.getLabel());//设置农场标签
+            }
         }
     }
 
@@ -149,12 +160,13 @@ public class FarmListActivity extends Activity {
         tvLabels.add((TextView) helper.getView(R.id.tvLabel3));
         TextView tvMore = helper.getView(R.id.tvMore);
 
-        List<String> labelList = label.getLabelList();
         boolean showMore = false;
         //全部设置为不见
         for (int i = 0; i < tvLabels.size(); i++) {
             tvLabels.get(i).setVisibility(View.GONE);
         }
+
+        List<String> labelList = label.getLabelList();
         int totalLen = 0;
         for (int i = 0; i < tvLabels.size() && i < labelList.size(); i++) {
             totalLen = totalLen + labelList.get(i).length();

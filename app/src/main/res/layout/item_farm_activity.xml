@@ -38,7 +38,7 @@
         <LinearLayout
             style="@style/Wrapper"
             android:layout_centerVertical="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_toRightOf="@id/tv_name"
             android:background="@null"
             android:gravity="left"
@@ -46,19 +46,17 @@
 
             <TextView
                 android:id="@+id/tvLabel1"
-                style="@style/LabelText1"
+                style="@style/FarmLabel"
                 android:layout_marginLeft="0dp"
                 android:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvLabel2"
-                style="@style/LabelText1"
-                android:visibility="visible" />
+                style="@style/FarmLabel" />
 
             <TextView
                 android:id="@+id/tvLabel3"
-                style="@style/LabelText1"
-                android:visibility="visible" />
+                style="@style/FarmLabel" />
 
             <TextView
                 android:id="@+id/tvMore"
@@ -75,10 +73,10 @@
             style="@style/MyText"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:gravity="center|left"
+            android:gravity="top|left"
             android:lines="2"
             android:maxLines="2"
-            android:text="场描述农场描述农场描述农场描述农场描述农场描述农农场描述农场描述农场描述农场描述农场描述"
+            android:text="场描述农场描场描述农场描述"
             android:textColor="@color/text_light" />
     </LinearLayout>
 

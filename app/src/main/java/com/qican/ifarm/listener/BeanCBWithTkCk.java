@@ -4,11 +4,9 @@
  */
 package com.qican.ifarm.listener;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.zhy.http.okhttp.callback.Callback;
 
@@ -18,17 +16,6 @@ import java.lang.reflect.Type;
 import okhttp3.Response;
 
 public abstract class BeanCBWithTkCk<T> extends Callback<T> {
-
-    private Context mContext;
-    private CommonTools myTool;
-
-    public BeanCBWithTkCk() {
-    }
-
-    public BeanCBWithTkCk(Context context) {
-        this.mContext = context;
-        myTool = new CommonTools(mContext);
-    }
 
     @Override
     public T parseNetworkResponse(Response response, int id) throws Exception {
@@ -41,15 +28,14 @@ public abstract class BeanCBWithTkCk<T> extends Callback<T> {
                 //如果是String类型，直接返回字符串
                 return (T) response.body().string();
             } else {
+                String str = response.body().string();
                 //签名失效
-                if (ConstantValue.TOKEN_LOSE.equals(response.body().string())) {
+                if (ConstantValue.TOKEN_LOSE.equals(str)) {
                     Log.d("BeanCallBack", "解析返回结果时发现Token失效！");
-                    if (myTool != null)
-                        myTool.showTokenLose();
                     return null;
                 }
                 // 如果是 Bean List Map ，则解析完后返回
-                return new Gson().fromJson(response.body().string(), beanType);
+                return new Gson().fromJson(str, beanType);
             }
         } else {
             //如果没有写泛型，直接返回Response对象

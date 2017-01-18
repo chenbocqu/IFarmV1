@@ -22,7 +22,7 @@
     <dimen name="roundBtnRadius">30dip</dimen>
     <dimen name="roundItemRadius">3dip</dimen>
     <dimen name="btnStroke">0.5dp</dimen>
-    
+
     <dimen name="textsize_normal">16sp</dimen>
     <dimen name="textsize_small">12sp</dimen>
     <dimen name="progress_height">12dp</dimen>
@@ -31,7 +31,7 @@
     <dimen name="mapTypeBtnLeft">10dp</dimen>
     <dimen name="sidemargin">50dp</dimen>
     <dimen name="edittextRadius">10dp</dimen>
-    <dimen name="labelPadding">8dp</dimen>
+    <dimen name="labelPadding">5dp</dimen>
     <dimen name="roundLabel">3dp</dimen>
     <dimen name="labeTop">5dp</dimen>
     <dimen name="linePaddingTop">3dp</dimen>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/MyText"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="农场实时状态" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:horizontalSpacing="0dp"
+            android:listSelector="@null"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp" />
+
+        <include layout="@layout/view_nodata" />
+    </RelativeLayout>
+
+
+    <TextView
+        style="@style/MyText"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="操作功能" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_refresh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:src="@drawable/refresh" />
+
+            <TextView
+                style="@style/MyText.Large"
+                android:text="刷新实时数据" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray_light" />
+
+        <LinearLayout
+            android:id="@+id/ll_excel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="8dp"
+                android:src="@drawable/excel" />
+
+            <TextView
+                style="@style/MyText.Large"
+                android:text="导出为excel" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

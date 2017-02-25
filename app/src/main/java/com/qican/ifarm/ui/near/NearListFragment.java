@@ -20,24 +20,17 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ComUser;
-import com.qican.ifarm.bean.MonitorNode;
 import com.qican.ifarm.beanfromzhu.User;
 import com.qican.ifarm.listener.BeanCallBack;
-import com.qican.ifarm.ui.node.NodeInfoActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
-import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.androidannotations.annotations.AfterViews;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.bingoogolapple.progressbar.BGAProgressBar;
 import okhttp3.Call;
 
 public class NearListFragment extends Fragment implements PullToRefreshLayout.OnRefreshListener {

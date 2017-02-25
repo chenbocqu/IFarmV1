@@ -1,8 +1,6 @@
 package com.qican.ifarm.ui.node;
 
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -20,16 +19,22 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.DefaultFillFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.qican.ifarm.R;
+import com.qican.ifarm.adapter.DataAdapter;
+import com.qican.ifarm.bean.Farm;
+import com.qican.ifarm.bean.ParaCacheValues;
+import com.qican.ifarm.bean.Sensor;
+import com.qican.ifarm.data.NetRequest;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.TimeUtils;
 
 import org.angmarch.views.NiceSpinner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,16 +44,22 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
 
     private CommonTools myTool;
     private LineChart mChart;
+    private Farm mFarm;
     private String[] mMonths = new String[]{"一月", "二月", "三月", "四月", "五月", "六月",
             "七月", "八月", "九月", "十月", "十一月", "十二月"};
-    List<String> dataset = new LinkedList<>(Arrays.asList("湿度", "温度1", "温度2", "土壤水"));
+    List<String> dataset = new LinkedList<>();
     private NiceSpinner spinner;
-    private ArrayList<Entry> yVals1, yVals2, yVals3;
-    private LineDataSet set1;
+    private ArrayList<Entry> yVals1;
+    private LineDataSet set;
     private Legend l;
     private YAxis leftAxis;
     private int durationMillis = 1000;
     private float axisMargin = 35f;
+    private NetRequest netRequest;
+    private List<Sensor> mSensorList;
+    private List<ParaCacheValues> mDatas;
+    private TextView tvValue, tvTime, tvUnit;
+    private int curPos = 0;//当前显示的是第几条曲线
 
     @Nullable
     @Override
@@ -63,33 +74,27 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
     private void initEvents() {
         spinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                myTool.showInfo(dataset.get(position));
-                switch (position) {
-                    case 0:
-                        //湿度
-                        set1.setLabel("湿度");
-                        set1.setValues(yVals1);
-                        break;
-                    case 1:
-                        //温度1
-                        set1.setLabel("温度1");
-                        set1.setValues(yVals2);
-                        break;
-                    case 2:
-                        //温度2
-                        set1.setLabel("温度2");
-                        set1.setValues(yVals3);
-                        break;
-                    case 3:
-                        //土壤水
-                        set1.setLabel("土壤水");
-                        set1.setValues(yVals2);
-                        break;
-                }
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                curPos = position;
+                set.setLabel(mDatas.get(position).getName());
+                set.setValues(mDatas.get(position).getPoints());
 
-                leftAxis.setAxisMaximum(set1.getYMax() + axisMargin);
-                leftAxis.setAxisMinimum(set1.getYMin() - axisMargin);
+                leftAxis.setAxisMaximum(set.getYMax() + axisMargin);
+                leftAxis.setAxisMinimum(set.getYMin() - axisMargin);
+
+                IAxisValueFormatter formatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        if (mDatas.get(position).getPoints().size() > value)
+                            return TimeUtils.getTime(mDatas.get(position).getPoints().get((int) value).getData().toString());
+                        else
+                            return "Q";
+                    }
+                };
+
+                XAxis xAxis = mChart.getXAxis();
+                xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
+                xAxis.setValueFormatter(formatter);
 
                 mChart.getData().notifyDataChanged();
                 mChart.notifyDataSetChanged();
@@ -99,7 +104,12 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
     }
 
     private void initDatas() {
-        spinner.attachDataSource(dataset);
+        Bundle bundle = getArguments();
+        mFarm = (Farm) bundle.getSerializable(FarmActivity.KEY_FARM_INFO);
+        mDatas = new ArrayList<>();
+//        spinner.attachDataSource(dataset);
+        getSensorList();
+
         // 生产数据
         mChart.setOnChartValueSelectedListener(this);
 
@@ -171,64 +181,52 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
         myTool = new CommonTools(getActivity());
         mChart = (LineChart) v.findViewById(R.id.chart);
         spinner = (NiceSpinner) v.findViewById(R.id.spinner);
+        tvValue = (TextView) v.findViewById(R.id.tv_value);
+        tvTime = (TextView) v.findViewById(R.id.tv_time);
+        tvUnit = (TextView) v.findViewById(R.id.tv_unit);
+        netRequest = new NetRequest(getActivity());
     }
 
 
     private void setData(int count, float range) {
 
         yVals1 = new ArrayList<Entry>();
-
         for (int i = 0; i < count; i++) {
             float mult = range / 2f;
             float val = (float) (Math.random() * mult) + 150;
             yVals1.add(new Entry(i, val));
         }
-        yVals2 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count - 1; i++) {
-            float mult = range;
-            float val = (float) (Math.random() * mult) + 450;
-            yVals2.add(new Entry(i, val));
-        }
-
-        yVals3 = new ArrayList<Entry>();
-
-        for (int i = 0; i < count; i++) {
-            float mult = range;
-            float val = (float) (Math.random() * mult) + 500;
-            yVals3.add(new Entry(i, val));
-        }
 
         if (mChart.getData() != null) {
-            set1 = (LineDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
+            set = (LineDataSet) mChart.getData().getDataSetByIndex(0);
+            set.setValues(yVals1);
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(yVals1, "湿 度");
+            set = new LineDataSet(yVals1, "湿 度");
 
-            set1.setAxisDependency(YAxis.AxisDependency.LEFT);//依靠左边的Y轴
-            set1.setColor(ColorTemplate.getHoloBlue());
-            set1.setCircleColor(getResources().getColor(R.color.main_color));
-            set1.setLineWidth(1f);
-            set1.setCircleRadius(5f);
-            set1.setFillAlpha(55);
-            set1.setFillColor(ColorTemplate.getHoloBlue());
-            set1.setHighLightColor(Color.rgb(244, 117, 117));
-            set1.enableDashedLine(10f, 10f, 0f);//将折线设置为曲线
+            set.setAxisDependency(YAxis.AxisDependency.LEFT);//依靠左边的Y轴
+            set.setColor(ColorTemplate.getHoloBlue());
+            set.setCircleColor(getResources().getColor(R.color.main_color));
+            set.setLineWidth(1f);
+            set.setCircleRadius(5f);
+            set.setFillAlpha(55);
+            set.setFillColor(ColorTemplate.getHoloBlue());
+            set.setHighLightColor(Color.rgb(244, 117, 117));
+            set.enableDashedLine(10f, 10f, 0f);//将折线设置为曲线
 
-            set1.setDrawFilled(true);
-            set1.setFillFormatter(new DefaultFillFormatter());
-            //set1.setVisible(false);
-            set1.setDrawCircleHole(true);
-            set1.setCircleHoleRadius(4f);
-            set1.setCircleColorHole(getResources().getColor(R.color.main_color));
-            set1.setDrawHorizontalHighlightIndicator(true);
-            set1.setCubicIntensity(23f);
+            set.setDrawFilled(true);
+            set.setFillFormatter(new DefaultFillFormatter());
+            //set.setVisible(false);
+            set.setDrawCircleHole(true);
+            set.setCircleHoleRadius(4f);
+            set.setCircleColorHole(getResources().getColor(R.color.main_color));
+            set.setDrawHorizontalHighlightIndicator(true);
+            set.setCubicIntensity(23f);
 
             // create a data object with the datasets
-            LineData data = new LineData(set1);
+            LineData data = new LineData(set);
             data.setValueTextColor(Color.GRAY);
             data.setValueTextSize(12f);
 
@@ -239,12 +237,74 @@ public class LineChartFragment extends Fragment implements OnChartValueSelectedL
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
+        //动画滚动到当前位置
         mChart.centerViewToAnimated(e.getX(), e.getY(), mChart.getData().getDataSetByIndex(h.getDataSetIndex())
                 .getAxisDependency(), 500);
+
+        if (e.getData() == null) {
+            myTool.showInfo("当前为模拟数据！");
+            return;
+        }
+
+        //设置预览区显示
+        tvValue.setText(e.getY() + "");
+        tvTime.setText(e.getData().toString());
+        setUnit();//设置预览区数值单位
+    }
+
+    private void setUnit() {
+        String name = mDatas.get(curPos).getName();
+        if (name.contains("温度")) {
+            tvUnit.setText("℃");
+        } else if (name.contains("湿度")) {
+            tvUnit.setText("%RH");
+        } else if (name.contains("光照")) {
+            tvUnit.setText("LUX");
+        }
     }
 
     @Override
     public void onNothingSelected() {
 
     }
+
+    private void getSensorList() {
+        netRequest.getSensorList(mFarm.getId(), new DataAdapter() {
+            @Override
+            public void sensors(List<Sensor> sensorList) {
+                super.sensors(sensorList);
+                mSensorList = sensorList;
+                if (!mSensorList.isEmpty()) {
+                    // 再根据传感器列表获取参数
+                    getParaData();
+                }
+            }
+        });
+    }
+
+    // 获得传感器参数列表
+    private void getParaData() {
+        for (final Sensor sensor : mSensorList) {
+            netRequest.getSensorCacheValues(sensor.getId(), new DataAdapter() {
+                @Override
+                public void paraCaches(List<ParaCacheValues> cacheValues) {
+
+                    myTool.log("lineChart的mDatas:" + mDatas.toString());
+                    mDatas.addAll(cacheValues);
+                    //改变数据
+                    if (!mDatas.isEmpty()) {
+                        // 重置菜单
+                        dataset.clear();
+                        for (ParaCacheValues para : mDatas) {
+                            dataset.add(para.getName());
+                        }
+                        spinner.attachDataSource(dataset);
+                    }
+                }
+            });
+        }
+    }
+
+    // the labels that should be drawn on the XAxis
+    final String[] quarters = new String[]{"Q1", "Q2", "Q3", "Q4"};
 }

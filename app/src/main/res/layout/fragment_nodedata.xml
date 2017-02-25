@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@color/gray">
 
-    <TextView
-        style="@style/MyText.Large"
-        android:text="节点数据"
-        android:textSize="50sp" />
+    <com.ecloud.pulltozoomview.PullToZoomScrollViewEx
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <TextView
-        style="@style/MyText.Large"
-        android:layout_marginTop="20dp"
-        android:text="节点的相关数据以及信息"
-        android:textColor="@color/refresh_text_color_gray" />
-
-</LinearLayout>
+</RelativeLayout>

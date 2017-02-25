@@ -184,7 +184,7 @@ public class DragScaleImageView extends RelativeLayout {
             case MotionEvent.ACTION_MOVE:
                 // 拖拉图片
                 if (mode == MODE_DRAG) {
-//				float dx = event.getX() - startPoint.x; // 得到x轴的移动距离
+//				float dx = event.getTime() - startPoint.x; // 得到x轴的移动距离
                     float dy = event.getY() - startPoint.y; // 得到y轴的移动距离
                     // 在没有移动之前的位置上进行移动
                     if (dy > 0) {

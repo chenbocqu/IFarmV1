@@ -35,7 +35,8 @@ public class ControlListFragment extends Fragment implements View.OnClickListene
     private ControlFunAdapter mAdapter;
     private ImageView ivCall;
     //要跳转的一系列Activity
-    private Class<? extends Activity>[] funActs = new Class[]{//分别跳转时，采用这个
+    private Class<? extends Activity>[] funActs = new Class[]{
+            //分别跳转时，采用这个
             SelectFarmActivity.class,
             SelectFarmActivity.class,
             SelectFarmActivity.class,

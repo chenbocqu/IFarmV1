@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0682fd</color>
-    <color name="colorPrimaryDark">#0373e2</color>
+    <color name="colorPrimary">#00abff</color>
+    <color name="colorPrimaryDark">#019fed</color>
     <color name="colorAccent">#19c901</color>
     <color name="white">#ffffff</color>
 
     <color name="main_color">@color/colorPrimary</color>
-    <color name="main_color_deeper">#0673df</color>
+    <color name="main_color_deeper">@color/colorPrimaryDark</color>
 
     <!--下拉刷新文字颜色-->
     <color name="refresh_text_color_gray">#999999</color>
@@ -45,5 +45,6 @@
     <color name="trans">#00000000</color>
     <color name="green">#25ab2e</color>
     <color name="green_trans">#6625ab2e</color>
+    <color name="light_green_trans">#e9fdea</color>
 
 </resources>

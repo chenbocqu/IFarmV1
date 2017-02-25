@@ -52,4 +52,42 @@
         android:padding="10dp"
         android:paddingRight="10dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/light_green_trans"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_value"
+                style="@style/MyText.Large"
+                android:text="35"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/tv_unit"
+                style="@style/MyText"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
+                android:gravity="top"
+                android:text="℃"
+                android:textColor="@color/blue" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/MyText"
+            android:layout_marginTop="5dp"
+            android:text="昨天 12:12" />
+    </LinearLayout>
+
 </LinearLayout>

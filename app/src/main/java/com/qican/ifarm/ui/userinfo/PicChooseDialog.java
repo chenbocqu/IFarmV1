@@ -117,7 +117,6 @@ public class PicChooseDialog extends Dialog implements View.OnClickListener {
         }
     }
 
-
     public void setOnDialogListener(OnDialogListener l) {
         this.l = l;
     }

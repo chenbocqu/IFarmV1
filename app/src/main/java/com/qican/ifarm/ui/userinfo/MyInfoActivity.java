@@ -29,11 +29,9 @@ import com.qican.ifarm.beanfromzhu.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.listener.OnDialogListener;
 import com.qican.ifarm.listener.OnSexDialogListener;
-import com.qican.ifarm.listener.TokenListener;
 import com.qican.ifarm.ui.intro.IntroActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
-import com.qican.ifarm.utils.IFarmData;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -44,18 +42,22 @@ import okhttp3.Call;
 
 public class MyInfoActivity extends TakePhotoActivity implements View.OnClickListener, OnSexDialogListener, OnDialogListener {
     private static final String TAG = "MyInfoActivity";
+    private static final int TYPE_BG_IMG = 002;
+    private static final int TYPE_HEAD_IMG = 001;
+    private int picChooseType;
     private CommonTools myTool;
     private LinearLayout llBack;
-    private RelativeLayout rlNickName, rlSignature, rlUserId, rlTwodcode, rlSex, rlChooseHeadImg;
+    private RelativeLayout rlNickName, rlSignature, rlUserId, rlTwodcode, rlSex, rlChooseHeadImg, rlBgImg;
     private TextView tvNickName, tvSignature, tvSex;
     private TwodcodeDialog mTwodcodeDialog;
     private SexChooseDialog mSexDialog;
-    private PicChooseDialog mHeadDialog;
-    private ImageView ivHeadImg;
+    private PicChooseDialog mPicDialog;
+    private ImageView ivHeadImg, ivBgImg;
     private TakePhoto takePhoto;
-    private ProgressBar pbUploadHead;
-    CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(200 * 1024).setMaxPixel(800).create();
-    CropOptions cropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
+    private ProgressBar pbUploadBg, pbUploadHead;
+    CompressConfig compressConfig = new CompressConfig.Builder().setMaxSize(200 * 1024).setMaxPixel(800).create();//最大200K
+    CropOptions headCropOptions = new CropOptions.Builder().setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
+    CropOptions bgCropOptions = new CropOptions.Builder().setAspectX(16).setAspectY(10).setWithOwnCrop(true).create();
     private ComUser userInfo;
 
     @Override
@@ -93,6 +95,12 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                             R.drawable.default_head_male :
                             R.drawable.default_head_female);
         }
+        // 设置背景图片
+        if (userInfo.getBgImgUrl() != null) {
+            myTool.showImage(userInfo.getBgImgUrl(),
+                    ivBgImg,
+                    R.drawable.defaultbg);
+        }
     }
 
     private void initEvent() {
@@ -103,9 +111,10 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         rlTwodcode.setOnClickListener(this);
         rlSex.setOnClickListener(this);
         mSexDialog.setOnSexDialogListener(this);
-        mHeadDialog.setOnDialogListener(this);
+        mPicDialog.setOnDialogListener(this);
         rlChooseHeadImg.setOnClickListener(this);
         ivHeadImg.setOnClickListener(this);
+        rlBgImg.setOnClickListener(this);
     }
 
     private void initView() {
@@ -122,11 +131,14 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         tvSignature = (TextView) findViewById(R.id.tv_signature);
         tvSex = (TextView) findViewById(R.id.tv_sex);
         ivHeadImg = (ImageView) findViewById(R.id.iv_headimg);
+        ivBgImg = (ImageView) findViewById(R.id.iv_bgimg);
         pbUploadHead = (ProgressBar) findViewById(R.id.pb_uploadhead);
+        pbUploadBg = (ProgressBar) findViewById(R.id.pb_uploadbg);
 
         mTwodcodeDialog = new TwodcodeDialog(this, R.style.Translucent_NoTitle);
         mSexDialog = new SexChooseDialog(this, R.style.Translucent_NoTitle);
-        mHeadDialog = new PicChooseDialog(this, R.style.Translucent_NoTitle);
+        mPicDialog = new PicChooseDialog(this, R.style.Translucent_NoTitle);
+        rlBgImg = (RelativeLayout) findViewById(R.id.rl_bgimg);
 
         takePhoto = getTakePhoto();
 
@@ -145,7 +157,13 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.rl_choose_headpic:
-                mHeadDialog.show();
+                picChooseType = TYPE_HEAD_IMG;
+                mPicDialog.show();
+                break;
+            //背景图片
+            case R.id.rl_bgimg:
+                picChooseType = TYPE_BG_IMG;
+                mPicDialog.show();
                 break;
             case R.id.rl_nickname:
                 myTool.startActivity(NickNameActivity.class);
@@ -180,32 +198,57 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
     @Override
     public void takeSuccess(final TResult result) {
         super.takeSuccess(result);
-        //上传头像至服务器
-        File userHeadImgFile = new File(result.getImage().getPath());
-        pbUploadHead.setVisibility(View.VISIBLE);
 
         String url = ConstantValue.SERVICE_ADDRESS + "user/uploadImage";
+
+        //上传头像至服务器
+        File picFile = new File(result.getImage().getPath());
+        String fileName = myTool.getUserId() + "_头像.png";
+        String flag = "0";
+
+        switch (picChooseType) {
+            case TYPE_HEAD_IMG:
+                pbUploadHead.setVisibility(View.VISIBLE);
+                flag = ConstantValue.UPLOAD_HEADIMG;
+                fileName = myTool.getUserId() + "_头像.png";
+                break;
+            case TYPE_BG_IMG:
+                pbUploadBg.setVisibility(View.VISIBLE);
+                flag = ConstantValue.UPLOAD_BGIMG;
+                fileName = myTool.getUserId() + "_背景.png";
+                break;
+        }
+
         //上传用户头像
         OkHttpUtils.post().url(url)
                 .addParams("userId", myTool.getUserId())
-                .addParams("flag", ConstantValue.UPLOAD_HEADIMG)//flag=0表示上次头像
-                .addFile("mFile", myTool.getUserId() + "_头像.png", userHeadImgFile)
+                .addParams("flag", flag)//flag=0表示上次头像,1表示背景图像
+                .addFile("mFile", fileName, picFile)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        pbUploadHead.setVisibility(View.GONE);
+                        setPbGone();
                         myTool.showInfo("上传失败，请稍后再试！");
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        pbUploadHead.setVisibility(View.GONE);
+                        setPbGone();
                         Log.i(TAG, "onResponse: " + response);
                         switch (response) {
                             case "success":
+
                                 Bitmap bitmap = BitmapFactory.decodeFile(result.getImage().getPath());
-                                ivHeadImg.setImageBitmap(bitmap);
+                                switch (picChooseType) {
+                                    case TYPE_HEAD_IMG:
+                                        ivHeadImg.setImageBitmap(bitmap);
+                                        break;
+                                    case TYPE_BG_IMG:
+                                        ivBgImg.setImageBitmap(bitmap);
+                                        break;
+                                }
+
                                 myTool.showInfo("上传成功！");
                                 updateInfo();//更新信息
                                 break;
@@ -221,6 +264,12 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         Log.i(TAG, "takeSuccess: " + result.getImage().getPath());
     }
 
+    //进度环设置为不见
+    private void setPbGone() {
+        pbUploadBg.setVisibility(View.GONE);
+        pbUploadHead.setVisibility(View.GONE);
+    }
+
     /**
      * 重新加载用户信息
      */
@@ -233,8 +282,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         myTool.log("查询用户信息失败，异常为：" + e.toString());
-                        if (e.getClass().getSimpleName().equals("JsonSyntaxException"))
-                        {
+                        if (e.getClass().getSimpleName().equals("JsonSyntaxException")) {
                             myTool.showTokenLose();
                         }
                     }
@@ -266,11 +314,25 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         switch (msg) {
             case PicChooseDialog.FORM_CAMERA:
                 takePhoto.onEnableCompress(compressConfig, false);
-                takePhoto.onPickFromCaptureWithCrop(myTool.getUserHeadFileUri(), cropOptions);
+                switch (picChooseType) {
+                    case TYPE_HEAD_IMG:
+                        takePhoto.onPickFromCaptureWithCrop(myTool.getUserHeadFileUri(), headCropOptions);
+                        break;
+                    case TYPE_BG_IMG:
+                        takePhoto.onPickFromCaptureWithCrop(myTool.getUserBgFileUri(), bgCropOptions);
+                        break;
+                }
                 break;
             case PicChooseDialog.FROM_FILE:
                 takePhoto.onEnableCompress(compressConfig, false);
-                takePhoto.onPickFromDocumentsWithCrop(myTool.getUserHeadFileUri(), cropOptions);
+                switch (picChooseType) {
+                    case TYPE_HEAD_IMG:
+                        takePhoto.onPickFromDocumentsWithCrop(myTool.getUserHeadFileUri(), headCropOptions);
+                        break;
+                    case TYPE_BG_IMG:
+                        takePhoto.onPickFromDocumentsWithCrop(myTool.getUserBgFileUri(), bgCropOptions);
+                        break;
+                }
                 break;
         }
     }

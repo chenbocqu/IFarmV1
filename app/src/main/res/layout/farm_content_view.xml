@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/MyText.Large"
+            android:text="节点数据"
+            android:textSize="50sp" />
+
+        <TextView
+            style="@style/MyText.Large"
+            android:layout_marginTop="20dp"
+            android:text="节点的相关数据以及信息"
+            android:textColor="@color/refresh_text_color_gray" />
+    </LinearLayout>
+
+
+    <include layout="@layout/view_nodata" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
+</RelativeLayout>

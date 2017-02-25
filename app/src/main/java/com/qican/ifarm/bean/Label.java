@@ -1,5 +1,5 @@
 /**
- * 标签
+ * 标签，农场标签，人的标签
  */
 package com.qican.ifarm.bean;
 

@@ -14,28 +14,32 @@ import android.widget.TextView;
 
 
 import com.qican.ifarm.R;
+import com.qican.ifarm.bean.Farm;
+import com.qican.ifarm.ui.farm.FarmSettingFragment;
 import com.qican.ifarm.utils.CommonTools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NodeInfoActivity extends FragmentActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class FarmActivity extends FragmentActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
-    private static final String TAG = "ComMainActivity";
+    private static final String TAG = "FarmActivity";
+    public static final String KEY_FARM_INFO = "KEY_FARM_INFO";
     private ViewPager mViewPager;
     private List<Fragment> mTabs = new ArrayList<Fragment>();
     private FragmentPagerAdapter mAdapter;
 
     private NodeDataFragment fgNodeData;
     private LineChartFragment fgLineChart;
-    private ControlFragment fgControl;
+    private FarmSettingFragment fgControl;
     private int tabCnt = 0;
 
     private int mPerScreenWidth;
     private int initLeftMargin = 0;
     private int llWidth;
     private CommonTools myTool;
+    private Farm myFarm;
 
     /**
      * Tab显示内容TextView
@@ -63,10 +67,14 @@ public class NodeInfoActivity extends FragmentActivity implements ViewPager.OnPa
         setContentView(R.layout.activity_nodeinfo);
 
         initView();
+        initData();
         initEvent();
 
 //        initTabLineWidth();
         myInitTabLine();
+    }
+
+    private void initData() {
     }
 
     private void myInitTabLine() {
@@ -174,7 +182,17 @@ public class NodeInfoActivity extends FragmentActivity implements ViewPager.OnPa
         //所有订单
         fgNodeData = new NodeDataFragment();
         fgLineChart = new LineChartFragment();
-        fgControl = new ControlFragment();
+        fgControl = new FarmSettingFragment();
+
+        myFarm = new Farm();
+        myFarm = (Farm) myTool.getParam(myFarm);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(KEY_FARM_INFO, myFarm);
+
+        fgNodeData.setArguments(bundle);
+        fgLineChart.setArguments(bundle);
+        fgControl.setArguments(bundle);
 
         mTabs.add(fgNodeData);
         mTabs.add(fgLineChart);

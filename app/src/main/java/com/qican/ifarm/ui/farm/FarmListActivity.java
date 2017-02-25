@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,8 +20,10 @@ import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.BeanCBWithTkCk;
+import com.qican.ifarm.ui.node.FarmActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
+import com.qican.ifarm.utils.IFarmData;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -52,20 +55,27 @@ public class FarmListActivity extends Activity {
     @AfterViews
     void main() {
         myTool = new CommonTools(this);
-        initData();
+        defaultFarmPic = BitmapFactory.decodeResource(getResources(), R.mipmap.default_farm_img);
     }
 
     private void initData() {
-        defaultFarmPic = BitmapFactory.decodeResource(getResources(), R.mipmap.default_farmpic);
-
         mDatas = new ArrayList<>();
         mAdapter = new FarmAdaper(this, mDatas, R.layout.item_farm_activity);
         mListView.setAdapter(mAdapter);
+
         showNoData();
         getFarmData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
     private void getFarmData() {
+//        mDatas.addAll(IFarmData.getFarmList());
+//        notifyData();
         OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/getFarmColletorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -95,6 +105,7 @@ public class FarmListActivity extends Activity {
     }
 
     private void notifyData() {
+        myTool.log("mDatas大小：" + mDatas.size() + "\nmDatas内容：" + mDatas.toString());
         mAdapter.notifyDataSetChanged();
 //        rlNodata.setVisibility(mDatas.isEmpty() ? View.VISIBLE : View.GONE);//直接显示
         if (mDatas.isEmpty()) {
@@ -132,12 +143,13 @@ public class FarmListActivity extends Activity {
         }
 
         @Override
-        public void convert(ViewHolder helper, Farm item) {
+        public void convert(ViewHolder helper, final Farm item) {
 
             myTool.log("convert URL:" + item.getImgUrl());
+            LinearLayout rlItem = helper.getView(R.id.ll_item);
 
             if (item.getImgUrl() != null) {
-                helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
+                helper.setImageByUrl(R.id.iv_img, item.getImgUrl(), R.mipmap.default_farm_img);
             } else {
                 ((ImageView) helper.getView(R.id.iv_img)).setImageBitmap(defaultFarmPic);
             }
@@ -147,6 +159,13 @@ public class FarmListActivity extends Activity {
             if (item.getLabel() != null) {
                 setLabel(helper, item.getLabel());//设置农场标签
             }
+
+            rlItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myTool.startActivity(item, FarmActivity.class);
+                }
+            });
         }
     }
 

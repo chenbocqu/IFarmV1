@@ -23,17 +23,26 @@ import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.bean.Farm;
+import com.qican.ifarm.bean.Label;
+import com.qican.ifarm.listener.BeanCBWithTkCk;
 import com.qican.ifarm.ui.chat.ChatActivity;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.CircleImageView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import me.xiaopan.sketch.SketchImageView;
+import okhttp3.Call;
 
 
 public class NearInfoActivity extends Activity implements View.OnClickListener {
+    private static final int LABEL_MAX_SHOW_LEN = 20;
     private CommonTools myTool;
     private LinearLayout llBack;
     private PullToZoomListViewEx listView;
@@ -73,21 +82,79 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
         if (friend != null) {
             tvTitle.setText(friend.getNickName());
             tvSignature.setText(friend.getSignature());
-            myTool.showImage(friend.getHeadImgUrl(), ivHeadImg).showImage(friend.getBgImgUrl(), ivBg);
+
+            //设置头像
+            if (!"".equals(friend.getHeadImgUrl())) {
+                myTool.showImage(friend.getHeadImgUrl(),
+                        ivHeadImg, "男"
+                                .equals(friend.getSex()) ?
+                                R.drawable.default_head_male :
+                                R.drawable.default_head_female);
+            } else {
+                myTool.showDefaultHeadImgBySex(ivHeadImg, friend.getSex());//显示默认头像
+            }
+            myTool.log("bgurl:" + friend.getBgImgUrl());
+            //  设置背景图片
+            if (friend.getBgImgUrl() != null) {
+                myTool.showImage(friend.getBgImgUrl(),
+                        ivBg,
+                        R.drawable.defaultbg);
+            }
+//            myTool.showImage(friend.getHeadImgUrl(), ivHeadImg).showImage(friend.getBgImgUrl(), ivBg);
             setLabel(friend.getLabels());
         }
         // 通过文件路径设置
+        mData = new ArrayList<>();
         mData = IFarmFakeData.getFarmList();
         myTool.log(mData.toString());
-        mAdapter = new FarmAdapter(this, mData, R.layout.item_farm);
+
+        mAdapter = new FarmAdapter(this, mData, R.layout.item_farm_activity);
         listView.setAdapter(mAdapter);
+        getFarmDataFromNet();
+    }
+
+    /**
+     * 从服务器获取农场数据！
+     */
+    private void getFarmDataFromNet() {
+        myTool.log("请求参数,userId:" + myTool.getUserId() + ",friendId:" + friend.getId());
+        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/getUserAroundFarmList")
+                .addParams("userId", myTool.getUserId())
+                .addParams("signature", myTool.getToken())
+                .addParams("aroundPersonId", friend.getId())
+                .addParams("beginIndex", "0")
+                .addParams("count", "10")
+                .build()
+                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromzhu.Farm>>() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        e.printStackTrace();
+                        myTool.log("好友农场列表e：" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(List<com.qican.ifarm.beanfromzhu.Farm> farmList, int id) {
+                        //处理token失效问题
+                        if (farmList == null) {
+                            myTool.showTokenLose();
+                            return;
+                        }
+                        myTool.log("好友农场列表list：" + farmList.toString());
+                        for (com.qican.ifarm.beanfromzhu.Farm farm : farmList) {
+                            Farm myFarm = new Farm(farm);
+                            mData.add(myFarm);
+                        }
+                        mAdapter.notifyDataSetChanged();
+//                        notifyData();
+                    }
+                });
     }
 
     private void initView() {
         myTool = new CommonTools(this);
         llBack = (LinearLayout) findViewById(R.id.ll_back);
         listView = (PullToZoomListViewEx) findViewById(R.id.listview);
-        ivBg = (ImageView) listView.getPullRootView().findViewById(R.id.iv_zoom);
+        ivBg = (ImageView) listView.getPullRootView().findViewById(R.id.iv_bgimg);
         ivHeadImg = (CircleImageView) listView.getPullRootView().findViewById(R.id.iv_headimg);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvSignature = (TextView) listView.getPullRootView().findViewById(R.id.tv_signature);
@@ -129,8 +196,11 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                     .setText(R.id.tv_desc, item.getDesc())
                     .setText(R.id.tv_time, item.getTime());
             if (item.getImgUrl() != null) {
-                helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
+                helper.setImageByUrl(R.id.iv_img, item.getImgUrl(), R.mipmap.default_farm_img);
             }
+            //有标签的话，显示标签
+            if (item.getLabel() != null)
+                setLabel(helper, item.getLabel());
         }
     }
 
@@ -152,5 +222,40 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                 tvLabel[i].setText(labels[i]);
             }
         }
+    }
+
+    /**
+     * 设置标签
+     */
+    private void setLabel(ViewHolder helper, Label label) {
+        List<TextView> tvLabels = new ArrayList<>();
+        tvLabels.add((TextView) helper.getView(R.id.tvLabel1));
+        tvLabels.add((TextView) helper.getView(R.id.tvLabel2));
+        tvLabels.add((TextView) helper.getView(R.id.tvLabel3));
+        TextView tvMore = helper.getView(R.id.tvMore);
+
+        boolean showMore = false;
+        //全部设置为不见
+        for (int i = 0; i < tvLabels.size(); i++) {
+            tvLabels.get(i).setVisibility(View.GONE);
+        }
+
+        List<String> labelList = label.getLabelList();
+        int totalLen = 0;
+        for (int i = 0; i < tvLabels.size() && i < labelList.size(); i++) {
+            totalLen = totalLen + labelList.get(i).length();
+            if (totalLen > LABEL_MAX_SHOW_LEN) {
+                showMore = true;
+                break;
+            }
+            tvLabels.get(i).setVisibility(View.VISIBLE);
+            tvLabels.get(i).setText(labelList.get(i));
+        }
+        // 本身比标签容量多，或者显示不够完全，则显示更多
+        tvMore.setVisibility(
+                labelList.size() > tvLabels.size() ||
+                        showMore ?
+                        View.VISIBLE : View.GONE);
+
     }
 }

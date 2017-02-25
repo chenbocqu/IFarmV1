@@ -21,8 +21,9 @@
     <string name="infowindow_call">电话</string>
     <string name="agent_addr">地址：%1$s</string>
     <string name="infowindow_monitor">视频</string>
+
     <string name="tabmenu1">数据</string>
     <string name="tabmenu2">曲线</string>
-    <string name="tabmenu3">控制</string>
+    <string name="tabmenu3">设置</string>
 
 </resources>

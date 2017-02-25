@@ -80,7 +80,7 @@
             android:name=".ui.ComMainActivity_"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.node.NodeInfoActivity"
+            android:name=".ui.node.FarmActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.userinfo.MyInfoActivity"
@@ -126,6 +126,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.farm.FarmListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.FarmInfoActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.SensorListActivity_"
             android:screenOrientation="portrait" />
 
         <activity

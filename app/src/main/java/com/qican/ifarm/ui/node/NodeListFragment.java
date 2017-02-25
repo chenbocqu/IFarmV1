@@ -12,7 +12,6 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.MonitorNode;
-import com.qican.ifarm.ui.node.NodeInfoActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmFakeData;
@@ -109,7 +108,7 @@ public class NodeListFragment extends Fragment implements PullToRefreshLayout.On
             helper.getView(R.id.rl_item).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    myTool.startActivity(NodeInfoActivity.class);
+                    myTool.startActivity(FarmActivity.class);
                 }
             });
         }

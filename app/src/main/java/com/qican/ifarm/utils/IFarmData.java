@@ -6,11 +6,15 @@ package com.qican.ifarm.utils;
 import android.content.Context;
 
 import com.qican.ifarm.bean.ComUser;
+import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.beanfromzhu.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.listener.TokenListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -72,5 +76,18 @@ public class IFarmData {
                         myTool.setToken(response);
                     }
                 });
+    }
+
+    public static List<Farm> getFarmList() {
+        List<Farm> farmList = new ArrayList<Farm>();
+        for (int i = 0; i < 3; i++) {
+            Farm farm = new Farm();
+            farm.setName("最小农场");
+            farm.setLabels("花花,草草");
+            farm.setDesc("测试用");
+            farm.setTime("昨天 下午5:50");
+            farmList.add(farm);
+        }
+        return farmList;
     }
 }

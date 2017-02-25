@@ -2,6 +2,7 @@ package com.qican.ifarm.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.DrawableRes;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,6 +117,20 @@ public class ViewHolder {
     public ViewHolder setImageByUrl(int viewId, String url) {
         //.placeholder(R.drawable.tab_bg)
         Glide.with(mContext).load(url).error(R.drawable.tab_bg)
+                .centerCrop().crossFade().into((ImageView) getView(viewId));
+        return this;
+    }
+
+    /**
+     * 为ImageView设置图片
+     *
+     * @param viewId
+     * @param url
+     * @return
+     */
+    public ViewHolder setImageByUrl(int viewId, String url, @DrawableRes int errRes) {
+        //.placeholder(R.drawable.tab_bg)
+        Glide.with(mContext).load(url).error(errRes)
                 .centerCrop().crossFade().into((ImageView) getView(viewId));
         return this;
     }

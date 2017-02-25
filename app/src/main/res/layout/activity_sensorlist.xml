@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+    <!-- 顶部titleBar-->
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_color">
+
+        <LinearLayout
+            android:id="@+id/llBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                style="@style/Menu_Icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10dp"
+                android:text="返回"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="采集设备"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/llAddFarm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                style="@style/MyText"
+                android:layout_gravity="center"
+                android:text="添加设备"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view_nodata" />
+
+    <com.qican.ifarm.view.refresh.PullToRefreshLayout
+        android:id="@+id/pullToRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.qican.ifarm.view.refresh.PullListView
+            android:id="@+id/pullListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/gray_light"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent"
+            android:overScrollMode="never"
+            android:scrollingCache="false" />
+    </com.qican.ifarm.view.refresh.PullToRefreshLayout>
+
+</LinearLayout>

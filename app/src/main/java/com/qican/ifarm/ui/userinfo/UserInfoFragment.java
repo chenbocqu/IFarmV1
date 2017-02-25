@@ -37,7 +37,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
     private OnFragmentListener mCallBack;
     private ComUser userInfo;
     private TextView tvNickName, tvSignature;
-    private ImageView ivHeadImg, ivSex;
+    private ImageView ivHeadImg, ivSex, ivBgImg;
 
 
     @Nullable
@@ -87,6 +87,13 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         } else {
             myTool.showDefaultHeadImgBySex(ivHeadImg, userInfo.getSex());//显示默认头像
         }
+        myTool.log("bgurl:" + userInfo.getBgImgUrl());
+        //  设置背景图片
+        if (userInfo.getBgImgUrl() != null) {
+            myTool.showImage(userInfo.getBgImgUrl(),
+                    ivBgImg,
+                    R.drawable.defaultbg);
+        }
     }
 
     private void initView(View v) {
@@ -113,6 +120,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         tvSignature = (TextView) scrollView.getRootView().findViewById(R.id.tv_signature);
         ivSex = (ImageView) scrollView.getRootView().findViewById(R.id.iv_usersex);
         ivHeadImg = (ImageView) scrollView.getRootView().findViewById(R.id.iv_headimg);
+        ivBgImg = (ImageView) scrollView.getRootView().findViewById(R.id.iv_bgimg);
     }
 
     private void initEvents() {

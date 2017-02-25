@@ -164,6 +164,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 .url(url)
                 .addParams("userId", userName)
                 .addParams("userPwd", password)
+                .addParams("userName", "用户" + userName)
+                .addParams("userSignature", "这个家伙很懒，没有任何介绍！")
+                .addParams("userSex", "男")
                 .build()
                 .execute(new StringCallback() {
                     @Override

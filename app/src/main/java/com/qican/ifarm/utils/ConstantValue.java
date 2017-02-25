@@ -25,7 +25,8 @@ public interface ConstantValue {
     String KEY_FIRSTIN = "KEY_FIRSTIN";
 
     //IP地址和端口号
-    String IP = "172.20.33.237";
+//    String IP = "172.20.33.237";
+    String IP = "47.93.91.45";
     String PORT = "8080";
     String SERVICE_ADDRESS = "http://" + IP + ":" + PORT + "//IFarm/";
 
@@ -56,7 +57,7 @@ public interface ConstantValue {
             BitmapFactory.decodeResource(mContext.getResources(), R.drawable.fun_add)
     };
     String UPLOAD_HEADIMG = "0";
-    String UPLOAD_BGIMG = "0";
+    String UPLOAD_BGIMG = "1";
 
     String KEY_TOKEN = "KEY_TOKEM";
     String KEY_ISEMCOUNTEXIST = "KEY_ISEMCOUNTEXIST";

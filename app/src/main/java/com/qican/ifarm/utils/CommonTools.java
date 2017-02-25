@@ -397,8 +397,13 @@ public class CommonTools {
     }
 
     public Uri getUserHeadFileUri() {
-
         File file = new File(USER_FILE_PATH + "/" + getUserId(), "head.jpg");
+        if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
+        Uri imageUri = Uri.fromFile(file);
+        return imageUri;
+    }
+    public Uri getUserBgFileUri() {
+        File file = new File(USER_FILE_PATH + "/" + getUserId(), "background.jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
         Uri imageUri = Uri.fromFile(file);
         return imageUri;

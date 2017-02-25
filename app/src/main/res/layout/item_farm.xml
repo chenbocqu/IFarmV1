@@ -10,7 +10,9 @@
 
     <ImageView
         android:id="@+id/iv_img"
-        style="@style/MyImg" />
+        style="@style/MyImg"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/default_farm_img" />
 
     <LinearLayout
         android:layout_width="match_parent"

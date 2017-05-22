@@ -27,6 +27,7 @@ import com.hyphenate.chat.EMClient;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
+import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.bean.PhoneInfo;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
@@ -61,6 +62,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private String userName, password;
     private final String REGISTER = "REGISTER";//注册
     private final String RESETPWD = "RESETPWD";//重置密码
+    private ComUser userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +81,25 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             ivDelUserName.setVisibility(View.VISIBLE);
             edtPassword.requestFocus();
         }
-        if (!"".equals(myTool.getUserHeadURL())) {
-            myTool.showImage(myTool.getUserHeadURL(), ivHeadImg);
+
+        userInfo = myTool.getComUserInfoById(myTool.getUserId());
+        if (userInfo == null) {
+            return;
         }
+        //设置头像
+        if (!"".equals(userInfo.getHeadImgUrl())) {
+            myTool.showImage(userInfo.getHeadImgUrl(),
+                    ivHeadImg, "男"
+                            .equals(userInfo.getSex()) ?
+                            R.drawable.default_head_male :
+                            R.drawable.default_head_female);
+        }
+//        // 设置背景图片
+//        if (userInfo.getBgImgUrl() != null) {
+//            myTool.showImage(userInfo.getBgImgUrl(),
+//                    ivBgImg,
+//                    R.drawable.defaultbg);
+//        }
     }
 
     private void initEvent() {

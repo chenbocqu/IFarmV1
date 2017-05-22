@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/videoHeight">
+
+        <include layout="@layout/video_view" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/para_bg"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Menu_Icon.Left"
+                    android:src="@drawable/video_temperature" />
+
+                <TextView
+                    android:id="@+id/tvTemperature"
+                    style="@style/MyText"
+                    android:layout_marginLeft="@dimen/margin_para"
+                    android:hint="-- ℃"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Menu_Icon.Left"
+                    android:src="@drawable/video_humidity" />
+
+                <TextView
+                    android:id="@+id/tvHumidity"
+                    style="@style/MyText"
+                    android:layout_marginLeft="@dimen/margin_para"
+                    android:hint="-- %"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    style="@style/Menu_Icon.Left"
+                    android:src="@drawable/video_illuminate" />
+
+                <TextView
+                    android:id="@+id/tvIlluminate"
+                    style="@style/MyText"
+                    android:layout_marginLeft="@dimen/margin_para"
+                    android:hint="-- Lux"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/monitor_data" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="监测数据" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llWatering"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/watering" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="灌溉" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFertilize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/fertilize" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="施肥" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/drug" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="施药" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/fun_sunshade" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="遮阳" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/fun_air" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="通风" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llScreenshot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/screenshot" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="截图" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_selector"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/paddingItem">
+
+            <ImageView
+                style="@style/MyImg.Small"
+                android:src="@drawable/video_more" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="5dp"
+                android:text="更多操作" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

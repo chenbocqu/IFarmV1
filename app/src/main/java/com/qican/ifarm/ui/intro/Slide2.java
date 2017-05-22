@@ -25,7 +25,7 @@ public class Slide2 extends Fragment implements ISlideBackgroundColorHolder {
 
     @Override
     public int getDefaultBackgroundColor() {
-        return Color.parseColor("#2291f5");
+        return Color.parseColor("#f99401");
     }
 
     @Override

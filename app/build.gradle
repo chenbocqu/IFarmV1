@@ -10,7 +10,11 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,9 +32,13 @@ android {
             maven { url "https://jitpack.io" }
         }
     }
+    packagingOptions {
+        exclude 'META-INF/maven/javax.jmdns/jmdns/pom.xml'
+        exclude 'META-INF/maven/javax.jmdns/jmdns/pom.properties'
+    }
 }
-repositories{
-    flatDir{
+repositories {
+    flatDir {
         dirs 'libs' //就是你放aar的目录地址
     }
 }
@@ -58,7 +66,7 @@ dependencies {
     compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'cn.bingoogolapple:bga-progressbar:1.0.0@aar'
     compile files('libs/AMap2DMap_2.9.3_AMapSearch_3.6.1_AMapLocation_3.2.0_20161205.jar')
-    compile 'com.youth.banner:banner:1.4.5'
+    compile 'com.youth.banner:banner:1.4.9'
     //下拉放大图片
     compile 'com.github.frank-zhu:pullzoomview:1.0.0'
     //最新版本
@@ -72,11 +80,28 @@ dependencies {
     compile files('libs/commons-codec-1.10.jar')
     compile files('libs/commons-io-1.4.jar')
     compile files('libs/ezmorph-1.0.6.jar')
-
     //配置从这里开始
     compile 'com.github.rey5137:material:1.1.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'net.steamcrafted:load-toast:1.0.6'
+    //日历
+    compile 'com.squareup:android-times-square:1.6.5'
+    // 选择时间
+    compile 'com.contrarywind:Android-PickerView:3.2.4'
+    //圆形进度按钮
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
+    //    //关于
+
+    //    compile 'com.github.medyo:android-about-page:1.2'
+
+    //二维码扫描
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+    //加载动画
+    compile 'com.wang.avi:library:2.1.3'
+    compile files('libs/jmdns-3.4.1.jar')
+    compile files('libs/EZOpenSDK.jar')
 }
 
 

@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.Farm;
+import com.qican.ifarm.ui.camera.CameraTestActivity;
+import com.qican.ifarm.ui.camera.CameraTestActivity_;
 import com.qican.ifarm.ui.node.FarmActivity;
 import com.qican.ifarm.utils.CommonTools;
 
@@ -22,7 +25,7 @@ public class FarmSettingFragment extends Fragment implements View.OnClickListene
     private static final int LABEL_MAX_SHOW_LEN = 20;
     private View view;
     private String TAG = "FarmSettingFragment";
-    private RelativeLayout rlFarmInfo, rlDevice;
+    private RelativeLayout rlFarmInfo, rlDevice, rlCamera;
     private Farm mFarm;
     private ImageView ivFarmImg;
     private List<TextView> tvLabels;
@@ -63,6 +66,7 @@ public class FarmSettingFragment extends Fragment implements View.OnClickListene
     private void initEvent() {
         rlFarmInfo.setOnClickListener(this);
         rlDevice.setOnClickListener(this);
+        rlCamera.setOnClickListener(this);
     }
 
 
@@ -70,6 +74,7 @@ public class FarmSettingFragment extends Fragment implements View.OnClickListene
         myTool = new CommonTools(getActivity());
         rlFarmInfo = (RelativeLayout) v.findViewById(R.id.rl_farminfo);
         rlDevice = (RelativeLayout) v.findViewById(R.id.rl_device_manage);
+        rlCamera = (RelativeLayout) v.findViewById(R.id.rl_camera);
 
         tvLabel1 = (TextView) v.findViewById(R.id.tvLabel1);
         tvLabel2 = (TextView) v.findViewById(R.id.tvLabel2);
@@ -89,6 +94,9 @@ public class FarmSettingFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.rl_device_manage:
                 myTool.startActivity(mFarm, SensorListActivity_.class);
+                break;
+            case R.id.rl_camera:
+                myTool.startActivity(CameraTestActivity_.class);
                 break;
         }
     }

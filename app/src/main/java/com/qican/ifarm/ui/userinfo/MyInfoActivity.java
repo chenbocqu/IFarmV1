@@ -25,7 +25,7 @@ import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TResult;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
-import com.qican.ifarm.beanfromzhu.User;
+import com.qican.ifarm.beanfromservice.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.listener.OnDialogListener;
 import com.qican.ifarm.listener.OnSexDialogListener;

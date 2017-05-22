@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="远程农场 随手掌控"
+        android:text="远程动态 实时监测"
         android:textColor="@color/white"
         android:textSize="24sp" />
 
@@ -27,7 +27,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="远程农场，一键开启XXXX，在家也能轻松搞定"
+        android:text="远程农场全面监测\n出门在外也能轻松了解农场状态"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

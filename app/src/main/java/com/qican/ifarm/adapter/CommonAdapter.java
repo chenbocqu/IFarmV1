@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.qican.ifarm.listener.OnItemClickListener;
+import com.qican.ifarm.utils.CommonTools;
+
 import java.util.List;
 
 
@@ -14,13 +17,15 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mDatas;
     protected final int mItemLayoutId;
+    protected OnItemClickListener<T> itemClickListener;
+    protected CommonTools myTool;
 
     public CommonAdapter(Context context, List<T> mDatas, int itemLayoutId) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mDatas = mDatas;
         this.mItemLayoutId = itemLayoutId;
-
+        this.myTool = new CommonTools(context);
     }
 
     @Override
@@ -44,7 +49,6 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
                 parent);
         convert(viewHolder, getItem(position));
         return viewHolder.getConvertView();
-
     }
 
     public abstract void convert(ViewHolder helper, T item);
@@ -57,5 +61,9 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 
     public void setDatas(List<T> mDatas) {
         this.mDatas = mDatas;
+    }
+
+    public void setItemClickListener(OnItemClickListener<T> itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }

@@ -17,15 +17,17 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
+import com.qican.ifarm.bean.EZCamera;
 import com.qican.ifarm.listener.OnFragmentListener;
-import com.qican.ifarm.ui.chat.MainActivity;
-import com.qican.ifarm.ui.farm.AddFarmActivity_;
-import com.qican.ifarm.ui.farm.FarmListActivity;
+import com.qican.ifarm.listener.OnInfoLoadListener;
 import com.qican.ifarm.ui.farm.FarmListActivity_;
+import com.qican.ifarm.ui.farm.VideoPlayActivity_;
 import com.qican.ifarm.ui.login.LoginActivity;
 import com.qican.ifarm.ui.myfriend.MyFriendActivity;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.IFarmData;
 import com.qican.ifarm.utils.PullToZoomHelper;
+import com.videogo.openapi.EZOpenSDK;
 
 public class UserInfoFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     private View view;
@@ -33,12 +35,12 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
 
     private CommonTools myTool;
     private PullToZoomScrollViewEx scrollView;
-    private RelativeLayout llMyInfo, rlSetting, rlService, rlComQuestion, rlFriend, rlLogout, rlFarm;
+    private RelativeLayout llMyInfo, rlSetting, rlService, rlComQuestion,
+            rlFriend, rlLogout, rlFarm, rlLinkEz, rlLogoutEZ;
     private OnFragmentListener mCallBack;
     private ComUser userInfo;
     private TextView tvNickName, tvSignature;
     private ImageView ivHeadImg, ivSex, ivBgImg;
-
 
     @Nullable
     @Override
@@ -69,10 +71,22 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         if (!myTool.isLogin()) {
             return;
         }
+
         userInfo = myTool.getComUserInfoById(myTool.getUserId());
         if (userInfo == null) {
+            IFarmData.updateUserInfo(getActivity(), new OnInfoLoadListener() {
+                @Override
+                public void userInfoLoadFinished(boolean isSuccess) {
+                    if (isSuccess) {
+                        initData();
+                    } else {
+                        tvNickName.setText("小农人");
+                    }
+                }
+            });
             return;
         }
+
         tvNickName.setText(userInfo.getNickName());
         tvSignature.setText(userInfo.getSignature());
         myTool.showSex(userInfo.getSex(), ivSex);
@@ -115,6 +129,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         rlFriend = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_friend);
         rlLogout = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_logout);
         rlFarm = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_farm);
+        rlLinkEz = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_link_ez);
+        rlLogoutEZ = (RelativeLayout) scrollView.getRootView().findViewById(R.id.rl_logout_ez);
 
         tvNickName = (TextView) scrollView.getRootView().findViewById(R.id.tv_nickname);
         tvSignature = (TextView) scrollView.getRootView().findViewById(R.id.tv_signature);
@@ -133,6 +149,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
         rlLogout.setOnClickListener(this);
         ivHeadImg.setOnClickListener(this);
         rlFarm.setOnClickListener(this);
+        rlLinkEz.setOnClickListener(this);
+        rlLogoutEZ.setOnClickListener(this);
     }
 
     @Override
@@ -142,8 +160,11 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
                 myTool.startActivity(MyInfoActivity.class);
                 break;
             case R.id.rl_setting:
-                myTool.startActivity(MainActivity.class);
-//                myTool.startActivity(LoginActivity.class);
+                EZCamera camera = new EZCamera();
+                camera.setDeviceSerial("626439264");
+                camera.setChannelNo(1);
+                camera.setVerifyCode("SEGHDP");
+                myTool.startActivity(camera, VideoPlayActivity_.class);
                 break;
             case R.id.rl_comquestion:
                 break;
@@ -176,6 +197,12 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener, 
                 break;
             case R.id.rl_farm:
                 myTool.startActivity(FarmListActivity_.class);
+                break;
+            case R.id.rl_link_ez:
+                EZOpenSDK.getInstance().openLoginPage();
+                break;
+            case R.id.rl_logout_ez:
+                EZOpenSDK.getInstance().logout();//注销
                 break;
         }
     }

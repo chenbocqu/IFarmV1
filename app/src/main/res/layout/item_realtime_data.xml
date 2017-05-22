@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/round_item_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            style="@style/MyImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/temperature" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/MyText.Large.Black"
+                android:text="土壤水温度" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_average_value"
+                    style="@style/MyText.Large"
+                    android:text="35.21"
+                    android:textColor="@color/blue" />
+
+                <TextView
+                    android:id="@+id/tv_unit"
+                    style="@style/MyText.Small"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:gravity="top"
+                    android:text="℃"
+                    android:textColor="@color/yellow_trans" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llItem1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="No.1" />
+
+            <TextView
+                android:id="@+id/tv_value1"
+                style="@style/MyText.Large"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:text="21.44℃"
+                android:textColor="@color/text_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llItem2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="No.2" />
+
+            <TextView
+                android:id="@+id/tv_value2"
+                style="@style/MyText.Large"
+                android:layout_marginTop="5dp"
+                android:gravity="top|left"
+                android:maxLines="2"
+                android:text="20.40℃"
+                android:textColor="@color/text_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/MyText.Small"
+                android:text="更多详情" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/moreinfo" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

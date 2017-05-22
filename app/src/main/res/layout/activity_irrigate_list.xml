@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@null"
-            android:dividerHeight="8dp"
+            android:dividerHeight="1dp"
             android:listSelector="@android:color/transparent"
             android:overScrollMode="ifContentScrolls"
             android:scrollingCache="false" />

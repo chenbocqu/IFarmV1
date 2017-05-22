@@ -118,9 +118,10 @@
             android:text="采集设备管理" />
 
         <ImageView style="@style/ArrowRight" />
-    </RelativeLayout><!-- 昵称-->
+    </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/rl_userinfo"
+        android:id="@+id/rl_camera"
         style="@style/MenuWrapper"
         android:layout_marginTop="@dimen/menuMargin">
 
@@ -132,7 +133,7 @@
         <TextView
             style="@style/MenuText"
             android:layout_toRightOf="@id/iv_help"
-            android:text="摄像头管理" />
+            android:text="实时监控" />
 
         <ImageView style="@style/ArrowRight" />
     </RelativeLayout>

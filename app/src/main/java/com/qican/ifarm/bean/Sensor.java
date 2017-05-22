@@ -6,7 +6,7 @@
  */
 package com.qican.ifarm.bean;
 
-import com.qican.ifarm.beanfromzhu.FarmSensor;
+import com.qican.ifarm.beanfromservice.FarmSensor;
 
 import java.io.Serializable;
 

@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.ecloud.pulltozoomview.PullToZoomListViewEx;
 import com.hyphenate.easeui.EaseConstant;
 import com.qican.ifarm.R;
@@ -31,13 +30,10 @@ import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.CircleImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-import me.xiaopan.sketch.SketchImageView;
 import okhttp3.Call;
 
 
@@ -125,7 +121,7 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                 .addParams("beginIndex", "0")
                 .addParams("count", "10")
                 .build()
-                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromzhu.Farm>>() {
+                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromservice.Farm>>() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         e.printStackTrace();
@@ -133,14 +129,14 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                     }
 
                     @Override
-                    public void onResponse(List<com.qican.ifarm.beanfromzhu.Farm> farmList, int id) {
+                    public void onResponse(List<com.qican.ifarm.beanfromservice.Farm> farmList, int id) {
                         //处理token失效问题
                         if (farmList == null) {
                             myTool.showTokenLose();
                             return;
                         }
                         myTool.log("好友农场列表list：" + farmList.toString());
-                        for (com.qican.ifarm.beanfromzhu.Farm farm : farmList) {
+                        for (com.qican.ifarm.beanfromservice.Farm farm : farmList) {
                             Farm myFarm = new Farm(farm);
                             mData.add(myFarm);
                         }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/round_item_bg">
+
+        <ImageView
+            android:id="@+id/iv"
+            style="@style/MyImg"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_farm_img" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@id/iv"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/MyText.Large.Black"
+                android:text="A0区" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="@style/MyText"
+                android:layout_marginTop="10dp"
+                android:gravity="center|left"
+                android:maxLines="3"
+                android:text="该区域长50米宽8米，主要用于空心菜与大白菜种植，年均产量7.5万元！" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

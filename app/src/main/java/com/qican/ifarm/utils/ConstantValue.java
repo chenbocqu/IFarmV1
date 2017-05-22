@@ -25,8 +25,8 @@ public interface ConstantValue {
     String KEY_FIRSTIN = "KEY_FIRSTIN";
 
     //IP地址和端口号
-//    String IP = "172.20.33.237";
-    String IP = "47.93.91.45";
+    String IP = "172.20.33.237";
+//    String IP = "47.93.91.45";
     String PORT = "8080";
     String SERVICE_ADDRESS = "http://" + IP + ":" + PORT + "//IFarm/";
 

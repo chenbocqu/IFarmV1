@@ -20,12 +20,13 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ComUser;
-import com.qican.ifarm.beanfromzhu.User;
+import com.qican.ifarm.beanfromservice.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
     Bitmap female;
     Bitmap male;
     RelativeLayout rlNodata;
+    AVLoadingIndicatorView avi;
+    ImageView ivNetError;
 
     @Nullable
     @Override
@@ -72,12 +75,13 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
         mDatas = new ArrayList<>();
         mAdpater = new UserAdapter(getActivity(), mDatas, R.layout.item_near_person);
         mListView.setAdapter(mAdpater);
-        showNoData();
         refreshData();
-//        mDatas = IFarmFakeData.getUserList();
     }
 
     private void refreshData() {
+        avi.smoothToShow();
+        ivNetError.setVisibility(View.GONE);
+
         OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -89,6 +93,8 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
                     public void onError(Call call, Exception e, int id) {
                         myTool.log("用户列表获取异常：" + e.toString());
                         mRefreshLayout.refreshFinish(true);
+                        avi.smoothToHide();
+                        ivNetError.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -110,12 +116,13 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
 
     private void notifyData() {
         mAdpater.notifyDataSetChanged();
-//        rlNodata.setVisibility(mDatas.isEmpty() ? View.VISIBLE : View.GONE);//直接显示
         if (mDatas.isEmpty()) {
             showNoData();
         } else {
             hideNoData();
         }
+        avi.smoothToHide();
+        ivNetError.setVisibility(View.GONE);
     }
 
     private void hideNoData() {
@@ -146,6 +153,9 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
         mRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.pullToRefreshLayout);
         mListView = (PullListView) v.findViewById(R.id.pullListView);
         rlNodata = (RelativeLayout) v.findViewById(R.id.rl_nodata);
+        avi = (AVLoadingIndicatorView) v.findViewById(R.id.avi);
+        ivNetError = (ImageView) v.findViewById(R.id.iv_net_error);
+
         myTool = new CommonTools(getActivity());
     }
 

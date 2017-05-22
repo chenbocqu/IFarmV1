@@ -37,4 +37,15 @@
     <dimen name="linePaddingTop">3dp</dimen>
     <dimen name="linePaddingLeft">12dp</dimen>
 
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dimen_margin_circle">4dp</dimen>
+    <dimen name="dimen_margin_circle.negative">-4dp</dimen>
+    <dimen name="margin_para">20dp</dimen>
+    <dimen name="paddingItem">15dp</dimen>
+    <dimen name="controlTextSize">30sp</dimen>
+    <dimen name="itemChooseRadius">3dp</dimen>
+    <dimen name="syspicMargin">8dp</dimen>
+    <dimen name="videoHeight">335dp</dimen>
+
 </resources>

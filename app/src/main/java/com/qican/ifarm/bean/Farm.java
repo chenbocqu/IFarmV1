@@ -21,7 +21,7 @@ public class Farm implements Serializable {
     public Farm() {
     }
 
-    public Farm(com.qican.ifarm.beanfromzhu.Farm farm) {
+    public Farm(com.qican.ifarm.beanfromservice.Farm farm) {
         setId(String.valueOf(farm.getFarmId()));
         setName(farm.getFarmName());
         setDesc(farm.getFarmDescribe());
@@ -146,6 +146,13 @@ public class Farm implements Serializable {
 
         public Builder setImgUrl(String imgUrl) {
             farm.setImgUrl(imgUrl);
+            return this;
+        }
+
+        public Builder setLabel(Label l) {
+            farm.setLabel(l);
+            farm.setLabelList(l.getLabelList());
+            farm.setLabels(l.getLabelStr());
             return this;
         }
 

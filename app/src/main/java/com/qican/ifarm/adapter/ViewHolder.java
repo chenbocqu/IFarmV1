@@ -116,8 +116,9 @@ public class ViewHolder {
      */
     public ViewHolder setImageByUrl(int viewId, String url) {
         //.placeholder(R.drawable.tab_bg)
-        Glide.with(mContext).load(url).error(R.drawable.tab_bg)
-                .centerCrop().crossFade().into((ImageView) getView(viewId));
+        if (url != null)
+            Glide.with(mContext).load(url).error(R.drawable.tab_bg)
+                    .centerCrop().crossFade().into((ImageView) getView(viewId));
         return this;
     }
 

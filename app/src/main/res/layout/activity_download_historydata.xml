@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <!-- 顶部titleBar-->
+    <include layout="@layout/titlebar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinner_farm"
+            style="@style/MySpinner"
+            android:hint="农场"
+            app:arrowTint="@color/green"
+            app:textTint="@color/text_color" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinner_collector"
+            style="@style/MySpinner"
+            android:hint="集中器"
+            app:arrowTint="@color/yellow"
+            app:textTint="@color/text_color" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinner_sensor"
+            style="@style/MySpinner"
+            android:hint="传感器"
+            app:arrowTint="@color/main_color"
+            app:textTint="@color/text_color" />
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+        <!-- 头像-->
+        <RelativeLayout
+            android:id="@+id/rlStartTime"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_img"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/start_time" />
+
+            <ImageView
+                android:id="@+id/iv_headimg_back"
+                style="@style/ArrowRight" />
+
+            <TextView
+                android:id="@+id/tv_headimg"
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_img"
+                android:text="开始时间" />
+
+            <TextView
+                android:id="@+id/tvStartTime"
+                style="@style/MyText"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/iv_headimg_back"
+                android:layout_toRightOf="@id/tv_headimg"
+                android:gravity="center|right"
+                android:hint="请选择开始时间"
+                android:text="" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rlEndTime"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_endtime"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/end_time" />
+
+            <ImageView
+                android:id="@+id/iv_endtime_back"
+                style="@style/ArrowRight" />
+
+            <TextView
+                android:id="@+id/tv_end"
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_endtime"
+                android:text="结束时间" />
+
+            <TextView
+                android:id="@+id/tvEndTime"
+                style="@style/MyText"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/iv_endtime_back"
+                android:layout_toRightOf="@id/tv_end"
+                android:gravity="center|right"
+                android:hint="请选择开始时间"
+                android:text="" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/btnWithText"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="25dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:cpb_cornerRadius="48dp"
+        app:cpb_textComplete="立即打开"
+        app:cpb_textError="下载出错"
+        app:cpb_textIdle="立即下载" />
+
+</LinearLayout>

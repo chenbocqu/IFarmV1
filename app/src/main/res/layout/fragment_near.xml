@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical">
 
     <include layout="@layout/view_nodata" />
+
+    <ImageView
+        android:id="@+id/iv_net_error"
+        style="@style/MyImg"
+        android:layout_centerInParent="true"
+        android:src="@drawable/net_error"
+        android:visibility="gone" />
 
     <com.qican.ifarm.view.refresh.PullToRefreshLayout
         android:id="@+id/pullToRefreshLayout"
@@ -22,5 +30,15 @@
             android:overScrollMode="never"
             android:scrollingCache="false" />
     </com.qican.ifarm.view.refresh.PullToRefreshLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/main_color"
+        app:indicatorName="BallTrianglePathIndicator" />
 
 </RelativeLayout>

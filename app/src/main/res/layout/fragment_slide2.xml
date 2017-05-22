@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="智能检测 异常报警"
+        android:text="智能农场 远程控制"
         android:textColor="@color/white"
         android:textSize="24sp" />
 
@@ -27,7 +27,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="采用智能高效的检测算法，农场异常尽在掌握之中"
+        android:text="采用先进远程控制技术\n随时随地轻松控制远程农场"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

@@ -5,17 +5,11 @@ package com.qican.ifarm.ui.control;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.CommonAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
@@ -23,11 +17,12 @@ import com.qican.ifarm.bean.ControlFunction;
 import com.qican.ifarm.bean.Device;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
+import com.qican.ifarm.utils.DataBindUtils;
 import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectFarmActivity extends Activity implements View.OnClickListener, PullToRefreshLayout.OnRefreshListener {
@@ -50,11 +45,12 @@ public class SelectFarmActivity extends Activity implements View.OnClickListener
     }
 
     private void initData() {
-        fun = (ControlFunction) myTool.getParam(new ControlFunction("dd"));
+        fun = (ControlFunction) myTool.getParam(ControlFunction.class);
         if (fun != null)
             ((TextView) (findViewById(R.id.tv_title))).setText(fun.getName());
+
         mData = IFarmFakeData.getFarmList();
-        mAdapter = new FunForFarmAdapter(this, mData, R.layout.item_farm_fun);
+        mAdapter = new FunForFarmAdapter(this, mData, R.layout.item_farm_activity);
         mListView.setAdapter(mAdapter);
     }
 
@@ -108,44 +104,28 @@ public class SelectFarmActivity extends Activity implements View.OnClickListener
         }
 
         @Override
-        public void convert(ViewHolder helper, Farm item) {
+        public void convert(final ViewHolder helper, final Farm item) {
             List<Device> data = IFarmFakeData.getDeviceList();
-            GridView gridView = helper.getView(R.id.gridView);
+
 
             helper
                     .setText(R.id.tv_name, item.getName())
-                    .setText(R.id.tv_desc, item.getDesc());
+                    .setText(R.id.tv_desc, item.getDesc())
+                    .setText(R.id.tv_time, item.getTime());
+
             if (item.getImgUrl() != null)//设置农场照片
                 helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
 
-            //TODO: 动画有点bug
-            gridView.setAdapter(new CommonAdapter<Device>(SelectFarmActivity.this, data, R.layout.item_device) {
+            List<TextView> mTvs = new ArrayList<>();
+            mTvs.add((TextView) helper.getView(R.id.tvLabel1));
+            mTvs.add((TextView) helper.getView(R.id.tvLabel2));
+            mTvs.add((TextView) helper.getView(R.id.tvLabel3));
+
+            DataBindUtils.setLabel(mTvs, (TextView) helper.getView(R.id.tvMore), item.getLabel());
+            helper.getView(R.id.ll_item).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void convert(ViewHolder helper, Device item) {
-                    helper.setText(R.id.tv_item, item.getName());
-                    final ImageView ivItem = helper.getView(R.id.iv_item);
-                    ivItem.setImageBitmap(ConstantValue.iconFunOn[fun.getIndex()]);
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            super.run();
-                            while (true) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        YoYo.with(Techniques.Wobble)
-                                                .duration(1000)
-                                                .playOn(ivItem);
-                                    }
-                                });
-                                try {
-                                    Thread.sleep(2500);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }.start();
+                public void onClick(View v) {
+                    myTool.startActivity(item, SystemListActivity_.class);
                 }
             });
         }

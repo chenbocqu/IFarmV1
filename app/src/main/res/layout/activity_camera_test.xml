@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+    <!-- 顶部titleBar-->
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/main_color">
+
+        <LinearLayout
+            android:id="@+id/llBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                style="@style/Menu_Icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10dp"
+                android:text="返回"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="实时监控"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/llTest"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_selector_title"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                style="@style/MyText"
+                android:layout_gravity="center"
+                android:text="实时监控"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_farm"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_farm"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/series" />
+
+            <ImageView
+                android:id="@+id/iv1"
+                style="@style/ArrowRight" />
+
+            <TextView
+                android:id="@+id/tv_serviel"
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_farm"
+                android:text="序列号" />
+
+            <EditText
+                android:id="@+id/edtSeries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv1"
+                android:layout_toRightOf="@id/tv_serviel"
+                android:background="@drawable/edittext_bg"
+                android:padding="3dp" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+        <!-- 昵称-->
+        <RelativeLayout
+            android:id="@+id/rl_valve"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_valve"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/path" />
+
+            <ImageView
+                android:id="@+id/iv2"
+                style="@style/ArrowRight" />
+
+            <TextView
+                android:id="@+id/tv2"
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_valve"
+                android:text="通道号" />
+
+            <EditText
+                android:id="@+id/edtPath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv2"
+                android:layout_toRightOf="@id/tv2"
+                android:background="@drawable/edittext_bg"
+                android:padding="3dp" />
+        </RelativeLayout>
+        <View style="@style/SplitLine.WithMargin" />
+        <!-- 昵称-->
+        <RelativeLayout
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_check"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/vericode" />
+
+            <ImageView
+                android:id="@+id/iv3"
+                style="@style/ArrowRight" />
+
+            <TextView
+                android:id="@+id/tv3"
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_check"
+                android:text="验证码" />
+
+            <EditText
+                android:id="@+id/edtVericode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv3"
+                android:layout_toRightOf="@id/tv3"
+                android:background="@drawable/edittext_bg"
+                android:padding="3dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/openCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:background="@drawable/roundbtn_bg"
+        android:text="打开相机"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>

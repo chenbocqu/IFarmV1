@@ -50,12 +50,14 @@ public class ControlListFragment extends Fragment implements View.OnClickListene
     @DrawableRes
     private int[] iconRes = new int[]{//控制功能图标资源
             R.drawable.fun_irrigate,
+            R.drawable.fertilize,
+            R.drawable.drug,
             R.drawable.fun_air,
             R.drawable.fun_illuminate,
             R.drawable.fun_temperature,
             R.drawable.fun_humidity,
-            R.drawable.fun_co2,
-            R.drawable.fun_o2,
+//            R.drawable.fun_co2,
+//            R.drawable.fun_o2,
             R.drawable.fun_sunshade,
             R.drawable.fun_add};
 
@@ -116,7 +118,8 @@ public class ControlListFragment extends Fragment implements View.OnClickListene
                 @Override
                 public void onClick(View v) {
 //                    myTool.startActivity(funActs[item.getIndex()]);//分别跳转
-                    myTool.startActivity(item, SelectFarmActivity.class);
+//                    myTool.startActivity(item, SelectFarmActivity.class);
+                    myTool.startActivity(item, SelectSystemActivity.class);
                 }
             });
         }

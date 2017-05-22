@@ -21,7 +21,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:text">"文本"</item>
+        <item name="android:hint">"文"</item>
         <item name="android:textColor">@color/text_color</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
@@ -82,6 +82,11 @@
         <item name="android:src">@drawable/img_holder</item>
     </style>
 
+    <style name="MyImg.Small">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+    </style>
+
     <style name="MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">20dp</item>
@@ -108,6 +113,27 @@
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="Icon">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="Icon.16dp">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+    </style>
+
+    <style name="Icon.25dp">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+    </style>
+
+    <style name="Icon.40dp">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
     </style>
 
     <style name="Menu_Icon.Small">
@@ -165,5 +191,28 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="MySpinner">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:shadowColor">@color/light_gray</item>
+    </style>
+
     <dimen name="menuMargin">12dp</dimen>
+
+    <style name="BtnItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="ImgTank">
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:src">@drawable/tank_off</item>
+    </style>
 </resources>

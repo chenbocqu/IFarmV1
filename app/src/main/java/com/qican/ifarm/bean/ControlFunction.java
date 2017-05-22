@@ -1,14 +1,9 @@
 package com.qican.ifarm.bean;
 
-import com.qican.ifarm.R;
-
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2016/12/27 0027.
- */
-public class ControlFunction implements Serializable{
-    public final static String funType[] = new String[]{"浇灌", "通风", "光照", "温度", "湿度", "二氧化碳", "氧气", "遮阳"};
+public class ControlFunction implements Serializable {
+    public final static String funType[] = new String[]{"浇灌", "施肥", "施药", "通风", "光照", "温度", "湿度", "遮阳"};// "二氧化碳", "氧气",
     private String id;
     private String name;
     private String desc;//描述
@@ -35,24 +30,30 @@ public class ControlFunction implements Serializable{
             case "灌溉":
                 this.index = 0;
                 break;
-            case "通风":
+            case "施肥":
                 this.index = 1;
                 break;
-            case "光照":
+            case "施药":
                 this.index = 2;
                 break;
-            case "温度":
+            case "通风":
                 this.index = 3;
                 break;
-            case "湿度":
+            case "光照":
                 this.index = 4;
                 break;
-            case "CO2":
+            case "温度":
                 this.index = 5;
                 break;
-            case "O2":
+            case "湿度":
                 this.index = 6;
                 break;
+//            case "CO2":
+//                this.index = 5;
+//                break;
+//            case "O2":
+//                this.index = 6;
+//                break;
             case "遮阳":
                 this.index = 7;
                 break;

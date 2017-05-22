@@ -3,10 +3,9 @@
  */
 package com.qican.ifarm.bean;
 
-import com.qican.ifarm.beanfromzhu.User;
+import com.qican.ifarm.beanfromservice.User;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class ComUser implements Serializable {
     private String id;

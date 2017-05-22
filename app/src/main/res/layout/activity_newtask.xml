@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_marginBottom="@dimen/syspicMargin"
+        android:layout_marginTop="@dimen/syspicMargin"
+        android:background="@drawable/round_item_bg">
+
+        <include layout="@layout/control_system" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/MenuGroupWrapper"
+                android:layout_marginTop="0dp">
+
+                <RelativeLayout
+                    android:id="@+id/rlOperation"
+                    style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_operation"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/operation" />
+
+                    <ImageView
+                        android:id="@+id/iv_operation_back"
+                        style="@style/ArrowRight" />
+
+                    <TextView
+                        android:id="@+id/tv_operation"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_operation"
+                        android:text="操作类型" />
+
+                    <TextView
+                        android:id="@+id/tvOperation"
+                        style="@style/MyText"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toLeftOf="@id/iv_operation_back"
+                        android:layout_toRightOf="@id/tv_operation"
+                        android:gravity="center|right"
+                        android:hint="请选择操作类型"
+                        android:text="" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/MenuGroupWrapper">
+
+                <RelativeLayout
+                    android:id="@+id/rlArea"
+                    style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_area"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/location" />
+
+                    <ImageView
+                        android:id="@+id/iv_area_back"
+                        style="@style/ArrowRight" />
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_area"
+                        android:text="操作区域" />
+
+                    <TextView
+                        android:id="@+id/tvArea"
+                        style="@style/MyText"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toLeftOf="@id/iv_area_back"
+                        android:layout_toRightOf="@id/tv_area"
+                        android:gravity="center|right"
+                        android:hint="请选择操作区域"
+                        android:text="" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/MenuGroupWrapper">
+                <!-- 头像-->
+                <RelativeLayout
+                    android:id="@+id/rlStartTime"
+                    style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_img"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/start_time" />
+
+                    <ImageView
+                        android:id="@+id/iv_headimg_back"
+                        style="@style/ArrowRight" />
+
+                    <TextView
+                        android:id="@+id/tv_headimg"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_img"
+                        android:text="开始时间" />
+
+                    <TextView
+                        android:id="@+id/tvStartTime"
+                        style="@style/MyText"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toLeftOf="@id/iv_headimg_back"
+                        android:layout_toRightOf="@id/tv_headimg"
+                        android:gravity="center|right"
+                        android:hint="请选择开始时间"
+                        android:text="" />
+
+                </RelativeLayout>
+
+                <View style="@style/SplitLine.WithMargin" />
+
+                <RelativeLayout
+                    android:id="@+id/rlLastTime"
+                    style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_lasttime"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/lasttime" />
+
+                    <ImageView
+                        android:id="@+id/iv_lasttime_back"
+                        style="@style/ArrowRight" />
+
+                    <TextView
+                        android:id="@+id/tv_last"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_lasttime"
+                        android:text="持续时间" />
+
+                    <TextView
+                        android:id="@+id/tvLastTime"
+                        style="@style/MyText"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_toLeftOf="@id/iv_lasttime_back"
+                        android:layout_toRightOf="@id/tv_last"
+                        android:gravity="center|right"
+                        android:hint="请选择持续时间"
+                        android:text="" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

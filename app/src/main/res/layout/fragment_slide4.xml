@@ -26,7 +26,7 @@
         android:layout_below="@id/iv_img"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="从此开启智能农场Style"
+        android:text="开启智能农场Style\n从此走上人生巅峰"
         android:textColor="@color/white"
         android:textSize="16sp" />
 </RelativeLayout>

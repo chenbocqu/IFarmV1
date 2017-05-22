@@ -20,10 +20,9 @@ import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.BeanCBWithTkCk;
-import com.qican.ifarm.ui.node.FarmActivity;
+import com.qican.ifarm.ui.subarea.SubareasOfFarmActivity;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
-import com.qican.ifarm.utils.IFarmData;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -42,12 +41,16 @@ import okhttp3.Call;
 public class FarmListActivity extends Activity {
     private static final int LABEL_MAX_SHOW_LEN = 20;
     private CommonTools myTool;
+
     @ViewById(R.id.rl_nodata)
     RelativeLayout rlNoData;
+
     @ViewById(R.id.pullToRefreshLayout)
     PullToRefreshLayout refreshLayout;
+
     @ViewById(R.id.pullListView)
     PullListView mListView;
+
     private FarmAdaper mAdapter;
     private List<Farm> mDatas;
     private Bitmap defaultFarmPic;
@@ -80,7 +83,7 @@ public class FarmListActivity extends Activity {
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
-                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromzhu.Farm>>() {
+                .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromservice.Farm>>() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         e.printStackTrace();
@@ -88,14 +91,14 @@ public class FarmListActivity extends Activity {
                     }
 
                     @Override
-                    public void onResponse(List<com.qican.ifarm.beanfromzhu.Farm> farmList, int id) {
+                    public void onResponse(List<com.qican.ifarm.beanfromservice.Farm> farmList, int id) {
                         //处理token失效问题
                         if (farmList == null) {
                             myTool.showTokenLose();
                             return;
                         }
                         myTool.log("农场列表list：" + farmList.toString());
-                        for (com.qican.ifarm.beanfromzhu.Farm farm : farmList) {
+                        for (com.qican.ifarm.beanfromservice.Farm farm : farmList) {
                             Farm myFarm = new Farm(farm);
                             mDatas.add(myFarm);
                         }
@@ -145,7 +148,6 @@ public class FarmListActivity extends Activity {
         @Override
         public void convert(ViewHolder helper, final Farm item) {
 
-            myTool.log("convert URL:" + item.getImgUrl());
             LinearLayout rlItem = helper.getView(R.id.ll_item);
 
             if (item.getImgUrl() != null) {
@@ -163,7 +165,10 @@ public class FarmListActivity extends Activity {
             rlItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    myTool.startActivity(item, FarmActivity.class);
+                    // 跳转至选择分区页面
+                    myTool.startActivity(item, SubareasOfFarmActivity.class);
+//                    myTool.startActivity(item, SubareaListActivity_.class);
+//                    myTool.startActivity(item, FarmActivity.class);
                 }
             });
         }

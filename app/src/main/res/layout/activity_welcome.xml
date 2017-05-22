@@ -61,4 +61,14 @@
         android:layout_marginBottom="100dp"
         android:src="@mipmap/alog" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:text="重庆祺璨科技股份有限公司 版权所有\nCopyright @ 2016-2020 Qican.\nAll Rights Reserved."
+        android:textColor="@color/gray_light"
+        android:textSize="12sp" />
+
 </RelativeLayout>

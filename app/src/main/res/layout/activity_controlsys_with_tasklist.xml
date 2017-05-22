@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_allstop" />
+
+        <ImageView
+            android:id="@+id/iv_watering"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_watering" />
+
+        <ImageView
+            android:id="@+id/iv_tank1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_tank1" />
+
+        <ImageView
+            android:id="@+id/iv_tank2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_tank2" />
+
+        <ImageView
+            android:id="@+id/iv_tank3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_tank3" />
+
+        <ImageView
+            android:id="@+id/iv_a"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_a" />
+
+        <ImageView
+            android:id="@+id/iv_b"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_b" />
+
+        <ImageView
+            android:id="@+id/iv_c"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_c" />
+
+        <ImageView
+            android:id="@+id/iv_d"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_d" />
+
+        <ImageView
+            android:id="@+id/iv_e"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/control_e" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/common_list" />
+
+</LinearLayout>

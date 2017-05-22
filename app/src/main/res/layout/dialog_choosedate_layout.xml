@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:text="选择日期"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:id="@+id/sv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:lineSpacingExtra="5dp"
+            android:lineSpacingMultiplier="1.5"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <com.squareup.timessquare.CalendarPickerView
+                android:id="@+id/calendar_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/custom_background"
+                android:clipToPadding="false"
+                android:fadingEdge="none"
+                android:overScrollMode="never"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="none"
+                app:tsquare_dayBackground="@drawable/custom_calendar_bg_selector"
+                app:tsquare_dayTextColor="@color/custom_calendar_text_selector"
+                app:tsquare_dividerColor="@color/transparent"
+                app:tsquare_headerTextColor="@color/custom_header_text"
+                app:tsquare_titleTextColor="@color/custom_calendar_text_selector" />
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/left_button"
+                android:layout_width="90dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/line_green_btn_bg"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/green"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/right_button"
+                android:layout_width="90dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/line_btn_bg"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/yellow"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

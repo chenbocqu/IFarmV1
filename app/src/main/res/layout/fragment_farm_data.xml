@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
@@ -36,6 +37,18 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="操作功能" />
+
+    <cn.bingoogolapple.progressbar.BGAProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="35"
+        android:visibility="gone"
+        app:bga_pb_mode="horizontal"
+        app:bga_pb_reachedColor="@color/green_trans"
+        app:bga_pb_reachedHeight="@dimen/progress_height"
+        app:bga_pb_unReachedColor="@color/white"
+        app:bga_pb_unReachedHeight="@dimen/progress_height" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,11 +98,11 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="8dp"
-                android:src="@drawable/excel" />
+                android:src="@drawable/download" />
 
             <TextView
                 style="@style/MyText.Large"
-                android:text="导出为excel" />
+                android:text="下载历史数据" />
         </LinearLayout>
 
     </LinearLayout>

@@ -5,7 +5,6 @@
  */
 package com.qican.ifarm.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,9 +15,10 @@ import android.widget.TextView;
 
 import com.qican.ifarm.R;
 import com.qican.ifarm.listener.OnFragmentListener;
+import com.qican.ifarm.ui.camera.FarmListOfCameraFragment;
 import com.qican.ifarm.ui.control.ControlListFragment;
+import com.qican.ifarm.ui.find.FindFragment;
 import com.qican.ifarm.ui.login.LoginActivity;
-import com.qican.ifarm.ui.near.NearListFragment;
 import com.qican.ifarm.ui.node.NodeListFragment;
 import com.qican.ifarm.ui.userinfo.UserInfoFragment;
 import com.qican.ifarm.utils.CommonTools;
@@ -42,7 +42,7 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     ViewPager mViewPager;
 
     private List<Fragment> mTabs = new ArrayList<Fragment>();
-    private String[] mTitles = new String[]{"附近的人", "我的农场", "控制", "个人信息"};
+    private String[] mTitles = new String[]{"农场", "控制", "监控", "发现", "个人信息"};
     private FragmentPagerAdapter mAdapter;
     private NodeListFragment nodeListFragment;
 
@@ -94,20 +94,24 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
      * 加载主界面的几个子UI
      */
     private void loadFragments() {
-        //控制列表
-        NearListFragment tabFragment1 = new NearListFragment();
-        mTabs.add(tabFragment1);
-
-        // 监测列表
+        // 农场数据
         nodeListFragment = new NodeListFragment();
         mTabs.add(nodeListFragment);
 
-        //我的包裹
-//        MapFragment tabFragment2 = new MapFragment();
+        // 控制功能
         ControlListFragment tabFragment2 = new ControlListFragment();
         mTabs.add(tabFragment2);
 
-        //个人信息
+        // 监控视频
+        FarmListOfCameraFragment farmListFragment = new FarmListOfCameraFragment();
+        mTabs.add(farmListFragment);
+
+        // 发现
+//        NearListFragment tabFragment1 = new NearListFragment();
+        FindFragment tabFragment1 = new FindFragment();
+        mTabs.add(tabFragment1);
+
+        // 个人信息
         UserInfoFragment tabFragment3 = new UserInfoFragment();
         mTabs.add(tabFragment3);
     }
@@ -115,24 +119,26 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     private void initView() {
         myTool = new CommonTools(this);
         // 拿到底部的四个自定义View
-        ChangeColorIconWithText indicatorHomePage = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
-        ChangeColorIconWithText indicatorNearby = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
-        ChangeColorIconWithText indicatorMyparcel = (ChangeColorIconWithText) findViewById(R.id.id_indicator_three);
-        ChangeColorIconWithText indicatorMine = (ChangeColorIconWithText) findViewById(R.id.id_indicator_four);
+        ChangeColorIconWithText indicatorOne = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
+        ChangeColorIconWithText indicatorTwo = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
 
-        mTabIndicators.add(indicatorHomePage);
-        mTabIndicators.add(indicatorNearby);
-        mTabIndicators.add(indicatorMyparcel);
-        mTabIndicators.add(indicatorMine);
+        ChangeColorIconWithText indicatorCamera = (ChangeColorIconWithText) findViewById(R.id.id_indicator_camera);
+
+        ChangeColorIconWithText indicatorThree = (ChangeColorIconWithText) findViewById(R.id.id_indicator_three);
+        ChangeColorIconWithText indicatorFour = (ChangeColorIconWithText) findViewById(R.id.id_indicator_four);
+
+        mTabIndicators.add(indicatorOne);
+        mTabIndicators.add(indicatorTwo);
+        mTabIndicators.add(indicatorCamera);
+        mTabIndicators.add(indicatorThree);
+        mTabIndicators.add(indicatorFour);
 
         //指示器设置监听
-        indicatorHomePage.setOnClickListener(this);
-        indicatorNearby.setOnClickListener(this);
-        indicatorMyparcel.setOnClickListener(this);
-        indicatorMine.setOnClickListener(this);
-
+        for (ChangeColorIconWithText indicator : mTabIndicators) {
+            indicator.setOnClickListener(this);
+        }
         //默认是首页设置为选中状态，默认首页title
-        indicatorHomePage.setIconAlpha(1.0f);
+        indicatorOne.setIconAlpha(1.0f);
         setUITitle(0);
     }
 
@@ -176,17 +182,23 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
                 mTabIndicators.get(1).setIconAlpha(1.0f);
                 mViewPager.setCurrentItem(1, false);
                 break;
-            case R.id.id_indicator_three:
+            case R.id.id_indicator_camera:
                 //首先把其他Tab清除
                 resetOtherTabs();
                 mTabIndicators.get(2).setIconAlpha(1.0f);
                 mViewPager.setCurrentItem(2, false);
                 break;
-            case R.id.id_indicator_four:
+            case R.id.id_indicator_three:
                 //首先把其他Tab清除
                 resetOtherTabs();
                 mTabIndicators.get(3).setIconAlpha(1.0f);
                 mViewPager.setCurrentItem(3, false);
+                break;
+            case R.id.id_indicator_four:
+                //首先把其他Tab清除
+                resetOtherTabs();
+                mTabIndicators.get(4).setIconAlpha(1.0f);
+                mViewPager.setCurrentItem(4, false);
                 break;
         }
     }

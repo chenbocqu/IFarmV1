@@ -23,7 +23,9 @@
         <ImageView style="@style/ArrowRight" />
     </RelativeLayout>
 
-    <LinearLayout style="@style/MenuGroupWrapper">
+    <LinearLayout
+        style="@style/MenuGroupWrapper"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/rl_farm"
@@ -68,7 +70,8 @@
 
         <RelativeLayout
             android:id="@+id/rl_friend"
-            style="@style/MenuWrapper">
+            style="@style/MenuWrapper"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_friend"
@@ -149,8 +152,7 @@
 
         <RelativeLayout
             android:id="@+id/rl_setting"
-            style="@style/MenuWrapper"
-            android:layout_marginTop="@dimen/menuMargin">
+            style="@style/MenuWrapper">
 
             <ImageView
                 android:id="@+id/iv_setting"
@@ -166,6 +168,47 @@
         </RelativeLayout>
 
         <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rl_link_ez"
+            style="@style/MenuWrapper"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_ez"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/ez_icon" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_ez"
+                android:text="关联萤石账户" />
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rl_logout_ez"
+            style="@style/MenuWrapper"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_logout_ez"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/logoutez" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_logout_ez"
+                android:text="退出萤石账户" />
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
         <!-- 昵称-->
         <RelativeLayout
             android:id="@+id/rl_logout"
@@ -177,6 +220,7 @@
                 android:src="@drawable/logout" />
 
             <ImageView style="@style/ArrowRight" />
+
             <TextView
                 style="@style/MenuText"
                 android:layout_toRightOf="@id/iv_logout"

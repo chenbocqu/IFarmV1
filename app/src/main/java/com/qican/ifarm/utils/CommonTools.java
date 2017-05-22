@@ -219,6 +219,19 @@ public class CommonTools {
     }
 
     /**
+     * 得到上一页面传递过来的参数
+     *
+     * @param c 要接收的类型
+     * @return 上一页面传递过来的参数
+     */
+    public Serializable getParam(@NonNull Class c) {
+        Bundle bundle = ((Activity) mContext).getIntent().getExtras();
+        if (bundle == null)
+            return "";
+        return (Serializable) bundle.get(c.getName());
+    }
+
+    /**
      * 启动activity,得到返回结果
      *
      * @param activity 要启动的activity
@@ -402,6 +415,7 @@ public class CommonTools {
         Uri imageUri = Uri.fromFile(file);
         return imageUri;
     }
+
     public Uri getUserBgFileUri() {
         File file = new File(USER_FILE_PATH + "/" + getUserId(), "background.jpg");
         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();

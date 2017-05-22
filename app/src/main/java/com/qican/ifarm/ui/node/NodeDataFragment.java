@@ -24,21 +24,15 @@ import com.qican.ifarm.adapter.DataAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Sensor;
-import com.qican.ifarm.beanfromzhu.FarmPara;
+import com.qican.ifarm.beanfromservice.FarmPara;
 import com.qican.ifarm.data.NetRequest;
+import com.qican.ifarm.ui.farm.DownloadExcelActivity_;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
+import cn.bingoogolapple.progressbar.BGAProgressBar;
 
 public class NodeDataFragment extends Fragment implements View.OnClickListener {
     private View view;
@@ -52,6 +46,7 @@ public class NodeDataFragment extends Fragment implements View.OnClickListener {
     private LinearLayout llRefresh, llExcel;
     private RelativeLayout rlNoData;
     private NetRequest netRequest;
+    private BGAProgressBar mPbDownloadExcel;
 
     private CommonTools myTool;
 
@@ -129,6 +124,7 @@ public class NodeDataFragment extends Fragment implements View.OnClickListener {
         llRefresh = (LinearLayout) v.findViewById(R.id.ll_refresh);
         llExcel = (LinearLayout) v.findViewById(R.id.ll_excel);
         rlNoData = (RelativeLayout) v.findViewById(R.id.rl_nodata);
+        mPbDownloadExcel = (BGAProgressBar) v.findViewById(R.id.progressBar);
         netRequest = new NetRequest(getActivity());
     }
 
@@ -136,10 +132,13 @@ public class NodeDataFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_refresh:
-                myTool.showInfo("请求实时数据中···");
+                mDatas.clear();
+                notifyData();
+                getSensorList();
                 break;
             case R.id.ll_excel:
-                myTool.showInfo("正在导出数据···");
+                myTool.startActivity(mFarm, DownloadExcelActivity_.class);
+//                netRequest.downLoadExcel(mFarm, mPbDownloadExcel);//下载历史数据
                 break;
         }
     }

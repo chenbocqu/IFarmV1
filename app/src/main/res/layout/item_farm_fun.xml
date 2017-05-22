@@ -57,5 +57,5 @@
         android:scrollbars="none"
         android:stretchMode="columnWidth"
         android:verticalSpacing="0dp" />
-    s
+    
 </LinearLayout>

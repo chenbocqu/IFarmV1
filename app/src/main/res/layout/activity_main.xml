@@ -56,11 +56,18 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <com.qican.ifarm.view.MyViewPager
+    <android.support.v4.view.ViewPager
         android:id="@+id/id_viewpager"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></com.qican.ifarm.view.MyViewPager>
+        android:layout_weight="1" />
+
+    <!--<com.qican.ifarm.view.MyViewPager-->
+    <!--android:id="@+id/id_viewpager"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1" />-->
+
     <!-- 底部tab -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,8 +82,8 @@
             android:layout_weight="1"
             android:padding="5dp"
             xuedi:bottom_color="@color/main_color"
-            xuedi:bottom_icon="@drawable/near"
-            xuedi:bottom_text="附近的人"
+            xuedi:bottom_icon="@drawable/farm"
+            xuedi:bottom_text="农场"
             xuedi:bottom_text_size="12sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
@@ -86,8 +93,19 @@
             android:layout_weight="1"
             android:padding="5dp"
             xuedi:bottom_color="@color/main_color"
-            xuedi:bottom_icon="@drawable/farm"
-            xuedi:bottom_text="我的农场"
+            xuedi:bottom_icon="@drawable/tab_valve"
+            xuedi:bottom_text="控制"
+            xuedi:bottom_text_size="12sp" />
+
+        <com.qican.ifarm.view.ChangeColorIconWithText
+            android:id="@+id/id_indicator_camera"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            xuedi:bottom_color="@color/main_color"
+            xuedi:bottom_icon="@drawable/tab_camera"
+            xuedi:bottom_text="监控"
             xuedi:bottom_text_size="12sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
@@ -97,8 +115,8 @@
             android:layout_weight="1"
             android:padding="5dp"
             xuedi:bottom_color="@color/main_color"
-            xuedi:bottom_icon="@drawable/tab_valve"
-            xuedi:bottom_text="控制"
+            xuedi:bottom_icon="@drawable/near"
+            xuedi:bottom_text="发现"
             xuedi:bottom_text_size="12sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText

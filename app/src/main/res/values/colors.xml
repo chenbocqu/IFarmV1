@@ -26,6 +26,8 @@
     <color name="black_text">#333333</color>
     <color name="black_text2">#666666</color>
     <color name="text_black">#444444</color>
+    <color name="text_color">#636363</color>
+
     <color name="blue">#1DA1F2</color>
     <color name="black_trans">#66000000</color>
     <color name="bg_trans">#22000000</color>
@@ -46,5 +48,28 @@
     <color name="green">#25ab2e</color>
     <color name="green_trans">#6625ab2e</color>
     <color name="light_green_trans">#e9fdea</color>
+    <color name="blue_trans">#d3eff9</color>
+
+    <color name="custom_header_text">#85B100</color>
+    <color name="custom_selected">#A8D324</color>
+    <color name="custom_background">#F0F8DB</color>
+    <color name="custom_background_today">#FF9105</color>
+    <color name="custom_background_disabled">#F0F8DB</color>
+    <color name="custom_text_selected">#FFFFFFFF</color>
+    <color name="custom_text_inactive">#7f778088</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="green_selected">#effae7</color>
+
+    <color name="color_running">#4daf51</color>
+    <color name="color_running_pressed">#5fd763</color>
+
+    <color name="color_completed">#2397f3</color>
+    <color name="color_completed_pressed">#52adf5</color>
+
+    <color name="color_waiting">#f44437</color>
+    <color name="color_waiting_pressed">#f55d52</color>
+
+    <color name="yellow_light">#fff987</color>
 
 </resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/main_system" />
+
+        <ImageView
+            android:id="@+id/ivTank1"
+            style="@style/ImgTank"
+            android:layout_marginLeft="218dp"
+            android:layout_marginTop="210dp"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/ivTank2"
+            style="@style/ImgTank"
+            android:layout_alignLeft="@id/ivTank1"
+            android:layout_below="@id/ivTank1"
+            android:layout_marginTop="2dp" />
+
+        <ImageView
+            android:id="@+id/ivTank3"
+            style="@style/ImgTank"
+            android:layout_alignLeft="@id/ivTank1"
+            android:layout_below="@id/ivTank2"
+            android:layout_marginTop="2dp" />
+    </RelativeLayout>
+</LinearLayout>

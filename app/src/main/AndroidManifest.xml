@@ -44,6 +44,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+
     <application
         android:name=".IFarmApp"
         android:allowBackup="true"
@@ -133,6 +135,64 @@
         <activity
             android:name=".ui.farm.SensorListActivity_"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.DownloadExcelActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.farm.VideoPlayActivity_"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui.farm.SubareaListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.subarea.SubareaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.CameraTestActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.near.NearListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.subarea.SubareasOfFarmActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.find.ExpertsListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.SystemListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.ControlSysActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.subarea.SubareasWithVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.SubareasWithVideoActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.VideoListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.VideoOfShedActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.SelectSystemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.ControlSystemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.ManagerTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.NewTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.control.TaskPreviewActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -142,7 +202,7 @@
 
         <service android:name="com.amap.api.location.APSService"></service>
 
-        <!-- 环信SDK???service SDK????-->
+        <!-- 环信SDK service SDK-->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -150,7 +210,7 @@
             android:name="com.hyphenate.chat.EMJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- ??SDK???receiver -->
+        <!-- 环信SDK ???receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -160,6 +220,19 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!--萤石云登录页-->
+        <activity
+            android:name="com.videogo.main.EzvizWebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <receiver
+            android:name=".receiver.EzvizBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.videogo.action.OAUTH_SUCCESS_ACTION" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
     </application>

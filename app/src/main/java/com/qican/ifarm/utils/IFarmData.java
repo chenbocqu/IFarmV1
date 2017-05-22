@@ -7,8 +7,9 @@ import android.content.Context;
 
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.bean.Farm;
-import com.qican.ifarm.beanfromzhu.User;
+import com.qican.ifarm.beanfromservice.User;
 import com.qican.ifarm.listener.BeanCallBack;
+import com.qican.ifarm.listener.OnInfoLoadListener;
 import com.qican.ifarm.listener.TokenListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -48,6 +49,33 @@ public class IFarmData {
                     public void onResponse(User user, int id) {
                         myTool.log("用户信息查询结果：" + user.toString());
                         myTool.setComUserInfoById(myTool.getUserId(), new ComUser(user));
+                    }
+                });
+    }
+
+    /**
+     * 更新用户信息到本地
+     *
+     * @param context
+     */
+    public static void updateUserInfo(Context context, final OnInfoLoadListener l) {
+        final CommonTools myTool = new CommonTools(context);
+        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "user/getUserById")
+                .addParams("userId", myTool.getUserId())
+                .addParams("signature", myTool.getToken())
+                .build()
+                .execute(new BeanCallBack<User>() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        myTool.log("查询用户信息失败，异常为：" + e.toString());
+                        l.userInfoLoadFinished(false);
+                    }
+
+                    @Override
+                    public void onResponse(User user, int id) {
+                        myTool.log("用户信息查询结果：" + user.toString());
+                        myTool.setComUserInfoById(myTool.getUserId(), new ComUser(user));
+                        l.userInfoLoadFinished(true);
                     }
                 });
     }

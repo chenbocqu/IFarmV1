@@ -155,7 +155,7 @@
             android:background="@drawable/edittext_bg"
             android:gravity="top|left"
             android:hint="添加相关的描述吧！"
-            android:lines="3"
+            android:lines="6"
             android:padding="10dp"
             android:text="" />
     </LinearLayout>

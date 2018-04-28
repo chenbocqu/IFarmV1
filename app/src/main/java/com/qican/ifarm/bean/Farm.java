@@ -18,6 +18,8 @@ public class Farm implements Serializable {
     private List<String> labelList;
     private Label label;
 
+    private boolean isSelected = false;
+
     public Farm() {
     }
 
@@ -61,12 +63,24 @@ public class Farm implements Serializable {
         }
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
     public String getLabels() {
         return labels;
     }
 
     public void setLabels(String labels) {
         this.labels = labels;
+
+        Label label = new Label(labels);
+        setLabel(label);
+        setLabelList(label.getLabelList());
     }
 
     public List<String> getLabelList() {

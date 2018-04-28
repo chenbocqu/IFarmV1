@@ -24,7 +24,6 @@
         android:layout_below="@id/iv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:text="啊哦，没有发现更多数据哦！" />
+        android:text="当前页面暂无数据展示！" />
 
 </RelativeLayout>

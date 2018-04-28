@@ -6,117 +6,161 @@
     android:background="@color/gray"
     android:orientation="vertical">
 
-    <com.youth.banner.Banner
-        android:id="@+id/banner"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:default_image="@drawable/bg_placeholder"
-        app:delay_time="2000"
-        app:image_scale_type="fit_xy"
-        app:indicator_drawable_selected="@drawable/selected_radius"
-        app:indicator_drawable_unselected="@drawable/unselected_radius"
-        app:indicator_height="10dp"
-        app:indicator_margin="5dp"
-        app:indicator_width="10dp"
-        app:title_background="@color/black_trans"
-        app:title_height="30dp"
-        app:title_textcolor="@color/white"
-        app:title_textsize="12sp" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/menuMargin"
-        android:background="@color/white"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/ll_expert"
-            style="@style/BtnItem">
-
-            <ImageView
-                style="@style/Icon_50dp"
-                android:src="@drawable/expert" />
-
-            <TextView
-                style="@style/MyText"
-                android:layout_marginTop="10dp"
-                android:text="专家" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_friend"
-            style="@style/BtnItem">
-
-            <ImageView
-                style="@style/Icon_50dp"
-                android:src="@drawable/myfriend" />
-
-            <TextView
-                style="@style/MyText"
-                android:layout_marginTop="10dp"
-                android:text="好友" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_news"
-            style="@style/BtnItem">
-
-            <ImageView
-                style="@style/Icon_50dp"
-                android:src="@drawable/news" />
-
-            <TextView
-                style="@style/MyText"
-                android:layout_marginTop="10dp"
-                android:text="资讯" />
-
-        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:default_image="@drawable/bg_placeholder"
+                    app:delay_time="2000"
+                    app:image_scale_type="center_crop"
+                    app:indicator_drawable_selected="@drawable/selected_radius"
+                    app:indicator_drawable_unselected="@drawable/unselected_radius"
+                    app:indicator_height="10dp"
+                    app:indicator_margin="5dp"
+                    app:indicator_width="10dp"
+                    app:title_background="@color/black_trans"
+                    app:title_height="40dp"
+                    app:title_textcolor="@color/white"
+                    app:title_textsize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/menuMargin"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_expert"
+                        style="@style/BtnItem">
+
+                        <ImageView
+                            style="@style/Icon_50dp"
+                            android:src="@drawable/expert" />
+
+                        <TextView
+                            style="@style/MyText"
+                            android:layout_marginTop="10dp"
+                            android:text="专家" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_friend"
+                        style="@style/BtnItem">
+
+                        <ImageView
+                            style="@style/Icon_50dp"
+                            android:src="@drawable/myfriend" />
+
+                        <TextView
+                            style="@style/MyText"
+                            android:layout_marginTop="10dp"
+                            android:text="好友" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_news"
+                        style="@style/BtnItem">
+
+                        <ImageView
+                            style="@style/Icon_50dp"
+                            android:src="@drawable/news" />
+
+                        <TextView
+                            style="@style/MyText"
+                            android:layout_marginTop="10dp"
+                            android:text="资讯" />
+
+                    </LinearLayout>
 
 
-    <LinearLayout style="@style/MenuGroupWrapper">
+                </LinearLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_qanda"
-            style="@style/MenuWrapper">
 
-            <ImageView
-                android:id="@+id/iv_farm"
-                style="@style/Menu_Icon.Left"
-                android:src="@drawable/aandq" />
+                <LinearLayout style="@style/MenuGroupWrapper">
 
-            <ImageView style="@style/ArrowRight" />
+                    <RelativeLayout
+                        android:id="@+id/rl_qanda"
+                        style="@style/MenuWrapper">
 
-            <TextView
-                style="@style/MenuText"
-                android:layout_toRightOf="@id/iv_farm"
-                android:text="问答" />
+                        <ImageView
+                            android:id="@+id/iv_farm"
+                            style="@style/Menu_Icon.Left"
+                            android:src="@drawable/aandq" />
 
-        </RelativeLayout>
+                        <ImageView style="@style/ArrowRight" />
 
-        <View style="@style/SplitLine.WithMargin" />
-        <!-- 昵称-->
-        <RelativeLayout
-            android:id="@+id/rl_near"
-            style="@style/MenuWrapper">
+                        <TextView
+                            style="@style/MenuText"
+                            android:layout_toRightOf="@id/iv_farm"
+                            android:text="问答" />
 
-            <ImageView
-                android:id="@+id/iv_valve"
-                style="@style/Menu_Icon.Left"
-                android:src="@drawable/near_person" />
+                    </RelativeLayout>
 
-            <ImageView style="@style/ArrowRight" />
+                    <View style="@style/SplitLine.WithMargin" />
+                    <!-- 昵称-->
+                    <RelativeLayout
+                        android:id="@+id/rl_near"
+                        style="@style/MenuWrapper">
 
-            <TextView
-                style="@style/MenuText"
-                android:layout_toRightOf="@id/iv_valve"
-                android:text="附近的人" />
-        </RelativeLayout>
-    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/iv_valve"
+                            style="@style/Menu_Icon.Left"
+                            android:src="@drawable/near_person" />
+
+                        <ImageView style="@style/ArrowRight" />
+
+                        <TextView
+                            style="@style/MenuText"
+                            android:layout_toRightOf="@id/iv_valve"
+                            android:text="附近的人" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_concern"
+                    style="@style/MenuWrapper"
+                    android:layout_marginTop="@dimen/menuMargin">
+
+                    <ImageView
+                        android:id="@+id/iv_manage_address"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/concern" />
+
+                    <TextView
+                        android:id="@+id/tv_manage_address"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_manage_address"
+                        android:text="我的关注" />
+
+                    <ImageView style="@style/ArrowRight" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -7,8 +7,281 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
+    // V4
+    String  sysTypeCode;
+
+    // V3
+    String canNo;
+
+    // 服务器需要的格式 v2
+    String farmId;
+    String farmName;
+    String systemDistrict;
+    String systemNo;
+    String systemId;
+    String controlType;
+    String controlOperation;
+    String commandCategory;
+    String command;
+    String executionTime;
+    String startExecutionTime;
+    String controlDeviceId;
+    String taskState;
+    String remainExecutionTime;
+    String systemType;
+    String functionName;
+    String addResultTime;
+
+
+    // 服务器需要的格式 v1
+    String collectorId;
+    String level;
+
+    String controlArea;
+    String fertilizationCan;
+    String waitTime;
+    String stopTime;
+    String controllerLogId;
+    String taskTime;
+
+    String type;
+    String response;
+
+
+    public String getSysTypeCode() {
+        return sysTypeCode;
+    }
+
+    public void setSysTypeCode(String sysTypeCode) {
+        this.sysTypeCode = sysTypeCode;
+    }
+
+    public String getCanNo() {
+        return canNo;
+    }
+
+    public void setCanNo(String canNo) {
+        this.canNo = canNo;
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
+
+    public String getAddResultTime() {
+        return addResultTime;
+    }
+
+    public void setAddResultTime(String addResultTime) {
+        this.addResultTime = addResultTime;
+    }
+
+    public String getSystemType() {
+        return systemType;
+    }
+
+    public void setSystemType(String systemType) {
+        this.systemType = systemType;
+    }
+
+    public String getRemainExecutionTime() {
+        return remainExecutionTime;
+    }
+
+    public void setRemainExecutionTime(String remainExecutionTime) {
+        this.remainExecutionTime = remainExecutionTime;
+    }
+
+    public String getTaskState() {
+        return taskState;
+    }
+
+    public void setTaskState(String taskState) {
+        this.taskState = taskState;
+    }
+
+    public String getControlDeviceId() {
+        return controlDeviceId;
+    }
+
+    public void setControlDeviceId(String controlDeviceId) {
+        this.controlDeviceId = controlDeviceId;
+    }
+
+    public String getFarmName() {
+        return farmName;
+    }
+
+    public void setFarmName(String farmName) {
+        this.farmName = farmName;
+    }
+
+    public String getSystemDistrict() {
+        return systemDistrict;
+    }
+
+    public void setSystemDistrict(String systemDistrict) {
+        this.systemDistrict = systemDistrict;
+    }
+
+    public String getSystemNo() {
+        return systemNo;
+    }
+
+    public void setSystemNo(String systemNo) {
+        this.systemNo = systemNo;
+    }
+
+    public String getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(String systemId) {
+        this.systemId = systemId;
+    }
+
+    public String getControlOperation() {
+        return controlOperation;
+    }
+
+    public void setControlOperation(String controlOperation) {
+        this.controlOperation = controlOperation;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getStopTime() {
+        return stopTime;
+    }
+
+    public void setStopTime(String stopTime) {
+        this.stopTime = stopTime;
+    }
+
+    public String getControllerLogId() {
+        return controllerLogId;
+    }
+
+    public void setControllerLogId(String controllerLogId) {
+        this.controllerLogId = controllerLogId;
+    }
+
+    public String getTaskTime() {
+        return taskTime;
+    }
+
+    public void setTaskTime(String taskTime) {
+        this.taskTime = taskTime;
+    }
+
+    public String getFarmId() {
+        return farmId;
+    }
+
+    public void setFarmId(String farmId) {
+        this.farmId = farmId;
+    }
+
+    public String getCollectorId() {
+        return collectorId;
+    }
+
+    public void setCollectorId(String collectorId) {
+        this.collectorId = collectorId;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getCommandCategory() {
+        return commandCategory;
+    }
+
+    public void setCommandCategory(String commandCategory) {
+        this.commandCategory = commandCategory;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
+    public String getControlArea() {
+        return controlArea;
+    }
+
+    public void setControlArea(String controlArea) {
+        this.controlArea = controlArea;
+    }
+
+    public String getControlType() {
+        return controlType;
+    }
+
+    public void setControlType(String controlType) {
+        this.controlType = controlType;
+    }
+
+    public String getFertilizationCan() {
+        return fertilizationCan;
+    }
+
+    public void setFertilizationCan(String fertilizationCan) {
+        this.fertilizationCan = fertilizationCan;
+    }
+
+    public String getWaitTime() {
+        return waitTime;
+    }
+
+    public void setWaitTime(String waitTime) {
+        this.waitTime = waitTime;
+    }
+
+    public String getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(String executionTime) {
+        this.executionTime = executionTime;
+    }
+
+    public String getStartExecutionTime() {
+        return startExecutionTime;
+    }
+
+    public void setStartExecutionTime(String startExecutionTime) {
+        this.startExecutionTime = startExecutionTime;
+    }
+
     public enum TaskStatus {
-        Running, Waiting, Completed
+        Running, Waiting, Completed, Blocking
     }
 
     int id;
@@ -179,6 +452,11 @@ public class Task implements Serializable {
             return this;
         }
 
+        public Builder setStopTime(String stopTime) {
+            task.setStopTime(stopTime);
+            return this;
+        }
+
         public Builder setDuration(String time) {
             task.setDuration(time);
             return this;
@@ -186,6 +464,46 @@ public class Task implements Serializable {
 
         public Builder setStatus(TaskStatus status) {
             task.setStatus(status);
+            return this;
+        }
+
+        public Builder setFarmId(String farmId) {
+            task.setFarmId(farmId);
+            return this;
+        }
+
+        public Builder setCollectorId(String collectorId) {
+            task.setCollectorId(collectorId);
+            return this;
+        }
+
+        public Builder setControlArea(String area) {
+            task.setControlArea(area);
+            return this;
+        }
+
+        public Builder setFertilizationCan(String can) {
+            task.setFertilizationCan(can);
+            return this;
+        }
+
+        public Builder setExecutionTime(String time) {
+            task.setExecutionTime(time);
+            return this;
+        }
+
+        public Builder setStartExecutionTime(String time) {
+            task.setStartExecutionTime(time);
+            return this;
+        }
+
+        public Builder setTaskTime(String time) {
+            task.setTaskTime(time);
+            return this;
+        }
+
+        public Builder setControlType(String type) {
+            task.setControlType(type);
             return this;
         }
 
@@ -256,5 +574,28 @@ public class Task implements Serializable {
 
     public void setE(boolean e) {
         isE = e;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "farmId='" + farmId + '\'' +
+                ", collectorId='" + collectorId + '\'' +
+                ", controlArea='" + controlArea + '\'' +
+                ", controlType='" + controlType + '\'' +
+                ", fertilizationCan='" + fertilizationCan + '\'' +
+                ", waitTime='" + waitTime + '\'' +
+                ", executionTime='" + executionTime + '\'' +
+                ", startExecutionTime='" + startExecutionTime + '\'' +
+                ", stopTime='" + stopTime + '\'' +
+                ", controllerLogId='" + controllerLogId + '\'' +
+                ", taskTime='" + taskTime + '\'' +
+                ", area='" + area + '\'' +
+                ", name='" + name + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", status=" + status +
+                ", type=" + type +
+                ", response=" + response +
+                '}';
     }
 }

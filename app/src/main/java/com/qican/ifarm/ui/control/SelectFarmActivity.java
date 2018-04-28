@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ControlFunction;
 import com.qican.ifarm.bean.Device;
@@ -97,7 +97,7 @@ public class SelectFarmActivity extends Activity implements View.OnClickListener
         }, 1000);
     }
 
-    class FunForFarmAdapter extends CommonAdapter<Farm> {
+    class FunForFarmAdapter extends ComAdapter<Farm> {
 
         public FunForFarmAdapter(Context context, List<Farm> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

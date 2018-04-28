@@ -9,11 +9,12 @@ import java.io.Serializable;
 public class EZCamera implements Serializable {
     protected String deviceSerial;
     protected int channelNo;
+    protected String verifyCode; // 验证码
+
     protected String channelName;
     protected int status;
     protected String isShared;
     protected String picUrl;
-    protected String verifyCode; // 验证码
     protected int isEncrypt;
     protected int videoLevel;
 

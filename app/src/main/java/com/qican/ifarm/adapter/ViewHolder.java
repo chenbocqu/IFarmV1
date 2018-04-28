@@ -3,6 +3,7 @@ package com.qican.ifarm.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +25,7 @@ public class ViewHolder {
         this.mPosition = position;
         this.mViews = new SparseArray<View>();
         this.mContext = context;
-        mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
-                false);
+        mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
         // setTag
         mConvertView.setTag(this);
     }
@@ -140,4 +140,20 @@ public class ViewHolder {
         return mPosition;
     }
 
+    public ViewHolder setOnClickListener(int id, View.OnClickListener listener) {
+
+        View v = getView(id);
+
+        if (v != null && listener != null) v.setOnClickListener(listener);
+
+        return this;
+    }
+
+    public ViewHolder setVisble(@IdRes int id, boolean visible) {
+
+        if (getView(id) != null)
+            getView(id).setVisibility(visible ? View.VISIBLE : View.GONE);
+
+        return this;
+    }
 }

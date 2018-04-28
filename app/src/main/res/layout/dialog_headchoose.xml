@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/iv_cancel"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="5dp"
@@ -43,8 +43,7 @@
 
         <ImageView
             android:id="@+id/iv_camera"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            style="@style/Menu_Icon.Left"
             android:layout_alignParentLeft="true"
             android:src="@drawable/from_camera" />
 
@@ -52,8 +51,7 @@
             style="@style/MyText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_camera"
-            android:text="从相机选取"
-            android:textSize="14sp" />
+            android:text="从相机选取" />
 
     </RelativeLayout>
 
@@ -66,8 +64,7 @@
 
         <ImageView
             android:id="@+id/iv_file"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            style="@style/Menu_Icon.Left"
             android:layout_alignParentLeft="true"
             android:src="@drawable/from_file" />
 
@@ -75,8 +72,7 @@
             style="@style/MyText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_file"
-            android:text="从文件选取"
-            android:textSize="14sp" />
+            android:text="从文件选取" />
 
     </RelativeLayout>
 

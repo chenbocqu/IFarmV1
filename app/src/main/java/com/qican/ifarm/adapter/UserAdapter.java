@@ -10,10 +10,11 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.ui.near.NearInfoActivity;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.TimeUtils;
 
 import java.util.List;
 
-public class UserAdapter extends CommonAdapter<ComUser> {
+public class UserAdapter extends ComAdapter<ComUser> {
     private CommonTools myTool;
     Bitmap female;
     Bitmap male;
@@ -31,7 +32,7 @@ public class UserAdapter extends CommonAdapter<ComUser> {
         helper
                 .setText(R.id.tv_nickname, near.getNickName())
                 .setText(R.id.tv_desc, near.getSignature())
-                .setText(R.id.tv_time, near.getLastLoginTime());
+                .setText(R.id.tv_time, TimeUtils.formatDateTime(near.getLastLoginTime()));
         myTool.showSex(near.getSex(), (ImageView) helper.getView(R.id.iv_sex));
         if (near.getHeadImgUrl() != null) {
             myTool.showImage(near.getHeadImgUrl(), (ImageView) helper.getView(R.id.iv_headimg),

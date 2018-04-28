@@ -5,10 +5,13 @@
 package com.qican.ifarm;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Environment;
 import android.util.Log;
 
-import com.hyphenate.easeui.controller.EaseUI;
+import com.previewlibrary.ZoomMediaLoader;
+import com.qican.ifarm.service.TaskService;
+import com.qican.ifarm.utils.TestImageLoader;
 import com.videogo.openapi.EZOpenSDK;
 
 import java.io.File;
@@ -16,7 +19,9 @@ import java.io.File;
 import cn.smssdk.SMSSDK;
 
 public class IFarmApp extends Application {
+
     private static Application mApp;
+
     //萤石APPKEY
     public static final String EZ_appKey = "7c6d2cd139684bb896c0011e55052ef7";
     //so库存放位置
@@ -26,17 +31,42 @@ public class IFarmApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ZoomMediaLoader.getInstance().init(new TestImageLoader());
+
         mApp = this;
+
         SMSSDK.initSDK(IFarmApp.this, "1a77f1ffd7152", "b962941f4b300b9799231137d0cca6b9");//短信验证
-        EaseUI.getInstance().init(IFarmApp.this, null);
+//        EaseUI.getInstance().init(IFarmApp.this, null);
+
         //初始化萤石云SDK
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                initEZSDK();
+                init();
             }
         }.start();
+    }
+
+    private void init() {
+        initEZSDK();
+        // 开启任务服务
+        startService(new Intent(this, TaskService.class));
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        Log.i("IFarm", "onTerminate()");
+        // 结束服务
+        stopService(new Intent(this, TaskService.class));
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        Log.i("IFarm", "onTrimMemory()");
     }
 
     //放到线程中优化启动

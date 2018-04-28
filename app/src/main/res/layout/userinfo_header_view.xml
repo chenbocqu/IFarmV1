@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_head_view"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_bgimg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/headinfo_bg" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"
+        android:background="@color/bg_trans" />
+
+    <RelativeLayout
+        android:id="@+id/rl_headimg"
+        style="@style/MyImg.Large"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/iv_headimg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_head_female" />
+
+        <ImageView
+            android:id="@+id/iv_usersex"
+            style="@style/Menu_Icon"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/female" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/rl_headimg"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/rl_headimg"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            style="@style/MyText.Large"
+            android:text="未登录"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_signature"
+            style="@style/MyText.Small"
+            android:layout_below="@id/ll_nickname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:gravity="center|right"
+            android:maxLines="2"
+            android:text="还未登录，请先登录到服务器！"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

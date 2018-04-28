@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="290dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/syspicMargin"
         android:layout_marginTop="@dimen/syspicMargin"
         android:background="@drawable/round_item_bg">

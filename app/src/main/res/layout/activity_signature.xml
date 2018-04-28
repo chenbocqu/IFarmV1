@@ -8,7 +8,7 @@
     <!-- 顶部titleBar-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@color/main_color">
 
         <LinearLayout
@@ -28,6 +28,7 @@
                 android:src="@drawable/back" />
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -43,7 +44,7 @@
             android:layout_centerInParent="true"
             android:text="修改签名"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
 
         <LinearLayout
             android:id="@+id/ll_save"
@@ -57,6 +58,7 @@
             android:paddingRight="10dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -81,14 +83,15 @@
 
             <EditText
                 android:id="@+id/edt_autograph"
+                style="@style/MyText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:gravity="left"
                 android:hint="请输入签名"
                 android:maxLines="7"
                 android:textColor="#444"
-                android:textColorHint="#999"
-                android:textSize="15sp" />
+                android:textColorHint="#999" />
         </RelativeLayout>
 
         <View style="@style/SplitLine.WithMargin" />
@@ -101,12 +104,11 @@
             android:padding="15dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="一个好的签名可以让你的朋友更多地了解你。"
-                android:textColor="#999"
-                android:textSize="14sp" />
-
+                android:textColor="#999" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

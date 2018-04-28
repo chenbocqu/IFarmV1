@@ -12,7 +12,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Sensor;
@@ -77,7 +77,7 @@ public class SensorListActivity extends Activity {
     private void getFarmData() {
 //        mDatas.addAll(IFarmData.getFarmList());
 //        notifyData();
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farmSensor/getFarmSensorsList")
+        OkHttpUtils.post().url(myTool.getServAdd()+ "farmSensor/getFarmSensorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", mFarm.getId())
@@ -147,7 +147,7 @@ public class SensorListActivity extends Activity {
         this.finish();
     }
 
-    class SensorAdapter extends CommonAdapter<Sensor> {
+    class SensorAdapter extends ComAdapter<Sensor> {
         public SensorAdapter(Context context, List<Sensor> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }

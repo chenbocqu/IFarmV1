@@ -18,6 +18,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
 import com.qican.ifarm.ui.intro.IntroActivity;
+import com.qican.ifarm.ui.login.LoginNewActivity;
 import com.qican.ifarm.utils.CommonTools;
 
 
@@ -94,7 +95,14 @@ public class WelcomeActivity extends Activity {
      * 进入主页面
      */
     private void toMainActivity() {
+
         myTool.startActivity(ComMainActivity_.class);
+
+        if (myTool.isErrorToken()) {
+            myTool.showInfo("token 失效，请重新登录！");
+            myTool.startActivity(LoginNewActivity.class);
+        }
+
         //渐入效果
         overridePendingTransition(R.anim.myfade_in, R.anim.myfade_out);
         finish();

@@ -5,13 +5,13 @@ import android.view.View;
 
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ControlSystem;
-import com.qican.ifarm.ui.control.ControlSystemActivity;
-import com.qican.ifarm.ui.control.TaskPreviewActivity;
+import com.qican.ifarm.ui.control.TaskPreviewerActivity;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.TimeUtils;
 
 import java.util.List;
 
-public class SystemAdapter extends CommonAdapter<ControlSystem> {
+public class SystemAdapter extends ComAdapter<ControlSystem> {
 
     private CommonTools myTool;
 
@@ -30,22 +30,14 @@ public class SystemAdapter extends CommonAdapter<ControlSystem> {
         helper
                 .setText(R.id.tv_name, item.getName())
                 .setText(R.id.tv_desc, item.getDesc())
-                .setText(R.id.tv_time, item.getTime());
+                .setText(R.id.tv_time, TimeUtils.formatDateTime(item.getTime()));
 
         helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
 
         helper.getView(R.id.ll_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myTool.startActivity(item, TaskPreviewActivity.class);
-            }
-        });
-
-        helper.getView(R.id.ll_item).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                myTool.startActivity(item, ControlSystemActivity.class);
-                return true;
+                myTool.startActivity(item, TaskPreviewerActivity.class);
             }
         });
     }

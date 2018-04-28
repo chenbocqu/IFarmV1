@@ -55,7 +55,7 @@ public class NetRequest {
      * @param adaper 返回结果适配器
      */
     public void getSensorList(final String farmId, final DataAdapter adaper) {
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farmSensor/getFarmSensorsList")
+        OkHttpUtils.post().url(myTool.getServAdd() + "farmSensor/getFarmSensorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", farmId)
@@ -85,7 +85,7 @@ public class NetRequest {
 
     public void getSensorPara(final String sensorId, final DataAdapter adapter) {
         // 请求传感器数据
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/getSensorVaules")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/getSensorVaules")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("sensorId", sensorId)
@@ -125,7 +125,7 @@ public class NetRequest {
 
     public void getSensorCacheValues(final String sensorId, final DataAdapter adapter) {
         // 请求传感器数据
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/getSensorCacheVaules")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/getSensorCacheVaules")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("sensorId", sensorId)
@@ -178,7 +178,7 @@ public class NetRequest {
 
     public void downLoadExcel(final Farm mFarm, final BGAProgressBar pb) {
         pb.setVisibility(View.VISIBLE);
-        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "sensor/historySensorValuesExcel")
+        OkHttpUtils.get().url(myTool.getServAdd() + "sensor/historySensorValuesExcel")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", mFarm.getId())
@@ -229,7 +229,7 @@ public class NetRequest {
      * @param adaper 返回结果适配器
      */
     public void getSensorList(final Subarea area, final DataAdapter adaper) {
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/sensorDistrict")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/sensorDistrict")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", area.getFarmId())
@@ -259,7 +259,7 @@ public class NetRequest {
     }
 
     public void getFarmList(final DataAdapter adapter) {
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/getFarmColletorsList")
+        OkHttpUtils.post().url(myTool.getServAdd()+ "farm/getFarmColletorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
@@ -267,7 +267,6 @@ public class NetRequest {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         e.printStackTrace();
-                        myTool.log("农场列表e：" + e.getMessage());
                     }
 
                     @Override
@@ -278,7 +277,6 @@ public class NetRequest {
                             myTool.showTokenLose();
                             return;
                         }
-                        myTool.log("农场列表list：" + farmList.toString());
                         for (com.qican.ifarm.beanfromservice.Farm farm : farmList) {
                             Farm myFarm = new Farm(farm);
                             datas.add(myFarm);
@@ -292,7 +290,7 @@ public class NetRequest {
 
         final List<Subarea> mData = new ArrayList<>();
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/getSensorVaules")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/getSensorVaules")
                 .addParams("farmId", mFarm.getId())
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -317,52 +315,58 @@ public class NetRequest {
                         }
 
                         myTool.log("分区列表list：" + response);
-                        net.sf.json.JSONArray arr = net.sf.json.JSONArray.fromObject(response);
-                        net.sf.json.JSONObject jsonObject = arr.getJSONObject(0);
-                        Iterator<String> iterator = jsonObject.keys();
-                        while (iterator.hasNext()) {
-                            Subarea area = new Subarea();
-                            String key = iterator.next();
-                            myTool.log("\n当前分区为:" + key);
+                        JSONArray arr = null;
+                        try {
+                            arr = new JSONArray(response);
+                            JSONObject jsonObject = arr.getJSONObject(0);
+                            Iterator<String> iterator = jsonObject.keys();
+                            while (iterator.hasNext()) {
+                                Subarea area = new Subarea();
+                                String key = iterator.next();
+                                myTool.log("\n当前分区为:" + key);
 
-                            Map<String, List<String>> map = new HashMap<String, List<String>>();
+                                Map<String, List<String>> map = new HashMap<String, List<String>>();
 
-                            net.sf.json.JSONArray array = jsonObject.getJSONArray(key);
+                                JSONArray array = jsonObject.getJSONArray(key);
 
-                            for (int i = 0; i < array.size(); i++) {
-                                // 取参数
-                                net.sf.json.JSONObject object = array.getJSONObject(i);
-                                net.sf.json.JSONArray paraName = object.getJSONArray("sensorParam");
-                                net.sf.json.JSONArray paraData = object.getJSONArray("data");
-                                for (int j = 0; j < paraName.size() && j < paraData.size(); j++) {
-                                    String paraKey = paraName.getString(j);
-                                    String paraValue = paraData.getString(j);
+                                for (int i = 0; i < array.length(); i++) {
+                                    // 取参数
+                                    JSONObject object = array.getJSONObject(i);
+                                    JSONArray paraName = object.getJSONArray("sensorParam");
+                                    JSONArray paraData = object.getJSONArray("data");
+                                    for (int j = 0; j < paraName.length() && j < paraData.length(); j++) {
+                                        String paraKey = paraName.getString(j);
+                                        String paraValue = paraData.getString(j);
 
-                                    if (!map.containsKey(paraKey)) {
-                                        //如果当前没有出现该Key值则新建一个空间用于存放
-                                        List<String> temp = new ArrayList<String>();
-                                        temp.clear();
-                                        temp.add(paraValue);
-                                        map.put(paraKey, temp);
-                                    } else {
-                                        ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
-                                        dataList.add(paraValue);
-                                        map.put(paraKey, dataList);
+                                        if (!map.containsKey(paraKey)) {
+                                            //如果当前没有出现该Key值则新建一个空间用于存放
+                                            List<String> temp = new ArrayList<String>();
+                                            temp.clear();
+                                            temp.add(paraValue);
+                                            map.put(paraKey, temp);
+                                        } else {
+                                            ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
+                                            dataList.add(paraValue);
+                                            map.put(paraKey, dataList);
+                                        }
+
+                                        myTool.log("\nmap为:" + map.toString());
                                     }
-
-                                    myTool.log("\nmap为:" + map.toString());
                                 }
-                            }
-                            area.setName(key);
-                            area.setFarmId(mFarm.getId());
-                            area.setDataMap(map);
-                            area.setFarm(mFarm);
-                            area.setImgUrl("http://img4.imgtn.bdimg.com/it/u=3436548158,2996155944&fm=23&gp=0.jpg");
+                                area.setName(key);
+                                area.setFarmId(mFarm.getId());
+                                area.setDataMap(map);
+                                area.setFarm(mFarm);
+                                area.setImgUrl("http://img4.imgtn.bdimg.com/it/u=3436548158,2996155944&fm=23&gp=0.jpg");
 
-                            mData.add(area);
+                                mData.add(area);
+                            }
+                            if (adapter != null)
+                                adapter.subareas(mData);
+
+                        } catch (JSONException e) {
+                            myTool.log(e.getMessage());
                         }
-                        if (adapter != null)
-                            adapter.subareas(mData);
                     }
                 });
     }

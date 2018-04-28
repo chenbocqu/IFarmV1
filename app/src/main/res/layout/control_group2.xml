@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_control_group2"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_wendu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:onClick="onClick"
+        android:background="@drawable/griditem_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:src="@drawable/fun_temperature" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="@dimen/menuMarginTop"
+            android:text="温度" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_shidu"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/griditem_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:src="@drawable/fun_humidity" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="@dimen/menuMarginTop"
+            android:text="湿度" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/griditem_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+</LinearLayout>

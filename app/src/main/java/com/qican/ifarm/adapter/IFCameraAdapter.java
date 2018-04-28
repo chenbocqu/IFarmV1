@@ -8,7 +8,7 @@ import com.qican.ifarm.bean.IFarmCamera;
 
 import java.util.List;
 
-public class IFCameraAdapter extends CommonAdapter<IFarmCamera> {
+public class IFCameraAdapter extends ComAdapter<IFarmCamera> {
     public IFCameraAdapter(Context context, List<IFarmCamera> mDatas, int itemLayoutId) {
         super(context, mDatas, itemLayoutId);
     }

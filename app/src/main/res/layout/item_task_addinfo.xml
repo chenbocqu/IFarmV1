@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_selector"
+    android:orientation="vertical"
+    android:paddingBottom="30dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="30dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/MyText.Large.Black"
+            android:layout_alignParentLeft="true"
+            android:text="升温" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/LabelText"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_name"
+            android:background="@drawable/label_bg_fill_green"
+            android:text="成功" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        style="@style/MyText"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="响堂生态农场A区域所有点位，自今天下午2:30开始，持续执行15分钟。" />
+
+</LinearLayout>

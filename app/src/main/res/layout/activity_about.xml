@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/iv_welcome"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ifarm_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_welcome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="智能农场V1.0"
+            android:textColor="#888"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_evaluate"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_balance"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/evaluate" />
+
+            <ImageView
+                android:id="@+id/iv_balance_arrow"
+                style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_balance"
+                android:text="去评分" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rl_intro"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_integral"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/introduction" />
+
+            <ImageView
+                android:id="@+id/iv_integral_arrow"
+                style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_integral"
+                android:text="功能介绍" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout style="@style/MenuGroupWrapper">
+
+        <RelativeLayout
+            android:id="@+id/rl_msg"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/message"
+                android:tint="@color/blue" />
+
+            <ImageView style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_setting"
+                android:text="系统通知" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <RelativeLayout
+            android:id="@+id/rl_upgrade"
+            style="@style/MenuWrapper">
+
+            <ImageView
+                android:id="@+id/iv_logout"
+                style="@style/Menu_Icon.Left"
+                android:src="@drawable/upgrade" />
+
+            <ImageView
+                android:id="@+id/iv_logout_arrow"
+                style="@style/ArrowRight" />
+
+            <TextView
+                style="@style/MenuText"
+                android:layout_toRightOf="@id/iv_logout"
+                android:text="检查更新" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv_logout_arrow"
+                android:gravity="right"
+                android:hint="智能农场V1.0"
+                android:text=""
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="使用条款和隐私政策"
+            android:textColor="@color/blue" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="褀璨科技股份有限公司 版权所有"
+            android:textColor="#999"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Copyright 2016-2018 QICAN_IFARM"
+            android:textColor="#999"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="All Rights Reserved."
+            android:textColor="#999"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

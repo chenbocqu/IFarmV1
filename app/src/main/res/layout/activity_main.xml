@@ -8,7 +8,7 @@
     <!-- 顶部titleBar-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/menuHeight"
         android:background="@color/main_color">
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:text="我的"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/font_title" />
 
         <LinearLayout
             android:id="@+id/ll_msg"
@@ -32,9 +32,10 @@
             android:paddingRight="20dp">
 
             <ImageView
-                style="@style/Menu_Icon"
+                android:id="@+id/iv_scan"
+                style="@style/Icon.25dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/message" />
+                android:src="@drawable/scan" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +85,7 @@
             xuedi:bottom_color="@color/main_color"
             xuedi:bottom_icon="@drawable/farm"
             xuedi:bottom_text="农场"
-            xuedi:bottom_text_size="12sp" />
+            xuedi:bottom_text_size="16sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
             android:id="@+id/id_indicator_two"
@@ -95,7 +96,7 @@
             xuedi:bottom_color="@color/main_color"
             xuedi:bottom_icon="@drawable/tab_valve"
             xuedi:bottom_text="控制"
-            xuedi:bottom_text_size="12sp" />
+            xuedi:bottom_text_size="16sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
             android:id="@+id/id_indicator_camera"
@@ -106,7 +107,7 @@
             xuedi:bottom_color="@color/main_color"
             xuedi:bottom_icon="@drawable/tab_camera"
             xuedi:bottom_text="监控"
-            xuedi:bottom_text_size="12sp" />
+            xuedi:bottom_text_size="16sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
             android:id="@+id/id_indicator_three"
@@ -117,7 +118,7 @@
             xuedi:bottom_color="@color/main_color"
             xuedi:bottom_icon="@drawable/near"
             xuedi:bottom_text="发现"
-            xuedi:bottom_text_size="12sp" />
+            xuedi:bottom_text_size="16sp" />
 
         <com.qican.ifarm.view.ChangeColorIconWithText
             android:id="@+id/id_indicator_four"
@@ -128,7 +129,7 @@
             xuedi:bottom_color="@color/main_color"
             xuedi:bottom_icon="@drawable/mine"
             xuedi:bottom_text="@string/bottom_mine"
-            xuedi:bottom_text_size="12sp" />
+            xuedi:bottom_text_size="16sp" />
     </LinearLayout>
 
 </LinearLayout>

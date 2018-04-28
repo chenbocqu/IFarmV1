@@ -105,6 +105,7 @@ public class HistoryDataLineFragment extends Fragment implements OnChartValueSel
 
     private void initDatas() {
         Bundle bundle = getArguments();
+        if (bundle == null) return;
         mArea = (Subarea) bundle.getSerializable(SubareaActivity.KEY_AREA_INFO);
         mDatas = new ArrayList<>();
 //        spinner.attachDataSource(dataset);

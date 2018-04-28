@@ -1,5 +1,4 @@
-<resources xmlns:app="http://schemas.android.com/res/cn.bingoogolapple">
-
+<resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -19,42 +18,47 @@
     <style name="MyText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:hint">"文"</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:hint">"空"</item>
         <item name="android:textColor">@color/text_color</item>
-        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="MyText.Large">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="MyText.Small">
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="MyText.RightOfPb">
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_width">80dp</item>
         <item name="android:gravity">center|left</item>
     </style>
 
     <style name="MyText.LeftOfPb">
-        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_width">85dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">center|right</item>
     </style>
 
-    <style name="MyText.Large">
-        <item name="android:textSize">16sp</item>
-    </style>
 
     <style name="MyText.Large.Black">
         <item name="android:textColor">@color/text_black</item>
     </style>
 
-    <style name="MyText.Small">
-        <item name="android:textSize">12sp</item>
-    </style>
 
-    <style name="LabelText" parent="MyText.Small">
+    <style name="LabelText" parent="MyText">
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:text">标签</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center</item>
         <item name="android:background">@drawable/label_bg_fill</item>
+    </style>
+
+    <style name="LabelText.Blue">
+        <item name="android:background">@drawable/label_bg_blue</item>
     </style>
 
     <style name="LabelText1" parent="LabelText">
@@ -69,22 +73,28 @@
 
     <style name="LabelInput" parent="LabelText">
         <item name="android:background">@drawable/label_input_bg</item>
-        <item name="android:textColor">@color/text_gray</item>
         <item name="android:visibility">gone</item>
+        <item name="android:textColor">@color/text_color</item>
         <item name="android:hint">添加标签</item>
         <item name="android:text"></item>
+        <item name="textSize">@dimen/textsize_normal</item>
         <item name="android:imeOptions">actionSend</item>
     </style>
 
     <style name="MyImg">
-        <item name="android:layout_width">80dp</item>
-        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_width">78dp</item>
+        <item name="android:layout_height">78dp</item>
         <item name="android:src">@drawable/img_holder</item>
     </style>
 
     <style name="MyImg.Small">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="MyImg.Large">
+        <item name="android:layout_width">105dp</item>
+        <item name="android:layout_height">105dp</item>
     </style>
 
     <style name="MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
@@ -104,8 +114,8 @@
     </style>
 
     <style name="Menu_Icon">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
@@ -119,6 +129,7 @@
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/bg_placeholder</item>
     </style>
 
     <style name="Icon.16dp">
@@ -129,6 +140,11 @@
     <style name="Icon.25dp">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
+    </style>
+
+    <style name="Icon.32dp">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
     </style>
 
     <style name="Icon.40dp">
@@ -143,6 +159,7 @@
 
     <style name="MenuText" parent="MyText">
         <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="Menu_Icon.Left">
@@ -179,6 +196,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="MenuWrapper" parent="Wrapper">
@@ -198,7 +217,17 @@
         <item name="android:shadowColor">@color/light_gray</item>
     </style>
 
-    <dimen name="menuMargin">12dp</dimen>
+    <dimen name="menuMargin">13dp</dimen>
+
+    <style name="WrapWrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchMatch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 
     <style name="BtnItem">
         <item name="android:layout_width">0dp</item>
@@ -215,4 +244,19 @@
         <item name="android:layout_height">46dp</item>
         <item name="android:src">@drawable/tank_off</item>
     </style>
+
+    <style name="popwindow_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+
+    <style name="ControlItem" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

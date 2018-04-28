@@ -24,7 +24,7 @@
     <dimen name="btnStroke">0.5dp</dimen>
 
     <dimen name="textsize_normal">16sp</dimen>
-    <dimen name="textsize_small">12sp</dimen>
+    <dimen name="textsize_small">13sp</dimen>
     <dimen name="progress_height">12dp</dimen>
     <dimen name="pbItemMargen">6dp</dimen>
     <dimen name="mapTypeBtnBottom">5dp</dimen>
@@ -47,5 +47,18 @@
     <dimen name="itemChooseRadius">3dp</dimen>
     <dimen name="syspicMargin">8dp</dimen>
     <dimen name="videoHeight">335dp</dimen>
+    <dimen name="taskItemRadius">6dp</dimen>
+    <dimen name="taskItemPadding">10dp</dimen>
 
+    <dimen name="griditem_padding">45dp</dimen>
+
+    <dimen name="font_huge">40sp</dimen>
+    <dimen name="font_normal">20sp</dimen>
+    <dimen name="menuMarginTop">7dp</dimen>
+    <dimen name="menuHeight">52dp</dimen>
+    <dimen name="font_title">25sp</dimen>
+    <dimen name="taskMenuHeight">40dp</dimen>
+    <dimen name="itemMargin">8dp</dimen>
+    <integer name="weight_left">4</integer>
+    <integer name="weight_right">9</integer>
 </resources>

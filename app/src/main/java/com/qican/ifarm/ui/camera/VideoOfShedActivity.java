@@ -4,20 +4,18 @@
 package com.qican.ifarm.ui.camera;
 
 import android.app.Activity;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qican.ifarm.R;
+import com.qican.ifarm.bean.ControlFunction;
 import com.qican.ifarm.bean.EZCamera;
 import com.qican.ifarm.bean.IFarmCamera;
-import com.qican.ifarm.listener.OnVideoPlayListener;
+import com.qican.ifarm.ui.control.SelectSystemActivity;
 import com.qican.ifarm.ui.subarea.SubareaActivity;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.IFarmVideoUtil;
 import com.qican.ifarm.utils.SubareaDataUtil;
-import com.qican.ifarm.utils.VideoUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -26,7 +24,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_video_of_shed)
-public class VideoOfShedActivity extends Activity implements OnVideoPlayListener {
+public class VideoOfShedActivity extends Activity {
 
     private CommonTools myTool;
 
@@ -42,14 +40,10 @@ public class VideoOfShedActivity extends Activity implements OnVideoPlayListener
     @ViewById
     TextView tvTemperature, tvHumidity, tvIlluminate;
 
-    @ViewById
-    ImageView ivStartPlay;
-
     EZCamera mEZCamera;
     IFarmCamera iFarmCamera;
 
-    private SurfaceHolder surfaceHolder;
-    VideoUtil videoUtil;
+    IFarmVideoUtil iFarmVideoUtil;
 
     @AfterViews
     void main() {
@@ -58,29 +52,32 @@ public class VideoOfShedActivity extends Activity implements OnVideoPlayListener
     }
 
     private void initView() {
-        surfaceHolder = svRealPlay.getHolder();
     }
 
     private void initData() {
 
         iFarmCamera = (IFarmCamera) myTool.getParam(IFarmCamera.class);
+
         if (iFarmCamera == null) {
             myTool.log("camera 为空！！");
             return;
         }
         tvTitle.setText(iFarmCamera.getShedNo() + "号棚");
 
-        mEZCamera = new EZCamera();
+        mEZCamera = iFarmCamera;
+        myTool.log("大棚视频监控相机信息" +
+                "：序列号，" + mEZCamera.getDeviceSerial() +
+                "；通道号，" + mEZCamera.getChannelNo() +
+                "；验证码，" + mEZCamera.getVerifyCode() + "。");
+
         if (mEZCamera.getDeviceSerial() == null) {
-            mEZCamera.setDeviceSerial("626439264");
+            mEZCamera.setDeviceSerial("761008117");
             mEZCamera.setChannelNo(1);
-            mEZCamera.setVerifyCode("SEGHDP");
+            mEZCamera.setVerifyCode("PGGSWF");
         }
 
-        videoUtil = new VideoUtil(this, iFarmCamera, surfaceHolder, aviVideo);
-        ivStartPlay.setVisibility(View.GONE);
-        videoUtil.setOnVideoPlayListener(this);
-        videoUtil.startRealPlay();
+        iFarmVideoUtil = new IFarmVideoUtil(this, mEZCamera);
+        iFarmVideoUtil.startRealPlay();
 
         // 视频上的实时数据温湿度、光照
         SubareaDataUtil.parseSubareaData(iFarmCamera.getSubarea(), new SubareaDataUtil.realDataListener() {
@@ -104,25 +101,6 @@ public class VideoOfShedActivity extends Activity implements OnVideoPlayListener
         this.finish();
     }
 
-    @Override
-    public void onSuccess() {
-        ivStartPlay.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onFail(int errorCode) {
-        ivStartPlay.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onVideoStart() {
-        ivStartPlay.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onVideoStop() {
-    }
-
     @Click
     void llData() {
         //实时数据
@@ -132,17 +110,37 @@ public class VideoOfShedActivity extends Activity implements OnVideoPlayListener
     @Click
     void llWatering() {
         myTool.showInfo("Watering```");
+        myTool.startActivity(new ControlFunction("灌溉"), SelectSystemActivity.class);
     }
 
     @Click
     void llFertilize() {
         myTool.showInfo("Fertilize```");
+        myTool.startActivity(new ControlFunction("施肥"), SelectSystemActivity.class);
+    }
+
+    @Click
+    void llDrug() {
+        myTool.showInfo("Drug```");
+        myTool.startActivity(new ControlFunction("施药"), SelectSystemActivity.class);
+    }
+
+    @Click
+    void llIlluminate() {
+        myTool.showInfo("Illuminate```");
+        myTool.startActivity(new ControlFunction("光照"), SelectSystemActivity.class);
+    }
+
+    @Click
+    void llAir() {
+        myTool.showInfo("Air```");
+        myTool.startActivity(new ControlFunction("通风"), SelectSystemActivity.class);
     }
 
     @Click
     void llScreenshot() {
         //截屏
-        videoUtil.snapshot();
+        iFarmVideoUtil.snapshot();
     }
 
     @Click
@@ -150,4 +148,9 @@ public class VideoOfShedActivity extends Activity implements OnVideoPlayListener
         myTool.showInfo("More```");
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        iFarmVideoUtil.stopRealPlay();
+    }
 }

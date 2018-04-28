@@ -15,16 +15,20 @@ import android.widget.TextView;
 
 import com.qican.ifarm.R;
 import com.qican.ifarm.listener.OnFragmentListener;
-import com.qican.ifarm.ui.camera.FarmListOfCameraFragment;
-import com.qican.ifarm.ui.control.ControlListFragment;
 import com.qican.ifarm.ui.find.FindFragment;
-import com.qican.ifarm.ui.login.LoginActivity;
+import com.qican.ifarm.ui.login.LoginNewActivity;
 import com.qican.ifarm.ui.node.NodeListFragment;
-import com.qican.ifarm.ui.userinfo.UserInfoFragment;
+import com.qican.ifarm.ui_v2.qrcode.ScanActivity;
+import com.qican.ifarm.ui_v2.base.FragmentWithOnResume;
+import com.qican.ifarm.ui_v2.camera.CameraListFragment;
+import com.qican.ifarm.ui_v2.control.ControlFuncsFragment;
+import com.qican.ifarm.ui_v2.farm.FarmListsFragment;
+import com.qican.ifarm.ui_v2.userinfo.UserInfoFragment;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.view.ChangeColorIconWithText;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -41,10 +45,11 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     @ViewById(R.id.id_viewpager)
     ViewPager mViewPager;
 
-    private List<Fragment> mTabs = new ArrayList<Fragment>();
+    private List<FragmentWithOnResume> mTabs = new ArrayList<FragmentWithOnResume>();
     private String[] mTitles = new String[]{"农场", "控制", "监控", "发现", "个人信息"};
     private FragmentPagerAdapter mAdapter;
     private NodeListFragment nodeListFragment;
+    int curIndex = 0, pageIndex = 0;
 
     @ViewById(R.id.ll_login)
     LinearLayout llLogin;
@@ -95,50 +100,46 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
      */
     private void loadFragments() {
         // 农场数据
-        nodeListFragment = new NodeListFragment();
-        mTabs.add(nodeListFragment);
+//        nodeListFragment = new NodeListFragment();FarmListForNodeDataFragment
+//        FarmListForNodeDataFragment fg1 = new FarmListForNodeDataFragment();
+        FarmListsFragment fg1 = new FarmListsFragment();
+        mTabs.add(fg1);
 
         // 控制功能
-        ControlListFragment tabFragment2 = new ControlListFragment();
+//        ControlListFragment tabFragment2 = new ControlListFragment();
+        ControlFuncsFragment tabFragment2 = new ControlFuncsFragment();
         mTabs.add(tabFragment2);
 
         // 监控视频
-        FarmListOfCameraFragment farmListFragment = new FarmListOfCameraFragment();
-        mTabs.add(farmListFragment);
+//        FarmListOfCameraFragment farmListFragment = new FarmListOfCameraFragment();
+        CameraListFragment cameraListFragment = new CameraListFragment();
+        mTabs.add(cameraListFragment);
 
         // 发现
 //        NearListFragment tabFragment1 = new NearListFragment();
         FindFragment tabFragment1 = new FindFragment();
         mTabs.add(tabFragment1);
 
-        // 个人信息
+        // 个人信息，ui包下的类可用，现在测试ui_v2包下的类
         UserInfoFragment tabFragment3 = new UserInfoFragment();
         mTabs.add(tabFragment3);
     }
 
     private void initView() {
         myTool = new CommonTools(this);
-        // 拿到底部的四个自定义View
-        ChangeColorIconWithText indicatorOne = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
-        ChangeColorIconWithText indicatorTwo = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
 
-        ChangeColorIconWithText indicatorCamera = (ChangeColorIconWithText) findViewById(R.id.id_indicator_camera);
+        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_one));
+        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_two));
+        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_camera));
+        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_three));
+        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_four));
 
-        ChangeColorIconWithText indicatorThree = (ChangeColorIconWithText) findViewById(R.id.id_indicator_three);
-        ChangeColorIconWithText indicatorFour = (ChangeColorIconWithText) findViewById(R.id.id_indicator_four);
-
-        mTabIndicators.add(indicatorOne);
-        mTabIndicators.add(indicatorTwo);
-        mTabIndicators.add(indicatorCamera);
-        mTabIndicators.add(indicatorThree);
-        mTabIndicators.add(indicatorFour);
-
-        //指示器设置监听
-        for (ChangeColorIconWithText indicator : mTabIndicators) {
+        // 指示器设置监听
+        for (ChangeColorIconWithText indicator : mTabIndicators)
             indicator.setOnClickListener(this);
-        }
-        //默认是首页设置为选中状态，默认首页title
-        indicatorOne.setIconAlpha(1.0f);
+
+        // 默认是首页设置为选中状态，默认首页title
+        mTabIndicators.get(0).setIconAlpha(1.0f);
         setUITitle(0);
     }
 
@@ -156,7 +157,7 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     private void doBtnClick(View v) {
         switch (v.getId()) {
             case R.id.ll_login:
-                myTool.startActivity(LoginActivity.class);
+                myTool.startActivity(LoginNewActivity.class);
                 break;
         }
     }
@@ -171,36 +172,31 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
         // 根据按键切换ViewPager
         switch (v.getId()) {
             case R.id.id_indicator_one:
-                //首先把其他Tab清除
-                resetOtherTabs();
-                mTabIndicators.get(0).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(0, false);
+                selectPage(0);
                 break;
             case R.id.id_indicator_two:
-                //首先把其他Tab清除
-                resetOtherTabs();
-                mTabIndicators.get(1).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(1, false);
+                selectPage(1);
                 break;
             case R.id.id_indicator_camera:
-                //首先把其他Tab清除
-                resetOtherTabs();
-                mTabIndicators.get(2).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(2, false);
+                selectPage(2);
                 break;
             case R.id.id_indicator_three:
-                //首先把其他Tab清除
-                resetOtherTabs();
-                mTabIndicators.get(3).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(3, false);
+                selectPage(3);
                 break;
             case R.id.id_indicator_four:
-                //首先把其他Tab清除
-                resetOtherTabs();
-                mTabIndicators.get(4).setIconAlpha(1.0f);
-                mViewPager.setCurrentItem(4, false);
+                selectPage(4);
                 break;
         }
+    }
+
+    private void selectPage(int index) {
+        //首先把其他Tab清除
+        resetOtherTabs();
+        mTabIndicators.get(index).setIconAlpha(1.0f);
+        mViewPager.setCurrentItem(index, false);
+        curIndex = index;
+
+        updatePage();
     }
 
     /**
@@ -229,6 +225,7 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
 
     @Override
     public void onPageSelected(int position) {
+        curIndex = position;
         // 设置title
         setUITitle(position);
     }
@@ -244,7 +241,18 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
 
     @Override
     public void onPageScrollStateChanged(int state) {
+        if (state == 0) {
+            updatePage();
+        }
+    }
 
+    private void updatePage() {
+
+        if (pageIndex == curIndex)
+            return;
+
+        pageIndex = curIndex;
+        mTabs.get(pageIndex).update();
     }
 
     /**
@@ -254,6 +262,13 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     protected void onResume() {
         super.onResume();
         initDatas();
+        llLogin.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!mTabs.isEmpty())
+                    mTabs.get(curIndex).update();
+            }
+        }, 500);
     }
 
     private void initDatas() {
@@ -272,8 +287,15 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
                 // 注销后重新刷新页面
                 case "logout":
                     initDatas();
+                    mViewPager.setCurrentItem(0, false);
+                    mViewPager.setCurrentItem(mTabs.size() - 1, false);
                     break;
             }
         }
+    }
+
+    @Click(R.id.iv_scan)
+    void scan() {
+        myTool.startActivity(ScanActivity.class);
     }
 }

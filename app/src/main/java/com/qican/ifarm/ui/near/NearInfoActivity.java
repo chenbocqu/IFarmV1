@@ -5,7 +5,6 @@ package com.qican.ifarm.ui.near;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -16,17 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ecloud.pulltozoomview.PullToZoomListViewEx;
-import com.hyphenate.easeui.EaseConstant;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.BeanCBWithTkCk;
-import com.qican.ifarm.ui.chat.ChatActivity;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.CircleImageView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -114,7 +110,7 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
      */
     private void getFarmDataFromNet() {
         myTool.log("请求参数,userId:" + myTool.getUserId() + ",friendId:" + friend.getId());
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/getUserAroundFarmList")
+        OkHttpUtils.post().url(myTool.getServAdd() + "farm/getUserAroundFarmList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("aroundPersonId", friend.getId())
@@ -174,12 +170,13 @@ public class NearInfoActivity extends Activity implements View.OnClickListener {
                 myTool.showInfo("关注待实现");
                 break;
             case R.id.tv_sendmsg:
-                startActivity(new Intent(this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, friend.getId()));
+                myTool.showInfo("暂未开放");
+//                startActivity(new Intent(this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, friend.getId()));
                 break;
         }
     }
 
-    class FarmAdapter extends CommonAdapter<Farm> {
+    class FarmAdapter extends ComAdapter<Farm> {
 
         public FarmAdapter(Context context, List<Farm> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

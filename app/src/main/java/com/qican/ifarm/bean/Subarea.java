@@ -3,16 +3,27 @@
  */
 package com.qican.ifarm.bean;
 
+import com.qican.ifarm.listener.ChooseItems;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class Subarea implements Serializable {
+public class Subarea implements Serializable, ChooseItems {
     private String farmId;
     private String name;
     private String imgUrl;
     private Map<String, List<String>> dataMap;
     private Farm farm;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public String getName() {
         return name;

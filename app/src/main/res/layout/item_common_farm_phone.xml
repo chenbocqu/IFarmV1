@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_selector"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_farm_img" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                style="@style/Wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/MyText.Small"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/text_light" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/MyText.Large.Black"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/menuMargin"
+                    android:layout_toLeftOf="@id/tv_time"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="XXXXXXXXXXXXXX智能农场" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/Wrapper"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_label1"
+                    style="@style/LabelText"
+                    android:layout_marginLeft="0dp" />
+
+                <TextView
+                    android:id="@+id/tv_label2"
+                    style="@style/LabelText" />
+
+                <TextView
+                    android:id="@+id/tv_label3"
+                    style="@style/LabelText" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_desc"
+        style="@style/MyText"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:lines="3"
+        android:maxLines="3"
+        android:text="场描述场描述场描述述农场描述农场描场描述述农场描述农场描述农场描述场描述场描述述农场描述农场描述农场描述场描述场描述述农场描述农"
+        android:textColor="@color/text_light" />
+
+</LinearLayout>

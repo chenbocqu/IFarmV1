@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MyText"
+                    android:padding="10dp"
+                    android:text="任务时间" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/taskinfo_waiting" />
+
+                    <include layout="@layout/task_status" />
+                </RelativeLayout>
+
+                <TextView
+                    style="@style/MyText"
+                    android:padding="10dp"
+                    android:text="详细信息" />
+
+                <LinearLayout
+                    style="@style/Wrapper"
+                    android:padding="@dimen/paddingItem">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="农场：" />
+
+                        <TextView
+                            android:id="@+id/tv_farm_name"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="分区：" />
+
+                        <TextView
+                            android:id="@+id/tv_district"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="系统：" />
+
+                        <TextView
+                            android:id="@+id/tv_system"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="系统类型：" />
+
+                        <TextView
+                            android:id="@+id/tv_sys_type"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="控制类型：" />
+
+                        <TextView
+                            android:id="@+id/tv_control_type"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="任务状态：" />
+
+                        <TextView
+                            android:id="@+id/tv_status"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="创建时间：" />
+
+                        <TextView
+                            android:id="@+id/tv_task_time"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="持续时间：" />
+
+                        <TextView
+                            android:id="@+id/tv_last_time"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="剩余时间：" />
+
+                        <TextView
+                            android:id="@+id/tv_remaining_time"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="开始时间：" />
+
+                        <TextView
+                            android:id="@+id/tv_start_time"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemMargin"
+                        android:gravity="center">
+
+                        <TextView
+                            style="@style/MyText.Large.Black"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_left"
+                            android:gravity="center|right"
+                            android:text="完成时间：" />
+
+                        <TextView
+                            android:id="@+id/tv_stop_time"
+                            style="@style/MyText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="@integer/weight_right"
+                            android:gravity="center_vertical"
+                            android:hint="暂无消息"
+                            android:textColorHint="@color/text_color" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

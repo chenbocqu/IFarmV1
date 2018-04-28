@@ -11,21 +11,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.previewlibrary.GPreviewBuilder;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
+import com.qican.ifarm.bean.Img;
 import com.qican.ifarm.listener.LoggingListener;
-import com.qican.ifarm.ui.login.LoginActivity;
+import com.qican.ifarm.ui.login.LoginNewActivity;
+import com.qican.ifarm.ui_v2.userinfo.HintActivity;
 import com.zhy.base.cache.disk.DiskLruCacheHelper;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.BitmapCallback;
@@ -33,15 +43,15 @@ import com.zhy.http.okhttp.callback.BitmapCallback;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 
 public class CommonTools {
 
-    //    private final static String ALBUM_PATH
-    //    = Environment.getExternalStorageDirectory() + "/download_test/";
-    public static final String PACKAGE_NAME = "com.qican.ygj";
+    public static final String PACKAGE_NAME = "com.qican.ifarm";
 
     public static final String USER_FILE_PATH = Environment.getExternalStorageDirectory() + "/"
             + PACKAGE_NAME; //用户文件
@@ -50,9 +60,11 @@ public class CommonTools {
             + PACKAGE_NAME;
 
     private Context mContext;
+    private CropHelper mCropHelper;
+
     SharedPreferences sp;
     SharedPreferences.Editor editor;
-    private CropHelper mCropHelper;
+
     private DiskLruCacheHelper cacheHelper = null;
 
     public CommonTools(Context context) {
@@ -63,7 +75,6 @@ public class CommonTools {
 
         try {
             cacheHelper = new DiskLruCacheHelper(mContext);
-
         } catch (IOException e) {
             showExceptionInfo(e.toString());
         }
@@ -90,10 +101,12 @@ public class CommonTools {
      * @param imageView
      */
     public CommonTools showImage(String url, ImageView imageView) {
+
 //        Picasso.with(mContext).load(url).into(imageView);
-        Glide.with(mContext).load(url).error(R.drawable.tab_bg)
-                .listener(new LoggingListener<String, GlideDrawable>())
-                .centerCrop().crossFade().into(imageView);
+        if (url != null)
+            Glide.with(mContext).load(url).error(R.drawable.tab_bg)
+                    .listener(new LoggingListener<String, GlideDrawable>())
+                    .centerCrop().crossFade().into(imageView);
 //        Glide.with(mContext).load(url).placeholder(R.drawable.img_loading).error(R.drawable.img_error)
 //                .listener(new LoggingListener<String, GlideDrawable>()).centerCrop().crossFade().into(imageView);
         return this;
@@ -158,6 +171,7 @@ public class CommonTools {
     public void startActivity(Class<?> activity) {
         try {
             mContext.startActivity(new Intent(mContext, activity));
+//            ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         } catch (Exception e) {
             new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("异常！")
@@ -395,8 +409,9 @@ public class CommonTools {
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
-                            startActivity(LoginActivity.class);
+                            startActivity(LoginNewActivity.class);
                             sDialog.dismissWithAnimation();
+//                            ((Activity) mContext).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                         }
                     })
                     .show();
@@ -465,6 +480,7 @@ public class CommonTools {
      * @param msg
      */
     public void log(String msg) {
+        if (msg == null) msg = "null";
         Log.i("IFarm_DEBUG_" + mContext.getClass().getSimpleName(), msg);
     }
 
@@ -516,6 +532,16 @@ public class CommonTools {
         return sp.getString(ConstantValue.KEY_TOKEN, "");
     }
 
+    public CommonTools setErrorToken(boolean token) {
+        editor.putBoolean(ConstantValue.KEY_ERRORTOKEN, token);
+        editor.commit();
+        return this;
+    }
+
+    public boolean isErrorToken() {
+        return sp.getBoolean(ConstantValue.KEY_ERRORTOKEN, true);
+    }
+
     public CommonTools setCountExist(boolean isEmcountExist) {
         editor.putBoolean(ConstantValue.KEY_ISEMCOUNTEXIST, isEmcountExist);
         editor.commit();
@@ -529,20 +555,10 @@ public class CommonTools {
     /**
      * @############本地数据存储################
      */
-    /**
-     * 通过id从本地获取普通用户信息
-     *
-     * @return 池塘列表
-     */
     public ComUser getComUserInfoById(String userId) {
         ComUser user = new ComUser();
-        if (cacheHelper != null) {
+        if (cacheHelper != null)
             user = cacheHelper.getAsSerializable(ConstantValue.KEY_COMUSERINFO + userId);
-        }
-        if (user != null)
-            log("取出用户信息，key:" + ConstantValue.KEY_COMUSERINFO + userId + ",value:" + user.toString());
-        else
-            log("用户信息取出失败了，key:" + ConstantValue.KEY_COMUSERINFO + userId);
         return user;
     }
 
@@ -553,7 +569,6 @@ public class CommonTools {
      * @return 当前实例
      */
     public CommonTools setComUserInfoById(String userId, ComUser userInfo) {
-        log("存入用户信息，key:" + ConstantValue.KEY_COMUSERINFO + userId + ",value:" + userInfo.toString());
         cacheHelper.put(ConstantValue.KEY_COMUSERINFO + userId, userInfo);
         return this;
     }
@@ -583,16 +598,155 @@ public class CommonTools {
         // 未登录则提示
         new SweetAlertDialog(mContext, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Token失效")
-                .setContentText("token失效了哦（账号在远程登录，确认是否为本人操作，为保证账号安全，可及时修改密码）!")
+                .setContentText("登录已失效，请重新登录!")
                 .setConfirmText("重新登录")
                 .setCancelText("取  消")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sDialog) {
-                        startActivity(LoginActivity.class);
+                        startActivity(LoginNewActivity.class);
+                        sDialog.dismissWithAnimation();
+//                        ((Activity) (mContext)).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    }
+                })
+                .show();
+    }
+
+    private void showDialog(
+            int type,
+            String title,
+            String content,
+            String confirmText,
+            String cancelText,
+            final View.OnClickListener confirmListener,
+            final View.OnClickListener cancelListener) {
+
+        if (title == null) title = "提示";
+        if (content == null) content = "一些提示信息";
+        if (confirmText == null) confirmText = "确 认";
+        if (cancelText == null) cancelText = "取 消";
+
+        if (type == 0) type = SweetAlertDialog.WARNING_TYPE;
+
+        // 未登录则提示
+        new SweetAlertDialog(mContext, type)
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText(confirmText)
+                .setCancelText(cancelText)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        if (confirmListener != null)
+                            confirmListener.onClick(null);
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        if (cancelListener != null)
+                            cancelListener.onClick(null);
                         sDialog.dismissWithAnimation();
                     }
                 })
                 .show();
+    }
+
+    public void showDialog(int type, String title, String content, View.OnClickListener confirmListener) {
+        showDialog(type, title, content, null, null, confirmListener, null);
+    }
+
+    public void setIP(String ip) {
+        editor.putString(ConstantValue.IP_ADDRESS, ip);
+        editor.commit();
+    }
+
+    // 获得服务器ip地址
+    public String getIP() {
+        String ip = sp.getString(ConstantValue.IP_ADDRESS, "");
+        if ("".equals(ip))
+            ip = ConstantValue.IP;
+        return ip;
+    }
+
+    // 客服姓名和电话
+    public String getSerNum() {
+        return sp.getString(ConstantValue.SerNum, "余先生,18323433566");
+    }
+
+    // 获取服务器数据地址
+    public String getServAdd() {
+        return "http://" + getIP() + ":" + ConstantValue.PORT + "//IFarm/";
+//        return ConstantValue.SERVICE_ADDRESS; //固定地址
+    }
+
+    public String getSocketAdd() {
+        return "http://" + getIP() + ":" + ConstantValue.PORT + "/IFarm/";
+    }
+
+    public int getScreenWidth() {
+        DisplayMetrics dpMetrics = new DisplayMetrics();
+        ((Activity) mContext).getWindow().getWindowManager().getDefaultDisplay()
+                .getMetrics(dpMetrics);
+        return dpMetrics.widthPixels;
+    }
+
+    /**
+     * 设置空间布局为屏幕宽度的ratio倍，如1/3
+     *
+     * @param ratio
+     */
+    public void setHeightByWindow(View v, double ratio) {
+        ViewGroup.LayoutParams lp = v.getLayoutParams();
+        lp.height = (int) (getScreenWidth() * ratio);
+        v.setLayoutParams(lp);
+    }
+
+
+    public void showPopFormBottom(PopupWindow win, View mainView, final PopupWindow.OnDismissListener l) {
+        final WindowManager.LayoutParams[] params = {((Activity) mContext).getWindow().getAttributes()};
+        //当弹出Popupwindow时，背景变半透明
+        params[0].alpha = 0.7f;
+        ((Activity) mContext).getWindow().setAttributes(params[0]);
+
+        // 设置Popupwindow显示位置（从底部弹出）
+        win.showAtLocation(mainView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+
+        //设置Popupwindow关闭监听，当Popupwindow关闭，背景恢复1f
+        win.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                params[0] = ((Activity) mContext).getWindow().getAttributes();
+                params[0].alpha = 1f;
+                ((Activity) mContext).getWindow().setAttributes(params[0]);
+                if (l != null) l.onDismiss();
+            }
+        });
+    }
+
+    public void showPopFormBottom(PopupWindow win, View mainView) {
+        showPopFormBottom(win, mainView, null);
+    }
+
+    public void toHint() {
+        startActivity(HintActivity.class);
+    }
+
+    public void previewImg(ImageView iv, String url) {
+        //在你点击时，调用computeBoundsBackward（）方法
+        Rect bounds = new Rect();
+        iv.getGlobalVisibleRect(bounds);
+        Img img = new Img(url);
+        img.setBounds(bounds);
+
+        List<Img> list = new ArrayList<>();
+        list.add(img);
+
+        GPreviewBuilder.from((Activity) mContext)
+                .setData(list)
+                .setCurrentIndex(0)
+                .setType(GPreviewBuilder.IndicatorType.Number)
+                .start();
     }
 }

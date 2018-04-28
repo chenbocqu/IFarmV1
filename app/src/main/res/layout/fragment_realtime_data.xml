@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/MyText"
+            android:padding="10dp"
+            android:text="实时监测数据" />
+
+        <TextView
+            android:id="@+id/tv_update_time"
+            style="@style/MyText"
+            android:layout_alignParentRight="true"
+            android:hint="暂无更新"
+            android:padding="10dp" />
+
+    </RelativeLayout>
+
+
+    <com.qican.ifarm.view.MyGridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:horizontalSpacing="0dp"
+        android:listSelector="@null"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0dp" />
+
+    <include layout="@layout/view_nodata" />
+
+</LinearLayout>

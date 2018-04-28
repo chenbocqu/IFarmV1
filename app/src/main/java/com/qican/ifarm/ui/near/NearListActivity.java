@@ -94,7 +94,7 @@ public class NearListActivity extends Activity implements PullToRefreshLayout.On
         avi.smoothToShow();
         ivNetError.setVisibility(View.GONE);
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
+        OkHttpUtils.post().url(myTool.getServAdd()+ "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("beginIndex", "0")
@@ -165,7 +165,7 @@ public class NearListActivity extends Activity implements PullToRefreshLayout.On
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
+        OkHttpUtils.post().url(myTool.getServAdd() + "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("beginIndex", String.valueOf(mDatas.size()))

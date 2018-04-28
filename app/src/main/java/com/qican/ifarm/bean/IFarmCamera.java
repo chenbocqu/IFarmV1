@@ -1,16 +1,28 @@
 package com.qican.ifarm.bean;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class IFarmCamera extends EZCamera implements Serializable {
+public class IFarmCamera extends EZCamera implements Serializable, Comparable<IFarmCamera> {
     protected String id;
     protected String name;
-
     protected String location;
+    protected String createTime;
+
+
     protected int shedNo; //大棚编号
     private String preImgUrl;
 
     private Subarea subarea;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public String getId() {
         return id;
@@ -63,12 +75,41 @@ public class IFarmCamera extends EZCamera implements Serializable {
     @Override
     public String toString() {
         return "IFarmCamera{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", shedNo=" + shedNo +
-                ", preImgUrl='" + preImgUrl + '\'' +
+                "name='" + name + '\'' +
+                "deviceSerial='" + getDeviceSerial() + '\'' +
+                "channelNo='" + getChannelNo() + '\'' +
+                "status='" + getStatus() + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NonNull IFarmCamera another) {
+
+        int biger = -1;
+
+        if (another.getName() == null) return biger;
+        if (this.getName() == null) return -biger;
+
+        if (!another.getName().contains("视频")) return biger;
+        if (!this.getName().contains("视频")) return -biger;
+
+        // 都包含视频字段，解析下数字
+        return (parseNum(getName()) - parseNum(another.getName()));
+    }
+
+    private int parseNum(String name) {
+        if (name.length() < 3) return 0;
+
+        int num = name.charAt(2) - '0';
+
+        if (num >= 10 || num < 0) return 0;
+
+        if (name.length() > 3
+                && name.charAt(3) - '0' >= 0
+                && name.charAt(3) - '0' <= 9)
+            num = num * 10 + (name.charAt(3) - '0');
+
+        return num;
     }
 
     public static class Builder {

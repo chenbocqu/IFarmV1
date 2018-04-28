@@ -20,20 +20,14 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.PhoneInfo;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
-import com.qican.ifarm.utils.IFarmData;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import net.sf.json.JSONObject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
@@ -117,13 +111,13 @@ public class ResetPwdActivity extends Activity implements View.OnClickListener {
             case R.id.iv_del_conpwd:
                 edtConPwd.setText("");
                 break;
-            case R.id.btn_register:
-                attempRegister();//登录
+            case R.id.btn_reset:
+                toReset();//重置密码
                 break;
         }
     }
 
-    private void attempRegister() {
+    private void toReset() {
         password = edtPassword.getText().toString();
         confirmPwd = edtConPwd.getText().toString();
 
@@ -157,10 +151,10 @@ public class ResetPwdActivity extends Activity implements View.OnClickListener {
 
         mDialog = null;
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("正在注册···");
+                .setTitleText("正在修改密码···");
         mDialog.show();
 
-        String url = ConstantValue.SERVICE_ADDRESS + "user/updateUser";
+        String url = myTool.getServAdd() + "user/updateUser";
         OkHttpUtils.get().url(url)
                 .addParams("signature", myTool.getToken())
                 .addParams("userId", userName)
@@ -177,7 +171,7 @@ public class ResetPwdActivity extends Activity implements View.OnClickListener {
                         switch (response) {
                             case "success":
                                 mDialog.setTitleText("重置成功")
-                                        .setContentText("重置密码成功了，现在去登录吧！")
+                                        .setContentText("重置密码成功了，现在去登录？")
                                         .setConfirmText("好  的")
                                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                             @Override
@@ -199,7 +193,7 @@ public class ResetPwdActivity extends Activity implements View.OnClickListener {
                                 break;
                             case "error":
                                 mDialog.setTitleText("修改失败")
-                                        .setContentText("出现了一些小插曲，稍后重试哦！")
+                                        .setContentText("出现了一些小插曲，请稍后重试！")
                                         .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                 break;
                             default:

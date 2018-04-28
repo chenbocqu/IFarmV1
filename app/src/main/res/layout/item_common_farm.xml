@@ -5,12 +5,11 @@
     android:layout_height="wrap_content"
     android:background="@drawable/btn_selector"
     android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/iv_img"
-        style="@style/MyImg"
+        style="@style/MyImg.Large"
         android:scaleType="centerCrop"
         android:src="@mipmap/default_farm_img" />
 
@@ -28,7 +27,8 @@
 
             <TextView
                 android:id="@+id/tv_name"
-                style="@style/MyText.Large.Black" />
+                style="@style/MyText.Large.Black"
+                android:layout_centerVertical="true" />
 
             <LinearLayout
                 style="@style/Wrapper"
@@ -54,6 +54,7 @@
                 android:id="@+id/tv_time"
                 style="@style/MyText.Small"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:textColor="@color/text_light" />
         </RelativeLayout>
 
@@ -62,9 +63,9 @@
             style="@style/MyText"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:gravity="center|left"
-            android:maxLines="3"
-            android:text="场描述农场描述农场描述农场描述农场描述农场描述农农场描述农场描述农场描述农场描述农场描述"
+            android:lines="5"
+            android:maxLines="5"
+            android:text="场描述场描述述农场描述农场描述农场描述"
             android:textColor="@color/text_light" />
     </LinearLayout>
 

@@ -187,7 +187,9 @@
                 android:text="关联萤石账户" />
         </RelativeLayout>
 
-        <View style="@style/SplitLine.WithMargin" />
+        <View
+            style="@style/SplitLine.WithMargin"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/rl_logout_ez"
@@ -207,7 +209,9 @@
                 android:text="退出萤石账户" />
         </RelativeLayout>
 
-        <View style="@style/SplitLine.WithMargin" />
+        <View
+            style="@style/SplitLine.WithMargin"
+            android:visibility="gone" />
 
         <!-- 昵称-->
         <RelativeLayout

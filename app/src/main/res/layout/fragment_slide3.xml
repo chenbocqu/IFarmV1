@@ -6,20 +6,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="聚实力社团 拓展交际圈"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="32sp" />
 
     <ImageView
         android:id="@+id/iv_img"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
         android:src="@mipmap/img_slide3" />
 
     <TextView
+        style="@style/MyText.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_img"
@@ -27,7 +28,6 @@
         android:layout_marginRight="50dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="加入农场社团，交流农业经验，分享物流路线，走向共同致富"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:text="加入农场社团，交流农业经验\n分享物流路线，走向共同致富"
+        android:textColor="@color/white" />
 </RelativeLayout>

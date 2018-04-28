@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_para"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/MyPbItem">
+
+        <TextView
+            android:id="@+id/tv_para_name1"
+            style="@style/MyText.LeftOfPb"
+            android:text="para1" />
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/pb_1"
+            style="@style/MyProgressBar"
+            app:bga_pb_isHiddenText="true"
+            app:bga_pb_mode="horizontal"
+            app:bga_pb_reachedColor="@color/reachcolor_humidity"
+            app:bga_pb_reachedHeight="@dimen/progress_height"
+            app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+            app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+        <TextView
+            android:id="@+id/tv_para1"
+            style="@style/MyText.RightOfPb"
+            android:text="63.9%" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MyPbItem"
+        android:layout_marginTop="@dimen/pbItemMargen">
+
+        <TextView
+            android:id="@+id/tv_para_name2"
+            style="@style/MyText.LeftOfPb"
+            android:text="para2" />
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/pb_2"
+            style="@style/MyProgressBar"
+            android:progress="23"
+            app:bga_pb_isHiddenText="true"
+            app:bga_pb_mode="horizontal"
+            app:bga_pb_reachedColor="@color/reachcolor_temperature1"
+            app:bga_pb_reachedHeight="@dimen/progress_height"
+            app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+            app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+        <TextView
+            android:id="@+id/tv_para2"
+            style="@style/MyText.RightOfPb"
+            android:text="63.9%" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MyPbItem"
+        android:layout_marginTop="@dimen/pbItemMargen">
+
+        <TextView
+            android:id="@+id/tv_para_name3"
+            style="@style/MyText.LeftOfPb"
+            android:text="para3" />
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/pb_3"
+            style="@style/MyProgressBar"
+            android:progress="67"
+            app:bga_pb_isHiddenText="true"
+            app:bga_pb_mode="horizontal"
+            app:bga_pb_reachedColor="@color/reachcolor_temperature2"
+            app:bga_pb_reachedHeight="@dimen/progress_height"
+            app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+            app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+        <TextView
+            android:id="@+id/tv_para3"
+            style="@style/MyText.RightOfPb"
+            android:text="63.9%" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MyPbItem"
+        android:layout_marginTop="@dimen/pbItemMargen">
+
+        <TextView
+            android:id="@+id/tv_para_name4"
+            style="@style/MyText.LeftOfPb"
+            android:text="para4" />
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/pb_4"
+            style="@style/MyProgressBar"
+            android:progress="92"
+            app:bga_pb_isHiddenText="true"
+            app:bga_pb_mode="horizontal"
+            app:bga_pb_reachedColor="@color/reachcolor_watercontent"
+            app:bga_pb_reachedHeight="@dimen/progress_height"
+            app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+            app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+        <TextView
+            android:id="@+id/tv_para4"
+            style="@style/MyText.RightOfPb"
+            android:text="63.9%" />
+    </LinearLayout>
+
+    <LinearLayout style="@style/MyPbItem">
+
+        <TextView
+            android:id="@+id/tv_para_name5"
+            style="@style/MyText.LeftOfPb"
+            android:text="para5" />
+
+        <cn.bingoogolapple.progressbar.BGAProgressBar
+            android:id="@+id/pb_5"
+            style="@style/MyProgressBar"
+            app:bga_pb_isHiddenText="true"
+            app:bga_pb_mode="horizontal"
+            app:bga_pb_reachedColor="@color/reachcolor_humidity"
+            app:bga_pb_reachedHeight="@dimen/progress_height"
+            app:bga_pb_unReachedColor="@color/unreachcolor_humidity"
+            app:bga_pb_unReachedHeight="@dimen/progress_height" />
+
+        <TextView
+            android:id="@+id/tv_para5"
+            style="@style/MyText.RightOfPb"
+            android:text="63.9%" />
+    </LinearLayout>
+
+</LinearLayout>

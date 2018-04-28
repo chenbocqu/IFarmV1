@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_task_status"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp">
+
+    <View
+        android:id="@+id/v_circleCenter"
+        style="@style/Icon.16dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/selected_radius" />
+
+    <View
+        android:id="@+id/v_circleLeft"
+        style="@style/Icon.16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/selected_radius" />
+
+    <View
+        android:id="@+id/v_circleRight"
+        style="@style/Icon.16dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/unselected_radius" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        style="@style/MyText"
+        android:layout_above="@id/v_circleCenter"
+        android:layout_centerHorizontal="true"
+        android:text="开始执行"
+        android:textColor="@color/yellow_light" />
+
+    <TextView
+        android:id="@+id/tv_starttime"
+        style="@style/MyText"
+        android:layout_below="@id/v_circleCenter"
+        android:layout_centerHorizontal="true"
+        android:text="- - : - -"
+        android:textColor="@color/yellow_light" />
+
+    <View
+        android:id="@+id/v_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/v_circleCenter"
+        android:layout_toRightOf="@id/v_circleLeft"
+        android:background="@color/yellow_light" />
+
+    <View
+        android:id="@+id/v_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/v_circleRight"
+        android:layout_toRightOf="@id/v_circleCenter"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_task"
+        style="@style/MyText"
+        android:layout_above="@id/v_circleCenter"
+        android:layout_marginLeft="5dp"
+        android:text="任务下发"
+        android:textColor="@color/yellow_light" />
+
+    <TextView
+        android:id="@+id/tv_tasktime"
+        style="@style/MyText"
+        android:layout_below="@id/v_circleCenter"
+        android:layout_marginLeft="5dp"
+        android:text="今天 - - : - -"
+        android:textColor="@color/yellow_light" />
+
+    <TextView
+        style="@style/MyText"
+        android:layout_above="@id/v_circleCenter"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="完成"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_complete"
+        style="@style/MyText"
+        android:layout_above="@id/v_circleCenter"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="完成"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_complete_time"
+        style="@style/MyText"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/v_circleCenter"
+        android:layout_marginRight="5dp"
+        android:text="今天 - - : - -"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

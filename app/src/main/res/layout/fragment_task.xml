@@ -6,22 +6,22 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/rl_task_main"
+        android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginBottom="@dimen/syspicMargin"
         android:layout_marginLeft="@dimen/syspicMargin"
         android:layout_marginRight="@dimen/syspicMargin"
-        android:background="@drawable/taskbg_completed"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:background="@drawable/btn_selector"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/rl_top"
+            android:id="@+id/rl_task_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true">
+            android:layout_alignParentTop="true"
+            android:background="@drawable/taskbg_completed">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
                     style="@style/MyText.Large.Black"
                     android:layout_marginLeft="10dp"
                     android:text="灌溉"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <TextView
@@ -64,7 +64,7 @@
                     android:id="@+id/tv_starttime"
                     style="@style/MyText.Small"
                     android:text="9：00"
-                    android:textColor="@color/yellow_light" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     style="@style/MyText.Small"
@@ -75,7 +75,7 @@
                     android:id="@+id/tv_endtime"
                     style="@style/MyText.Small"
                     android:text="10：00"
-                    android:textColor="@color/yellow_light" />
+                    android:textColor="@color/black" />
 
                 <ImageView
                     style="@style/Icon.16dp"
@@ -97,8 +97,7 @@
                 style="@style/Icon.40dp"
                 android:layout_alignParentRight="true"
                 android:layout_margin="5dp"
-                android:src="@drawable/running"
-                android:tint="@color/white" />
+                android:src="@drawable/running" />
 
             <TextView
                 android:id="@+id/tv_desc"
@@ -107,7 +106,7 @@
                 android:layout_toLeftOf="@id/iv_status"
                 android:gravity="center|left"
                 android:text="对A区实施时长为25min的施肥[ 罐 1 2 ]。"
-                android:textColor="@color/white" />
+                android:textColor="@color/black" />
         </RelativeLayout>
 
         <LinearLayout
@@ -126,14 +125,12 @@
 
                 <ImageView
                     style="@style/Icon.16dp"
-                    android:src="@drawable/delete"
-                    android:tint="@color/white" />
+                    android:src="@drawable/delete" />
 
                 <TextView
                     style="@style/MyText"
                     android:layout_marginLeft="5dp"
-                    android:text="删除"
-                    android:textColor="@color/white" />
+                    android:text="删除" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,22 +141,15 @@
 
                 <ImageView
                     style="@style/Icon.16dp"
-                    android:src="@drawable/delete"
-                    android:tint="@color/white" />
+                    android:src="@drawable/delete" />
 
                 <TextView
                     style="@style/MyText"
                     android:layout_marginLeft="5dp"
-                    android:text="编辑"
-                    android:textColor="@color/white" />
+                    android:text="编辑" />
             </LinearLayout>
         </LinearLayout>
 
-        <View
-            style="@style/SplitLine"
-            android:layout_below="@id/rl_top"
-            android:layout_marginTop="15dp"
-            android:background="@color/white" />
-
     </RelativeLayout>
+
 </RelativeLayout>

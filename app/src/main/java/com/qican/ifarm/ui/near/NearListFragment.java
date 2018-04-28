@@ -17,7 +17,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.beanfromservice.User;
@@ -82,7 +82,7 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
         avi.smoothToShow();
         ivNetError.setVisibility(View.GONE);
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
+        OkHttpUtils.post().url(myTool.getServAdd() + "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("beginIndex", "0")
@@ -166,7 +166,7 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUsersListAround")
+        OkHttpUtils.post().url(myTool.getServAdd()+ "user/getUsersListAround")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("beginIndex", String.valueOf(mDatas.size()))
@@ -196,7 +196,7 @@ public class NearListFragment extends Fragment implements PullToRefreshLayout.On
     }
 
 
-    class UserAdapter extends CommonAdapter<ComUser> {
+    class UserAdapter extends ComAdapter<ComUser> {
         public UserAdapter(Context context, List<ComUser> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }

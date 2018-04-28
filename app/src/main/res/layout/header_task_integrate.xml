@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_control_group1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:id="@+id/ll_guangai"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_irrigate" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="灌溉" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shifei"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fertilize" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="施肥" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shiyao"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/drug" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="施药" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_wendu"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_temperature" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="温度" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_group2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:id="@+id/ll_shidu"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_humidity" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="湿度" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tongfeng"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_air" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="通风" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_guangzhao"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_illuminate" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="光照" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_zheyang"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_yusan" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="遮阳" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_group3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:id="@+id/ll_juanlian"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_juanlian" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="卷帘" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/ll_shuilian"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_shuilian" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="水帘" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/ll_co2"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_co2" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="二氧化碳" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/ll_o2"
+            style="@style/ControlItem">
+
+            <ImageView
+                style="@style/Icon.32dp"
+                android:src="@drawable/fun_o2" />
+
+            <TextView
+                style="@style/MyText"
+                android:layout_marginTop="@dimen/menuMarginTop"
+                android:text="氧气" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

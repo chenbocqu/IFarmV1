@@ -53,13 +53,12 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="14dp"
             android:layout_toRightOf="@id/iv_male"
-            android:text="男"
-            android:textSize="14sp" />
+            android:text="男" />
 
         <ImageView
             android:id="@+id/iv_male_selected"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/selected" />
     </RelativeLayout>
@@ -80,15 +79,15 @@
             style="@style/MyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="14dp"
-            android:layout_toRightOf="@id/iv_female"
+            android:layout_toEndOf="@+id/iv_female"
             android:text="女" />
 
         <ImageView
             android:id="@+id/iv_female_selected"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/selected" />
     </RelativeLayout>

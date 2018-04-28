@@ -4,10 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.qican.ifarm.ui.ComMainActivity_;
+import com.qican.ifarm.ui.login.LoginNewActivity;
 import com.qican.ifarm.utils.CommonTools;
 
 public class IntroActivity extends AppIntro {
@@ -71,11 +73,17 @@ public class IntroActivity extends AppIntro {
         switch (msg) {
             case "firstIn":
                 myTool.startActivity(ComMainActivity_.class);
+                if (myTool.isErrorToken()) {
+                    myTool.startActivity(LoginNewActivity.class);
+                }
                 break;
             case "notFirstIn":
                 break;
             default:
                 myTool.startActivity(ComMainActivity_.class);
+                if (myTool.isErrorToken()) {
+                    myTool.startActivity(LoginNewActivity.class);
+                }
         }
         finish();
     }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_selector">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaultbg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/menuMarginTop">
+
+            <RelativeLayout
+                style="@style/Wrapper"
+                android:layout_gravity="center_vertical"
+                android:background="@null">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/MyText.Large.Black"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/LabelText"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:gravity="top|left"
+                android:text="在线"
+                android:textSize="@dimen/textsize_small" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

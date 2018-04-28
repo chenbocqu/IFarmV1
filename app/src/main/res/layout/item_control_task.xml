@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_selector"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/MyText.Large.Black"
+            android:layout_alignParentLeft="true"
+            android:text="升温" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/LabelText"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_name"
+            android:text="等待中" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/MyText.Small"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="2017-12-03 03:45" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        style="@style/MyText"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="响堂生态农场A区域所有点位，自今天下午2:30开始，持续执行15分钟。" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/taskMenuHeight"
+        android:layout_gravity="right"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_task_info"
+            style="@style/Icon.40dp"
+            android:background="@drawable/btn_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/menu_detailinfo" />
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:background="@drawable/btn_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/menu_modify" />
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:background="@drawable/btn_selector"
+            android:clickable="true"
+            android:padding="8dp"
+            android:src="@drawable/menu_delete" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_control_header"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_integrate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/control_header_selector"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:src="@drawable/integrate"
+            android:tint="@color/white" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="@dimen/menuMarginTop"
+            android:text="组合任务"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_running"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/control_header_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:src="@drawable/running"
+            android:tint="@color/white" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="@dimen/menuMarginTop"
+            android:text="运行中"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_all"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/control_header_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/Icon.40dp"
+            android:src="@drawable/all_task"
+            android:tint="@color/white" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="@dimen/menuMarginTop"
+            android:text="所有任务"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

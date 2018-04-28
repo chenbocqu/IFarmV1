@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_nothing_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/syspicMargin"
+        android:layout_marginLeft="@dimen/syspicMargin"
+        android:layout_marginRight="@dimen/syspicMargin"
+        android:background="@drawable/bg_round"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            style="@style/MyImg"
+            android:src="@drawable/nothing" />
+
+        <TextView
+            style="@style/MyText"
+            android:layout_marginTop="5dp"
+            android:text="当前无任务，请先添加！" />
+
+        <TextView
+            android:id="@+id/tv_newtask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btnbg_blueline"
+            android:text="添加新任务"
+            android:textColor="@color/blue" />
+
+    </LinearLayout>
+
+</RelativeLayout>

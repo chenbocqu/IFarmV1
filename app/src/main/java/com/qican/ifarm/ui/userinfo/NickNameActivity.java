@@ -18,6 +18,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
+import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmData;
@@ -34,6 +35,7 @@ public class NickNameActivity extends Activity implements View.OnClickListener {
     private EditText edtNickName;
     private String nickName;
     private SweetAlertDialog mDialog;
+    private ComUser userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,12 @@ public class NickNameActivity extends Activity implements View.OnClickListener {
     }
 
     private void initData() {
-        edtNickName.setText(myTool.getNickName());
+        userInfo = myTool.getComUserInfoById(myTool.getUserId());
+        if (userInfo == null) {
+            return;
+        }
+
+        edtNickName.setText(userInfo.getNickName());
     }
 
     @Override
@@ -80,7 +87,7 @@ public class NickNameActivity extends Activity implements View.OnClickListener {
         }
 
         nickName = edtNickName.getText().toString();
-        if (nickName.equals(myTool.getNickName())) {
+        if (nickName.equals(userInfo.getNickName())) {
             myTool.showInfo("昵称没有变化");
             return;
         }
@@ -91,7 +98,7 @@ public class NickNameActivity extends Activity implements View.OnClickListener {
             mDialog.show();
 
             //更改服务器信息
-            String url = ConstantValue.SERVICE_ADDRESS + "user/updateUser";
+            String url = myTool.getServAdd() + "user/updateUser";
             OkHttpUtils.post().url(url)
                     .addParams("userId", myTool.getUserId())
                     .addParams("userName", nickName)
@@ -108,7 +115,6 @@ public class NickNameActivity extends Activity implements View.OnClickListener {
                         public void onResponse(String response, int id) {
                             switch (response) {
                                 case "success":
-                                    myTool.setNickName(nickName);
                                     IFarmData.updateUserInfo(NickNameActivity.this);//更新用户信息到本地
                                     mDialog.setTitleText("修改成功")
                                             .setConfirmText("好  的")

@@ -1,11 +1,9 @@
 package com.qican.ifarm.ui.farm;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +26,6 @@ import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.OnDialogListener;
 import com.qican.ifarm.ui.userinfo.PicChooseDialog;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -38,7 +35,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
-import org.androidannotations.annotations.res.StringRes;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,6 +47,8 @@ import okhttp3.Call;
 public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListener {
     private static final int REQUEST_LABEL = 1;
     private static final int LABEL_MAX_SHOW_LEN = 10;//能标签显示的最大长度
+
+    public static final String KEY_FARM_INFO = "KEY_FARM_INFO";
     private CommonTools myTool;
     private String farmName, farmDesc;
     private SweetAlertDialog mDialog;
@@ -140,6 +138,10 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
         farmName = edtFarmName.getText().toString().trim();
         farmDesc = edtFarmDesc.getText().toString().trim();
 
+        mFarm.setName(farmName);
+        mFarm.setDesc(farmDesc);
+        mFarm.setLabels(labelStr);
+
         mDialog.setTitleText("正在修改···");
         mDialog.showContentText(false);
         if (!mDialog.isShowing()) {
@@ -148,7 +150,7 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
             mDialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         }
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/updateFarmCollector")
+        OkHttpUtils.post().url(myTool.getServAdd() + "farm/updateFarmCollector")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", mFarm.getId())
@@ -159,8 +161,7 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        myTool.log("添加农场异常：" + e.getMessage());
-                        addFailed("异常信息：" + e.getMessage());
+                        modifyFailed("异常信息：" + e.getMessage());
                     }
 
                     @Override
@@ -168,10 +169,15 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                         myTool.log("添加农场response：" + response);
                         switch (response) {
                             case "success":
-                                addSuccess();
+
+                                Intent intent = new Intent();
+                                intent.putExtra(KEY_FARM_INFO, mFarm);
+                                setResult(RESULT_OK, intent);
+
+                                modifySuccess();
                                 break;
                             case "error":
-                                addFailed("服务器返回失败！");
+                                modifyFailed("服务器返回失败！");
                                 break;
                             case "lose effXXXX":
                                 //需要重新获取token
@@ -181,7 +187,7 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                 });
     }
 
-    private void addSuccess() {
+    private void modifySuccess() {
         mDialog.setTitleText("修改成功")
                 .setContentText("恭喜，您已成功修改了农场信息！")
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -207,7 +213,7 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
         }
     }
 
-    private void addFailed(String msg) {
+    private void modifyFailed(String msg) {
         mDialog.setTitleText("添加失败")
                 .setContentText(msg)
                 .setConfirmText("重试")
@@ -352,7 +358,7 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
 
         pbUpload.setVisibility(View.VISIBLE);
 
-        String url = ConstantValue.SERVICE_ADDRESS + "farm/uploadFarm";
+        String url = myTool.getServAdd() + "farm/uploadFarm";
 
         //上传头像至服务器
         File picFile = new File(result.getImage().getPath());
@@ -392,7 +398,6 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                         }
                     }
                 });
-        myTool.log("takeSuccess: " + result.getImage().getPath());
     }
 
     //进度环设置为不见

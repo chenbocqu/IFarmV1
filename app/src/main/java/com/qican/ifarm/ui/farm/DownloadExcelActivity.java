@@ -149,7 +149,7 @@ public class DownloadExcelActivity extends Activity {
 
         myTool.log("请求参数[startTime:" + startTime + "，endTime:" + endTime + "]");
 
-        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "sensor/historySensorValuesExcel")
+        OkHttpUtils.get().url(myTool.getServAdd() + "sensor/historySensorValuesExcel")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmId", mFarm.getId())

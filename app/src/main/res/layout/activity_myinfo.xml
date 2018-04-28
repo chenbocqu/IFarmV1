@@ -7,7 +7,7 @@
     <!-- 顶部titleBar-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/menuHeight"
         android:background="@color/main_color">
 
         <LinearLayout
@@ -27,6 +27,7 @@
                 android:src="@drawable/back" />
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -42,7 +43,7 @@
             android:layout_centerInParent="true"
             android:text="个人信息"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="25sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -64,6 +65,7 @@
             android:paddingTop="8dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -98,6 +100,7 @@
             android:padding="15dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -106,6 +109,7 @@
 
             <TextView
                 android:id="@+id/tv_nickname"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -126,6 +130,7 @@
             android:padding="15dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -134,6 +139,7 @@
 
             <TextView
                 android:id="@+id/tv_userid"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -154,6 +160,7 @@
             android:padding="15dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -161,8 +168,8 @@
                 android:textColor="#444" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/twodcode" />
         </RelativeLayout>
@@ -173,12 +180,13 @@
         style="@style/MenuWrapper"
         android:layout_marginTop="20dp"
         android:background="@drawable/btn_selector"
-        android:paddingBottom="8dp"
+        android:paddingBottom="0dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="8dp">
+        android:paddingTop="0dp">
 
         <TextView
+            style="@style/MyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -190,6 +198,7 @@
             android:layout_width="96dp"
             android:layout_height="60dp"
             android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
             android:src="@drawable/defaultbg" />
 
         <ProgressBar
@@ -218,6 +227,7 @@
             android:padding="15dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -226,6 +236,7 @@
 
             <TextView
                 android:id="@+id/tv_sex"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -246,6 +257,8 @@
             android:padding="15dp">
 
             <TextView
+                android:id="@+id/tv_graph"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -254,10 +267,13 @@
 
             <TextView
                 android:id="@+id/tv_signature"
-                android:layout_width="250dp"
+                style="@style/MyText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/tv_graph"
                 android:ellipsize="end"
                 android:gravity="center|right"
                 android:hint="暂时没有个性签名！"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/titlebar" />
+
+    <include layout="@layout/choose_loaction" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <include layout="@layout/common_list" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_operation"
+        style="@style/MenuWrapper"
+        android:layout_marginTop="@dimen/menuMargin">
+
+        <ImageView
+            android:id="@+id/iv_operation"
+            style="@style/Menu_Icon.Left"
+            android:src="@drawable/operation" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_oper"
+            style="@style/ArrowRight" />
+
+        <TextView
+            android:id="@+id/tv_operate"
+            style="@style/MenuText"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_arrow_oper"
+            android:layout_toRightOf="@id/iv_operation"
+            android:gravity="right|center_vertical"
+            android:hint="请选择操作" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_start_time"
+        style="@style/MenuWrapper"
+        android:layout_marginTop="@dimen/menuMargin">
+
+        <ImageView
+            android:id="@+id/iv_start_time"
+            style="@style/Menu_Icon.Left"
+            android:src="@drawable/start_time" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_start"
+            style="@style/ArrowRight" />
+
+        <TextView
+            android:id="@+id/tv_starttime"
+            style="@style/MenuText"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_arrow_start"
+            android:layout_toRightOf="@id/iv_start_time"
+            android:gravity="right|center_vertical"
+            android:hint="请选择开始时间" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/SplitLine.WithMargin" />
+
+    <RelativeLayout
+        android:id="@+id/rl_last_time"
+        style="@style/MenuWrapper"
+        android:layout_marginBottom="@dimen/menuMargin">
+
+        <ImageView
+            android:id="@+id/iv_last_time"
+            style="@style/Menu_Icon.Left"
+            android:src="@drawable/lasttime" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_last"
+            style="@style/ArrowRight" />
+
+        <TextView
+            android:id="@+id/tv_lasttime"
+            style="@style/MenuText"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_arrow_last"
+            android:layout_toRightOf="@id/iv_last_time"
+            android:gravity="right|center_vertical"
+            android:hint="请选择持续时间" />
+
+    </RelativeLayout>
+
+</LinearLayout>

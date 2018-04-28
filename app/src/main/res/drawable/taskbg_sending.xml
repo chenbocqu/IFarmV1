@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_sending" />
+            <corners android:topLeftRadius="@dimen/taskItemRadius" android:topRightRadius="@dimen/taskItemRadius" />
+            <padding android:bottom="@dimen/taskItemPadding" android:left="@dimen/taskItemPadding" android:right="@dimen/taskItemPadding" android:top="@dimen/taskItemPadding" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_sending_pressed" />
+            <corners android:topLeftRadius="@dimen/taskItemRadius" android:topRightRadius="@dimen/taskItemRadius" />
+            <padding android:bottom="@dimen/taskItemPadding" android:left="@dimen/taskItemPadding" android:right="@dimen/taskItemPadding" android:top="@dimen/taskItemPadding" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_sending" />
+            <corners android:topLeftRadius="@dimen/taskItemRadius" android:topRightRadius="@dimen/taskItemRadius" />
+            <padding android:bottom="@dimen/taskItemPadding" android:left="@dimen/taskItemPadding" android:right="@dimen/taskItemPadding" android:top="@dimen/taskItemPadding" />
+        </shape>
+    </item>
+</selector>

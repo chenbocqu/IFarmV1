@@ -4,7 +4,8 @@
     android:id="@+id/rlVideoPlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:keepScreenOn="true">
 
     <SurfaceView
         android:id="@+id/svRealPlay"
@@ -30,16 +31,16 @@
     </RelativeLayout>
 
     <!--<cn.bingoogolapple.progressbar.BGAProgressBar-->
-        <!--android:id="@+id/pbRealPlay"-->
-        <!--android:layout_width="60dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--app:bga_pb_isHiddenText="true"-->
-        <!--app:bga_pb_mode="comet"-->
-        <!--app:bga_pb_reachedColor="@color/reachcolor_humidity"-->
-        <!--app:bga_pb_reachedHeight="@dimen/progress_height"-->
-        <!--app:bga_pb_unReachedColor="@color/unreachcolor_humidity"-->
-        <!--app:bga_pb_unReachedHeight="@dimen/progress_height" />-->
+    <!--android:id="@+id/pbRealPlay"-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--app:bga_pb_isHiddenText="true"-->
+    <!--app:bga_pb_mode="comet"-->
+    <!--app:bga_pb_reachedColor="@color/reachcolor_humidity"-->
+    <!--app:bga_pb_reachedHeight="@dimen/progress_height"-->
+    <!--app:bga_pb_unReachedColor="@color/unreachcolor_humidity"-->
+    <!--app:bga_pb_unReachedHeight="@dimen/progress_height" />-->
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi"

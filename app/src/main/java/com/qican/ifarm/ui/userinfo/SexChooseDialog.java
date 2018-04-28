@@ -139,7 +139,7 @@ public class SexChooseDialog extends Dialog implements View.OnClickListener {
         showSex(sex);
         pbChangeSex.setVisibility(View.VISIBLE);
         //更改服务器信息
-        String url = ConstantValue.SERVICE_ADDRESS + "user/updateUser";
+        String url = myTool.getServAdd() + "user/updateUser";
         //修改性别
         OkHttpUtils.post().url(url)
                 .addParams("userId", myTool.getUserId())

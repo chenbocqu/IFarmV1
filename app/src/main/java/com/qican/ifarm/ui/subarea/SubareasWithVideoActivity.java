@@ -20,14 +20,12 @@ import android.widget.TextView;
 
 import com.ecloud.pulltozoomview.PullToZoomListViewEx;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.EZCamera;
 import com.qican.ifarm.bean.Farm;
-import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.bean.Subarea;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.videogo.exception.ErrorCode;
 import com.videogo.openapi.EZConstants;
 import com.videogo.openapi.EZOpenSDK;
@@ -36,10 +34,9 @@ import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.androidannotations.annotations.ViewById;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +55,7 @@ public class SubareasWithVideoActivity extends Activity implements View.OnClickL
     private SubareaAdapter mAdapter;
     private List<Subarea> mData;
     private TextView tvTitle;
-//            tvDesc;
+    //            tvDesc;
     private Farm mFarm;
 //    private TextView tvLabel1, tvLabel2, tvLabel3, tvMore;
 
@@ -139,7 +136,7 @@ public class SubareasWithVideoActivity extends Activity implements View.OnClickL
 
     private void getSubareaData() {
         if (mFarm.getId() == null) return;
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/getSensorVaules")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/getSensorVaules")
                 .addParams("farmId", mFarm.getId())
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -164,51 +161,57 @@ public class SubareasWithVideoActivity extends Activity implements View.OnClickL
                         }
 
                         myTool.log("分区列表list：" + response);
-                        JSONArray arr = JSONArray.fromObject(response);
-                        JSONObject jsonObject = arr.getJSONObject(0);
-                        Iterator<String> iterator = jsonObject.keys();
-                        while (iterator.hasNext()) {
-                            Subarea area = new Subarea();
-                            String key = iterator.next();
-                            myTool.log("\n当前分区为:" + key);
+                        JSONArray arr = null;
+                        try {
+                            arr = new JSONArray(response);
+                            JSONObject jsonObject = arr.getJSONObject(0);
+                            Iterator<String> iterator = jsonObject.keys();
+                            while (iterator.hasNext()) {
+                                Subarea area = new Subarea();
+                                String key = iterator.next();
+                                myTool.log("\n当前分区为:" + key);
 
-                            Map<String, List<String>> map = new HashMap<String, List<String>>();
+                                Map<String, List<String>> map = new HashMap<String, List<String>>();
 
-                            JSONArray array = jsonObject.getJSONArray(key);
+                                JSONArray array = jsonObject.getJSONArray(key);
 
-                            for (int i = 0; i < array.size(); i++) {
-                                // 取参数
-                                JSONObject object = array.getJSONObject(i);
-                                JSONArray paraName = object.getJSONArray("sensorParam");
-                                JSONArray paraData = object.getJSONArray("data");
-                                for (int j = 0; j < paraName.size() && j < paraData.size(); j++) {
-                                    String paraKey = paraName.getString(j);
-                                    String paraValue = paraData.getString(j);
+                                for (int i = 0; i < array.length(); i++) {
+                                    // 取参数
+                                    JSONObject object = array.getJSONObject(i);
+                                    JSONArray paraName = object.getJSONArray("sensorParam");
+                                    JSONArray paraData = object.getJSONArray("data");
+                                    for (int j = 0; j < paraName.length() && j < paraData.length(); j++) {
+                                        String paraKey = paraName.getString(j);
+                                        String paraValue = paraData.getString(j);
 
-                                    if (!map.containsKey(paraKey)) {
-                                        //如果当前没有出现该Key值则新建一个空间用于存放
-                                        List<String> temp = new ArrayList<String>();
-                                        temp.clear();
-                                        temp.add(paraValue);
-                                        map.put(paraKey, temp);
-                                    } else {
-                                        ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
-                                        dataList.add(paraValue);
-                                        map.put(paraKey, dataList);
+                                        if (!map.containsKey(paraKey)) {
+                                            //如果当前没有出现该Key值则新建一个空间用于存放
+                                            List<String> temp = new ArrayList<String>();
+                                            temp.clear();
+                                            temp.add(paraValue);
+                                            map.put(paraKey, temp);
+                                        } else {
+                                            ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
+                                            dataList.add(paraValue);
+                                            map.put(paraKey, dataList);
+                                        }
+
+                                        myTool.log("\nmap为:" + map.toString());
                                     }
-
-                                    myTool.log("\nmap为:" + map.toString());
                                 }
-                            }
-                            area.setName(key);
-                            area.setFarmId(mFarm.getId());
-                            area.setDataMap(map);
-                            area.setFarm(mFarm);
-                            area.setImgUrl("http://img4.imgtn.bdimg.com/it/u=3436548158,2996155944&fm=23&gp=0.jpg");
+                                area.setName(key);
+                                area.setFarmId(mFarm.getId());
+                                area.setDataMap(map);
+                                area.setFarm(mFarm);
+                                area.setImgUrl("http://img4.imgtn.bdimg.com/it/u=3436548158,2996155944&fm=23&gp=0.jpg");
 
-                            mData.add(area);
+                                mData.add(area);
+                            }
+                            notifyData();
+
+                        } catch (JSONException e) {
+                            myTool.showInfo(e.getMessage());
                         }
-                        notifyData();
                     }
                 });
     }
@@ -275,7 +278,7 @@ public class SubareasWithVideoActivity extends Activity implements View.OnClickL
 //
 //    }
 
-    class SubareaAdapter extends CommonAdapter<Subarea> {
+    class SubareaAdapter extends ComAdapter<Subarea> {
 
         public SubareaAdapter(Context context, List<Subarea> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

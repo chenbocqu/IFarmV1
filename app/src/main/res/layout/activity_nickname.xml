@@ -7,7 +7,7 @@
     <!-- 顶部titleBar-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@color/main_color">
 
         <LinearLayout
@@ -27,6 +27,7 @@
                 android:src="@drawable/back" />
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -56,6 +57,7 @@
             android:paddingRight="10dp">
 
             <TextView
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -100,7 +102,7 @@
             android:padding="15dp">
 
             <TextView
-                style="@style/MyText.Small"
+                style="@style/MyText"
                 android:text="好名字可以让你的朋友更容易记住你。"
                 android:textColor="#999" />
         </RelativeLayout>

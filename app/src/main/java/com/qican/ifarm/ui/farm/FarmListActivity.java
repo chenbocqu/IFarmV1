@@ -15,7 +15,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.Label;
@@ -79,7 +79,7 @@ public class FarmListActivity extends Activity {
     private void getFarmData() {
 //        mDatas.addAll(IFarmData.getFarmList());
 //        notifyData();
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/getFarmColletorsList")
+        OkHttpUtils.post().url(myTool.getServAdd() + "farm/getFarmColletorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
@@ -139,7 +139,7 @@ public class FarmListActivity extends Activity {
     }
 
 
-    class FarmAdaper extends CommonAdapter<Farm> {
+    class FarmAdaper extends ComAdapter<Farm> {
 
         public FarmAdaper(Context context, List<Farm> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

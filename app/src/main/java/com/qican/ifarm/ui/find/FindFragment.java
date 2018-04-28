@@ -5,7 +5,7 @@ package com.qican.ifarm.ui.find;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.qican.ifarm.R;
-import com.qican.ifarm.ui.myfriend.MyFriendActivity;
 import com.qican.ifarm.ui.near.NearListActivity_;
+import com.qican.ifarm.ui_v2.base.FragmentWithOnResume;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -24,7 +24,7 @@ import com.youth.banner.Transformer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindFragment extends Fragment implements View.OnClickListener {
+public class FindFragment extends FragmentWithOnResume implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private View view;
     private CommonTools myTool;
     private Banner mBanner;
@@ -33,6 +33,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     List<String> titles;
     private LinearLayout llExpert, llFriend, llNews;
     private RelativeLayout rlQanda, rlNear;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -56,6 +57,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         titles.add("一滴水也可以看到一个大世界");
         titles.add("生气勃勃的五教");
         titles.add("最美不过校园一角");
+        myTool.setHeightByWindow(mBanner, 9.7 / 16f);
     }
 
     private void initBanner() {
@@ -78,6 +80,8 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
         rlQanda.setOnClickListener(this);
         rlNear.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        view.findViewById(R.id.rl_concern).setOnClickListener(this);
     }
 
     private void initView(View v) {
@@ -89,6 +93,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
 
         rlQanda = (RelativeLayout) v.findViewById(R.id.rl_qanda);
         rlNear = (RelativeLayout) v.findViewById(R.id.rl_near);
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
     }
 
     @Override
@@ -109,17 +114,33 @@ public class FindFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_expert:
                 myTool.startActivity(ExpertsListActivity_.class);
                 break;
-            case R.id.ll_friend:
-                myTool.startActivity(MyFriendActivity.class);
-                break;
+
             case R.id.ll_news:
+                myTool.startActivity(NewsActivity.class);
+                break;
+            case R.id.rl_qanda:
+                myTool.startActivity(QuestionsActivity.class);
                 break;
 
-            case R.id.rl_qanda:
-                break;
+            // 朋友
+            case R.id.ll_friend:
             case R.id.rl_near:
                 myTool.startActivity(NearListActivity_.class);
                 break;
+
+            case R.id.rl_concern:
+                myTool.toHint();
+                break;
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        }, 1500);
     }
 }

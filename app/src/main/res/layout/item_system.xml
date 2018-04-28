@@ -33,6 +33,7 @@
                 android:id="@+id/tv_time"
                 style="@style/MyText.Small"
                 android:layout_alignParentRight="true"
+                android:hint="时间"
                 android:textColor="@color/text_light" />
         </RelativeLayout>
 

@@ -11,11 +11,12 @@ import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.listener.OnItemClickListener;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.DataBindUtils;
+import com.qican.ifarm.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FarmAdapter extends CommonAdapter<Farm> {
+public class FarmAdapter extends ComAdapter<Farm> {
     CommonTools myTool;
     OnItemClickListener<Farm> l;
 
@@ -29,7 +30,7 @@ public class FarmAdapter extends CommonAdapter<Farm> {
         helper
                 .setText(R.id.tv_name, item.getName())
                 .setText(R.id.tv_desc, item.getDesc())
-                .setText(R.id.tv_time, DataBindUtils.getTime(item.getTime()))
+                .setText(R.id.tv_time, TimeUtils.formatDateTime(item.getTime()))
                 .setImageByUrl(R.id.iv_img, item.getImgUrl(), R.mipmap.default_farm_img);
 
         Label label = item.getLabel();

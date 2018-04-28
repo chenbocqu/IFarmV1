@@ -81,7 +81,7 @@ public class AddFarmActivity extends Activity {
             mDialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         }
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "farm/addFarm")
+        OkHttpUtils.post().url(myTool.getServAdd() + "farm/addFarm")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("farmName", farmName)

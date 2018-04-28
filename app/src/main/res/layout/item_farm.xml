@@ -63,9 +63,12 @@
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:gravity="center|left"
-            android:maxLines="3"
+            android:maxLines="1"
             android:text="场描述农场描述农场描述农场描述农场描述农场描述农农场描述农场描述农场描述农场描述农场描述"
             android:textColor="@color/text_light" />
+
+        <include layout="@layout/farm_functions" />
+
     </LinearLayout>
 
 </LinearLayout>

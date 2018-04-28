@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_gray">
+
+    <RelativeLayout
+        android:id="@+id/rl_choose_loc"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menuHeight">
+
+        <ImageView
+            android:id="@+id/iv_loc"
+            style="@style/Menu_Icon.Left"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/location" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/MyText"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_loc"
+            android:hint="请选择位置信息" />
+
+        <ImageView style="@style/ArrowRight" />
+    </RelativeLayout>
+</RelativeLayout>

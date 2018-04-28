@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_popwindow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/dialog_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_cannel"
+                style="@style/MyText"
+                android:padding="10dp"
+                android:text="取消" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/MyText.Large.Black"
+                android:layout_centerHorizontal="true"
+                android:padding="10dp"
+                android:text="请选择项目" />
+
+            <TextView
+                android:id="@+id/tv_ok"
+                style="@style/MyText"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="确定"
+                android:textColor="@color/main_color_deeper"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <View style="@style/SplitLine.WithMargin" />
+
+        <LinearLayout
+            android:id="@+id/ll_list"
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+
+            <include layout="@layout/common_list" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -27,11 +27,11 @@ import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.PhoneInfo;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import net.sf.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
@@ -158,7 +158,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 .setTitleText("正在注册···");
         mDialog.show();
 
-        String url = ConstantValue.SERVICE_ADDRESS + "user/register";
+        String url = myTool.getServAdd() + "user/register";
         OkHttpUtils
                 .get()
                 .url(url)
@@ -176,26 +176,32 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        JSONObject object = JSONObject.fromObject(response);
-                        String msg = object.getString("message");
-                        switch (msg) {
-                            case "success":
-                                myTool.setToken(object.getString("token"));
-                                toLoginSuccess(response);
-                                break;
-                            case "repeat":
-                                mDialog.setTitleText("提示")
-                                        .setContentText("该用户已存在！")
-                                        .changeAlertType(SweetAlertDialog.WARNING_TYPE);
-                                break;
-                            case "error":
-                                mDialog.setTitleText("错误")
-                                        .setContentText("用户已存在或其他系统错误！")
-                                        .changeAlertType(SweetAlertDialog.ERROR_TYPE);
-                                break;
-                            default:
-                                toOtherCase(response);
-                                break;
+                        JSONObject object = null;
+                        try {
+                            object = new JSONObject(response);
+                            String msg = object.getString("message");
+                            switch (msg) {
+                                case "success":
+                                    myTool.setToken(object.getString("token"));
+                                    toLoginSuccess(response);
+                                    break;
+                                case "repeat":
+                                    mDialog.setTitleText("提示")
+                                            .setContentText("该用户已存在！")
+                                            .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                                    break;
+                                case "error":
+                                    mDialog.setTitleText("错误")
+                                            .setContentText("用户已存在或其他系统错误！")
+                                            .changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                                    break;
+                                default:
+                                    toOtherCase(response);
+                                    break;
+                            }
+
+                        } catch (JSONException e) {
+                            myTool.showInfo(e.getMessage());
                         }
                     }
                 });

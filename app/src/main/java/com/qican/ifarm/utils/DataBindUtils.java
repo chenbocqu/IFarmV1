@@ -1,12 +1,13 @@
 package com.qican.ifarm.utils;
 
+import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qican.ifarm.bean.IFarmDate;
 import com.qican.ifarm.bean.Label;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -114,5 +115,16 @@ public class DataBindUtils {
         return time;
     }
 
+    public static void setImgs(Context context, List<ImageView> ivs, List<String> urls) {
+        CommonTools myTool = new CommonTools(context);
+        //全部设置为不见
+        for (int i = 0; i < ivs.size(); i++) {
+            ivs.get(i).setVisibility(View.INVISIBLE);
+        }
 
+        for (int i = 0; i < ivs.size() && i < urls.size(); i++) {
+            ivs.get(i).setVisibility(View.VISIBLE);
+            myTool.showImage(urls.get(i), ivs.get(i));
+        }
+    }
 }

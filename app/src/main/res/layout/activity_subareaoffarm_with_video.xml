@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/videoHeight">
 
-        <include layout="@layout/video_view" />
+        <include layout="@layout/videoutil_layout" />
     </LinearLayout>
 
     <RelativeLayout

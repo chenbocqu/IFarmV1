@@ -9,7 +9,9 @@ package com.qican.ifarm.ui.userinfo;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,19 +25,23 @@ import com.jph.takephoto.app.TakePhotoActivity;
 import com.jph.takephoto.compress.CompressConfig;
 import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TResult;
+import com.previewlibrary.GPreviewBuilder;
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.ComUser;
+import com.qican.ifarm.bean.Img;
 import com.qican.ifarm.beanfromservice.User;
 import com.qican.ifarm.listener.BeanCallBack;
 import com.qican.ifarm.listener.OnDialogListener;
 import com.qican.ifarm.listener.OnSexDialogListener;
-import com.qican.ifarm.ui.intro.IntroActivity;
+import com.qican.ifarm.ui_v2.farm.FarmInfov2Fragment;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -86,6 +92,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         tvNickName.setText(userInfo.getNickName());
         tvSignature.setText(userInfo.getSignature());
         tvSex.setText(userInfo.getSex());
+        setText(R.id.tv_userid, userInfo.getId());
 
         //设置头像
         if (!"".equals(userInfo.getHeadImgUrl())) {
@@ -103,6 +110,13 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         }
     }
 
+    void setText(@IdRes int id, String text) {
+        TextView tv = (TextView) findViewById(id);
+
+        if (tv != null && text != null)
+            tv.setText(text);
+    }
+
     private void initEvent() {
         llBack.setOnClickListener(this);
         rlNickName.setOnClickListener(this);
@@ -115,6 +129,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         rlChooseHeadImg.setOnClickListener(this);
         ivHeadImg.setOnClickListener(this);
         rlBgImg.setOnClickListener(this);
+        ivBgImg.setOnClickListener(this);
     }
 
     private void initView() {
@@ -160,6 +175,10 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                 picChooseType = TYPE_HEAD_IMG;
                 mPicDialog.show();
                 break;
+            case R.id.iv_bgimg:
+                myTool.previewImg(ivBgImg, userInfo.getBgImgUrl());
+                break;
+
             //背景图片
             case R.id.rl_bgimg:
                 picChooseType = TYPE_BG_IMG;
@@ -178,11 +197,12 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
                 mSexDialog.show();
                 break;
             case R.id.iv_headimg:
-                myTool.startActivity(HeadInfoActivity.class);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                myTool.previewImg(ivHeadImg, userInfo.getHeadImgUrl());
+//                myTool.startActivity(HeadInfoActivity.class);
+//                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.rl_userid:
-                myTool.startActivityForResult("notFirstIn", IntroActivity.class, 0);
+//                myTool.startActivityForResult("notFirstIn", IntroActivity.class, 0);
                 break;
         }
     }
@@ -199,7 +219,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
     public void takeSuccess(final TResult result) {
         super.takeSuccess(result);
 
-        String url = ConstantValue.SERVICE_ADDRESS + "user/uploadImage";
+        String url = myTool.getServAdd() + "user/uploadImage";
 
         //上传头像至服务器
         File picFile = new File(result.getImage().getPath());
@@ -274,7 +294,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
      * 重新加载用户信息
      */
     private void updateInfo() {
-        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "user/getUserById") //getUserById
+        OkHttpUtils.get().url(myTool.getServAdd() + "user/getUserById") //getUserById
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()

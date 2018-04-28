@@ -24,6 +24,7 @@ public class TimePickerUtil {
             selectedDate.setTime(date);
 
         Calendar startDate = Calendar.getInstance();
+        startDate.set(2017, 5, 1); // 起始时间
 
         Calendar endDate = Calendar.getInstance();
         endDate.set(Calendar.getInstance().get(Calendar.YEAR) + 10, 1, 1);
@@ -58,12 +59,13 @@ public class TimePickerUtil {
         Calendar selectedDate = Calendar.getInstance();
 
         if (date != null)
-            selectedDate.set(0, 0, 0, date.getHours(), date.getMinutes(), 0);
+            selectedDate.set(0, 0, 0, date.getHours(), date.getMinutes(), date.getSeconds());
         else
-            selectedDate.set(0, 0, 0, 0, 20, 0);
+            selectedDate.set(0, 0, 0, 0, 0, 10);
 
         TimePickerView pvTime = new TimePickerView.Builder(context, l)
-                .setType(TimePickerView.Type.HOURS_MINS)//月日时分
+//                .setType(TimePickerView.Type.HOURS_MINS)//月日时分
+                .setType(TimePickerView.Type.ALL)//月日时分
                 .setCancelText("取消")//取消按钮文字
                 .setSubmitText("确定")//确认按钮文字
                 .setContentSize(18)//滚轮文字大小

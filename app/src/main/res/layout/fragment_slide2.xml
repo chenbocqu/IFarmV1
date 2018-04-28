@@ -6,20 +6,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="智能农场 远程控制"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="32sp" />
 
     <ImageView
         android:id="@+id/iv_img"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
         android:src="@mipmap/img_slide2" />
 
     <TextView
+        style="@style/MyText.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_img"
@@ -28,7 +29,6 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="采用先进远程控制技术\n随时随地轻松控制远程农场"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

@@ -12,7 +12,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Label;
 import com.qican.ifarm.utils.CommonTools;
@@ -22,7 +22,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -37,7 +36,7 @@ public class AddLabelActivity extends Activity {
     EditText edtLabel;
     @ViewById
     GridView gvLabel;
-    private CommonAdapter<String> mAdapter;
+    private ComAdapter<String> mAdapter;
 
     @AfterViews
     void main() {
@@ -45,7 +44,7 @@ public class AddLabelActivity extends Activity {
         label = (Label) myTool.getParam(new Label());
         mDatas = label.getLabelList();
 
-        mAdapter = new CommonAdapter<String>(this, mDatas, R.layout.item_label) {
+        mAdapter = new ComAdapter<String>(this, mDatas, R.layout.item_label) {
             @Override
             public void convert(ViewHolder helper, String label) {
                 helper.setText(R.id.tvLabel, label);

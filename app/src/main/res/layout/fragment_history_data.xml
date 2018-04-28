@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_item_bg"
+    android:orientation="vertical">
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowColor="@color/light_gray"
+        android:textSize="@dimen/font_normal"
+        app:arrowTint="@color/main_color"
+        app:textTint="@color/text_color" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="450dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp">
+
+        <TextView
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="35"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_huge" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/MyText"
+            android:layout_below="@id/tv_value"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="昨天 12:12" />
+
+        <TextView
+            android:id="@+id/tv_unit"
+            style="@style/MyText.Large"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_value"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/tv_value"
+            android:text="℃"
+            android:textColor="@color/blue" />
+
+    </RelativeLayout>
+
+</LinearLayout>

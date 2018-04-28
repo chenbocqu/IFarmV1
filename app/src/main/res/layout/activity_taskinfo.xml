@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/titlebar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:id="@+id/iv_taskbg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/taskinfo_running" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_trans" />
+
+                <include layout="@layout/task_status" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/ll_system_shower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp">
+
+                    <include layout="@layout/control_system" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_remain_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_system_shower"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/MyText.Large"
+                        android:background="@drawable/bg_round"
+                        android:text="任务将在 " />
+
+                    <TextView
+                        android:id="@+id/tv_remaining_time"
+                        style="@style/MyText.Large"
+                        android:background="@drawable/bg_round"
+                        android:text=" -- 分 -- 秒"
+                        android:textColor="@color/blue" />
+
+                    <TextView
+                        style="@style/MyText.Large"
+                        android:background="@drawable/bg_round"
+                        android:text=" 后结束" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_newtrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp">
+
+                    <ImageView
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/bg_status" />
+
+                    <TextView
+                        android:id="@+id/tv_status"
+                        style="@style/MyText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="运行中"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout style="@style/MenuGroupWrapper">
+
+                <RelativeLayout style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_comquestion"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/location" />
+
+                    <TextView
+                        android:id="@+id/tv_area_"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_comquestion"
+                        android:text="操作区域：" />
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/tv_area_"
+                        android:text="- - 区" />
+                </RelativeLayout>
+
+                <View style="@style/SplitLine.WithMargin" />
+                <!-- 昵称-->
+                <RelativeLayout
+                    android:id="@+id/rl_service"
+                    style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_service"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/can" />
+
+                    <TextView
+                        android:id="@+id/tv_can_"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_service"
+                        android:text="施  肥  罐：" />
+
+                    <TextView
+                        android:id="@+id/tv_can"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/tv_can_"
+                        android:text="- - 罐" />
+                </RelativeLayout>
+
+                <View style="@style/SplitLine.WithMargin" />
+                <!-- 昵称-->
+                <RelativeLayout style="@style/MenuWrapper">
+
+                    <ImageView
+                        android:id="@+id/iv_remaining_time"
+                        style="@style/Menu_Icon.Left"
+                        android:src="@drawable/time" />
+
+                    <TextView
+                        android:id="@+id/tv_remaining_time_"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/iv_remaining_time"
+                        android:text="执行时间：" />
+
+                    <TextView
+                        android:id="@+id/tv_execute_time"
+                        style="@style/MenuText"
+                        android:layout_toRightOf="@id/tv_remaining_time_"
+                        android:text="- - 分 - - 秒" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:background="@drawable/roundbtn_bg"
+                android:text="停止任务"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

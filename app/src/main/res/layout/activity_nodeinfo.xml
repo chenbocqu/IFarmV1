@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="60dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -31,6 +31,7 @@
                     android:src="@drawable/back" />
 
                 <TextView
+                    style="@style/MyText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -49,7 +50,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="43dp"
+                    android:layout_height="52dp"
                     android:baselineAligned="false"
                     android:orientation="horizontal">
 
@@ -65,12 +66,12 @@
 
                         <TextView
                             android:id="@+id/tv_pood"
+                            style="@style/MyText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/tabmenu1"
-                            android:textColor="@color/white"
-                            android:textSize="15dip" />
+                            android:textColor="@color/white" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -87,11 +88,12 @@
 
                         <TextView
                             android:id="@+id/tv_camera"
+                            style="@style/MyText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/tabmenu2"
-                            android:textSize="15dip" />
+                            android:textColor="@color/white" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -108,18 +110,19 @@
 
                         <TextView
                             android:id="@+id/tv_pump"
+                            style="@style/MyText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/tabmenu3"
-                            android:textSize="15dip" />
+                            android:textColor="@color/white" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/id_tab_line_iv"
-                    android:layout_width="60dp"
-                    android:layout_height="5dp"
+                    android:layout_width="125dp"
+                    android:layout_height="8dp"
                     android:background="@color/white"
                     android:contentDescription="tab" />
             </LinearLayout>

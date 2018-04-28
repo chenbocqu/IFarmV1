@@ -21,10 +21,6 @@ import android.view.View;
 
 import com.qican.ifarm.R;
 
-
-/**
- * Created by Administrator on 2016/6/29 0029.
- */
 public class ChangeColorIconWithText extends View {
 
     //自定义属性

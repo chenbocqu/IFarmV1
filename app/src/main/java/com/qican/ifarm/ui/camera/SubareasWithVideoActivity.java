@@ -26,6 +26,7 @@ import com.qican.ifarm.data.NetRequest;
 import com.qican.ifarm.listener.OnItemClickListener;
 import com.qican.ifarm.listener.OnVideoPlayListener;
 import com.qican.ifarm.utils.CommonTools;
+import com.qican.ifarm.utils.IFarmVideoUtil;
 import com.qican.ifarm.utils.VideoUtil;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EActivity(R.layout.activity_subareaoffarm_with_video)
-public class SubareasWithVideoActivity extends Activity implements OnVideoPlayListener, OnItemClickListener<Subarea> {
+public class SubareasWithVideoActivity extends Activity implements OnItemClickListener<Subarea> {
 
     private CommonTools myTool;
 
@@ -53,27 +54,17 @@ public class SubareasWithVideoActivity extends Activity implements OnVideoPlayLi
     @ViewById(R.id.pullListView)
     PullListView mListView;
 
-    @ViewById(R.id.avi_video)
-    AVLoadingIndicatorView aviVideo;
-
     @ViewById(R.id.avi)
     AVLoadingIndicatorView aviLoadData;
 
-    @ViewById
-    SurfaceView svRealPlay;
-
     @ViewById(R.id.tv_title)
     TextView tvTitle;
-
-    @ViewById
-    ImageView ivStartPlay;
 
     SubareaAdapter mAdapter;
     private List<Subarea> mDatas;
     EZCamera mEZCamera;
 
-    private SurfaceHolder surfaceHolder;
-    VideoUtil videoUtil;
+    IFarmVideoUtil iFarmVideoUtil;
     NetRequest netRequest;
 
     Farm mFarm;
@@ -84,11 +75,9 @@ public class SubareasWithVideoActivity extends Activity implements OnVideoPlayLi
         netRequest = new NetRequest(this);
         mFarm = (Farm) myTool.getParam(Farm.class);
         initView();
-        initData();
     }
 
     private void initView() {
-        surfaceHolder = svRealPlay.getHolder();
     }
 
     private void initData() {
@@ -96,20 +85,21 @@ public class SubareasWithVideoActivity extends Activity implements OnVideoPlayLi
 
         mEZCamera = new EZCamera();
         if (mEZCamera.getDeviceSerial() == null) {
-            mEZCamera.setDeviceSerial("626439264");
+//            mEZCamera.setDeviceSerial("626439264");
+//            mEZCamera.setVerifyCode("SEGHDP");
+            mEZCamera.setDeviceSerial("761008117");
+            mEZCamera.setVerifyCode("PGGSWF");
             mEZCamera.setChannelNo(1);
-            mEZCamera.setVerifyCode("SEGHDP");
         }
 
-        videoUtil = new VideoUtil(this, mEZCamera, surfaceHolder, aviVideo);
-        ivStartPlay.setVisibility(View.GONE);
-        videoUtil.setOnVideoPlayListener(this);
+        iFarmVideoUtil = new IFarmVideoUtil(this, mEZCamera);
+        iFarmVideoUtil.startRealPlay();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        videoUtil.startRealPlay();
+        initData();
         initListData();
     }
 
@@ -133,7 +123,6 @@ public class SubareasWithVideoActivity extends Activity implements OnVideoPlayLi
     @Override
     protected void onPause() {
         super.onPause();
-        videoUtil.stopRealPlay();
     }
 
     private void notifyData() {
@@ -173,27 +162,13 @@ public class SubareasWithVideoActivity extends Activity implements OnVideoPlayLi
     }
 
     @Override
-    public void onSuccess() {
-        ivStartPlay.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onFail(int errorCode) {
-        ivStartPlay.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onVideoStart() {
-        ivStartPlay.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onVideoStop() {
-
-    }
-
-    @Override
     public void onItemClick(ViewHolder helper, Subarea item) {
         myTool.startActivity(item, VideoListActivity_.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        iFarmVideoUtil.stopRealPlay();
     }
 }

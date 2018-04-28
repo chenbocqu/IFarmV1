@@ -7,7 +7,7 @@
     <!-- 顶部titleBar-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@color/main_color">
 
         <LinearLayout
@@ -72,6 +72,7 @@
 
             <TextView
                 android:id="@+id/tvDelAll"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -81,6 +82,7 @@
 
             <TextView
                 android:id="@+id/tvAdd"
+                style="@style/MyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -88,11 +90,11 @@
                 android:background="@drawable/line_green_btn_bg"
                 android:text="添加"
                 android:textColor="@color/green" />
+
             <EditText
                 android:id="@+id/edtLabel"
                 style="@style/LabelInput"
                 android:layout_marginLeft="0dp"
-                android:textSize="14sp"
                 android:visibility="visible" />
         </RelativeLayout>
 
@@ -105,6 +107,5 @@
             android:numColumns="3"
             android:paddingBottom="15dp"
             android:paddingTop="15dp" />
-
     </LinearLayout>
 </LinearLayout>

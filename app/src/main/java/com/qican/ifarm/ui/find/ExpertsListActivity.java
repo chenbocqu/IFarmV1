@@ -8,26 +8,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Expert;
-import com.qican.ifarm.bean.Farm;
-import com.qican.ifarm.bean.Label;
-import com.qican.ifarm.listener.BeanCBWithTkCk;
-import com.qican.ifarm.ui.farm.AddFarmActivity_;
-import com.qican.ifarm.ui.subarea.SubareasOfFarmActivity;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -36,8 +28,6 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Call;
 
 @EActivity(R.layout.activity_expertlist)
 public class ExpertsListActivity extends Activity {
@@ -147,7 +137,7 @@ public class ExpertsListActivity extends Activity {
     }
 
 
-    class ExpertAdapter extends CommonAdapter<Expert> {
+    class ExpertAdapter extends ComAdapter<Expert> {
 
         public ExpertAdapter(Context context, List<Expert> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

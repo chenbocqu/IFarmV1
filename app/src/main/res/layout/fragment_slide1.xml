@@ -6,20 +6,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:text="远程动态 实时监测"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="32sp" />
 
     <ImageView
         android:id="@+id/iv_img"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
         android:src="@mipmap/img_slide1" />
 
     <TextView
+        style="@style/MyText.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_img"
@@ -28,7 +29,6 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="远程农场全面监测\n出门在外也能轻松了解农场状态"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

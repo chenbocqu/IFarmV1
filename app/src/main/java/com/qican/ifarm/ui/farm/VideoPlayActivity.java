@@ -96,7 +96,7 @@ public class VideoPlayActivity extends Activity implements SurfaceHolder.Callbac
 //            mEZCamera.setVerifyCode("SEGHDP");
 //        }
 
-        myTool.log("XXXX:" + mEZCamera.toString());
+        myTool.log("Camera Info:" + mEZCamera.toString());
 
         avi.setVisibility(View.GONE);
     }

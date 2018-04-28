@@ -9,12 +9,11 @@ import android.widget.RelativeLayout;
 
 import com.qican.ifarm.R;
 import com.qican.ifarm.bean.Subarea;
-import com.qican.ifarm.listener.OnItemClickListener;
 import com.qican.ifarm.utils.CommonTools;
 
 import java.util.List;
 
-public class SubareaAdapter extends CommonAdapter<Subarea> {
+public class SubareaAdapter extends ComAdapter<Subarea> {
     private CommonTools myTool;
 
     public SubareaAdapter(Context context, List<Subarea> mDatas, int itemLayoutId) {

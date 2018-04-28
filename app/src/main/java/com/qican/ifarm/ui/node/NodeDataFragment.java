@@ -19,7 +19,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.DataAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
@@ -172,7 +172,7 @@ public class NodeDataFragment extends Fragment implements View.OnClickListener {
                 .playOn(rlNoData);
     }
 
-    class ParaAdapter extends CommonAdapter<FarmPara> {
+    class ParaAdapter extends ComAdapter<FarmPara> {
         public ParaAdapter(Context context, List<FarmPara> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
         }

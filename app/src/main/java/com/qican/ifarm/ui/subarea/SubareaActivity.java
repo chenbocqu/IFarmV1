@@ -61,7 +61,7 @@ public class SubareaActivity extends FragmentActivity implements ViewPager.OnPag
      * 屏幕的宽度
      */
     private int screenWidth;
-    private int offset = 55; //测量得重新去做
+    private int offset = 170; //测量得重新去做
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

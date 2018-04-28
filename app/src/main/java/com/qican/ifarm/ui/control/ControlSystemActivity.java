@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.TaskAdapter;
 import com.qican.ifarm.bean.Task;
-import com.qican.ifarm.ui.base.ContentWithBaseListActivity;
+import com.qican.ifarm.ui_v2.base.ContentWithBaseListActivity;
 import com.qican.ifarm.utils.IFarmFakeData;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 
@@ -40,7 +40,7 @@ public class ControlSystemActivity extends ContentWithBaseListActivity<Task> {
     }
 
     @Override
-    public CommonAdapter<Task> getAdapter() {
+    public ComAdapter<Task> getAdapter() {
         return mAdapter;
     }
 

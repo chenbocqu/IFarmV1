@@ -20,15 +20,14 @@ public interface ConstantValue {
     String KEY_NICKNAME = "KEY_NICKNAME";
     String KEY_AUTOGRAPH = "KEY_AUTOGRAPH";
     String KEY_SEX = "KEY_SEX";
-    String KEY_POND_LIST = "KEY_POND_LIST";//池塘列表
-    String KEY_CAMERA_LIST = "KEY_CAMERA_LIST";//相机列表
     String KEY_FIRSTIN = "KEY_FIRSTIN";
 
     //IP地址和端口号
-    String IP = "172.20.33.237";
-//    String IP = "47.93.91.45";
+    String IP = "47.93.91.45"; // 阿里云服务器地址
+//    String IP = "192.168.43.251"; // 本机地址
     String PORT = "8080";
     String SERVICE_ADDRESS = "http://" + IP + ":" + PORT + "//IFarm/";
+    String SOCKET_ADDRESS = "http://" + IP + ":" + PORT + "/IFarm/";
 
     //URL，从萤石请求摄像机列表
     String URL_EZ_CAMERA_LIST = "https://open.ys7.com/api/lapp/camera/list";
@@ -64,4 +63,7 @@ public interface ConstantValue {
     String KEY_COMUSERINFO = "INFO_";//普通用户信息
     String LABEL_SPLIT = ",";
     String TOKEN_LOSE = "lose efficacy";
+    String KEY_ERRORTOKEN = "KEY_ERRORTOKEN";
+    String IP_ADDRESS = "IP_ADDRESS";
+    String SerNum="SerNum";
 }

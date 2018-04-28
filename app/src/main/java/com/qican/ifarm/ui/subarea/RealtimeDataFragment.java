@@ -19,7 +19,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.Farm;
 import com.qican.ifarm.bean.RealtimeData;
@@ -27,14 +27,14 @@ import com.qican.ifarm.bean.Subarea;
 import com.qican.ifarm.data.NetRequest;
 import com.qican.ifarm.ui.farm.DownloadExcelActivity_;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.view.refresh.PullListView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,6 +102,7 @@ public class RealtimeDataFragment extends Fragment implements View.OnClickListen
 
     private void initData() {
         Bundle bundle = getArguments();
+        if (bundle == null) return;
         mArea = (Subarea) bundle.getSerializable(SubareaActivity.KEY_AREA_INFO);
         initRes();//初始化图像资源
         showNoData();
@@ -171,7 +172,7 @@ public class RealtimeDataFragment extends Fragment implements View.OnClickListen
 
     private void refreshData() {
 
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "sensor/getSensorVaules")
+        OkHttpUtils.post().url(myTool.getServAdd() + "sensor/getSensorVaules")
                 .addParams("farmId", mArea.getFarmId())
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -191,57 +192,63 @@ public class RealtimeDataFragment extends Fragment implements View.OnClickListen
                         }
 
                         myTool.log("分区列表list：" + response);
-                        JSONArray arr = JSONArray.fromObject(response);
-                        JSONObject jsonObject = arr.getJSONObject(0);
-                        Iterator<String> iterator = jsonObject.keys();
-                        while (iterator.hasNext()) {
-                            Subarea area = new Subarea();
-                            String key = iterator.next();
-                            myTool.log("\n当前分区为:" + key);
-                            //不是当前分区就直接继续
-                            if (!key.equals(mArea.getName())) {
-                                continue;
-                            }
-
-                            Map<String, List<String>> map = new HashMap<String, List<String>>();
-
-                            JSONArray array = jsonObject.getJSONArray(key);
-
-                            for (int i = 0; i < array.size(); i++) {
-                                // 取参数
-                                JSONObject object = array.getJSONObject(i);
-                                JSONArray paraName = object.getJSONArray("sensorParam");
-                                JSONArray paraData = object.getJSONArray("data");
-                                for (int j = 0; j < paraName.size() && j < paraData.size(); j++) {
-                                    String paraKey = paraName.getString(j);
-                                    String paraValue = paraData.getString(j);
-
-                                    if (!map.containsKey(paraKey)) {
-                                        //如果当前没有出现该Key值则新建一个空间用于存放
-                                        List<String> temp = new ArrayList<String>();
-                                        temp.clear();
-                                        temp.add(paraValue);
-                                        map.put(paraKey, temp);
-                                    } else {
-                                        ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
-                                        dataList.add(paraValue);
-                                        map.put(paraKey, dataList);
-                                    }
-
-                                    myTool.log("\nmap为:" + map.toString());
+                        JSONArray arr = null;
+                        try {
+                            arr = new JSONArray(response);
+                            JSONObject jsonObject = arr.getJSONObject(0);
+                            Iterator<String> iterator = jsonObject.keys();
+                            while (iterator.hasNext()) {
+                                Subarea area = new Subarea();
+                                String key = iterator.next();
+                                myTool.log("\n当前分区为:" + key);
+                                //不是当前分区就直接继续
+                                if (!key.equals(mArea.getName())) {
+                                    continue;
                                 }
+
+                                Map<String, List<String>> map = new HashMap<String, List<String>>();
+
+                                JSONArray array = jsonObject.getJSONArray(key);
+
+                                for (int i = 0; i < array.length(); i++) {
+                                    // 取参数
+                                    JSONObject object = array.getJSONObject(i);
+                                    JSONArray paraName = object.getJSONArray("sensorParam");
+                                    JSONArray paraData = object.getJSONArray("data");
+                                    for (int j = 0; j < paraName.length() && j < paraData.length(); j++) {
+                                        String paraKey = paraName.getString(j);
+                                        String paraValue = paraData.getString(j);
+
+                                        if (!map.containsKey(paraKey)) {
+                                            //如果当前没有出现该Key值则新建一个空间用于存放
+                                            List<String> temp = new ArrayList<String>();
+                                            temp.clear();
+                                            temp.add(paraValue);
+                                            map.put(paraKey, temp);
+                                        } else {
+                                            ArrayList<String> dataList = (ArrayList<String>) map.get(paraKey);
+                                            dataList.add(paraValue);
+                                            map.put(paraKey, dataList);
+                                        }
+
+                                        myTool.log("\nmap为:" + map.toString());
+                                    }
+                                }
+                                area.setName(key);
+                                area.setFarmId(mArea.getFarmId());
+                                area.setDataMap(map);
+                                area.setFarm(mArea.getFarm());
+
+                                mArea = area;
+                                mDatas.clear();
+
+                                parseSubareaData();
+                                notifyData();
+                                break;
                             }
-                            area.setName(key);
-                            area.setFarmId(mArea.getFarmId());
-                            area.setDataMap(map);
-                            area.setFarm(mArea.getFarm());
 
-                            mArea = area;
-                            mDatas.clear();
-
-                            parseSubareaData();
-                            notifyData();
-                            break;
+                        } catch (JSONException e) {
+                            myTool.showInfo(e.getMessage());
                         }
                     }
                 });
@@ -276,7 +283,7 @@ public class RealtimeDataFragment extends Fragment implements View.OnClickListen
                 .playOn(rlNoData);
     }
 
-    class RealtimeAdapter extends CommonAdapter<RealtimeData> {
+    class RealtimeAdapter extends ComAdapter<RealtimeData> {
 
         public RealtimeAdapter(Context context, List<RealtimeData> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);

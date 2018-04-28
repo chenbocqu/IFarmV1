@@ -35,7 +35,7 @@ public class IFarmData {
      */
     public static void updateUserInfo(Context context) {
         final CommonTools myTool = new CommonTools(context);
-        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "user/getUserById")
+        OkHttpUtils.get().url(myTool.getServAdd() + "user/getUserById")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
@@ -60,7 +60,7 @@ public class IFarmData {
      */
     public static void updateUserInfo(Context context, final OnInfoLoadListener l) {
         final CommonTools myTool = new CommonTools(context);
-        OkHttpUtils.get().url(ConstantValue.SERVICE_ADDRESS + "user/getUserById")
+        OkHttpUtils.get().url(myTool.getServAdd() + "user/getUserById")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
@@ -87,7 +87,7 @@ public class IFarmData {
      */
     public static void updateToken(Context context, final TokenListener l) {
         final CommonTools myTool = new CommonTools(context);
-        OkHttpUtils.post().url(ConstantValue.SERVICE_ADDRESS + "user/getUserToken")
+        OkHttpUtils.post().url(myTool.getServAdd() + "user/getUserToken")
                 .addParams("userId", myTool.getUserId())
                 .build()
                 .execute(new StringCallback() {

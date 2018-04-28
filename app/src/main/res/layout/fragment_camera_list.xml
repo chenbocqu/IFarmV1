@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/view_nodata" />
+
+
+        <ImageView
+            android:id="@+id/iv_net_error"
+            style="@style/MyImg"
+            android:layout_centerInParent="true"
+            android:src="@drawable/net_error"
+            android:visibility="gone" />
+
+        <com.qican.ifarm.view.refresh.PullToRefreshLayout
+            android:id="@+id/pullToRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.qican.ifarm.view.refresh.PullListView
+                android:id="@+id/pullListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@android:color/transparent"
+                android:overScrollMode="never"
+                android:scrollingCache="false" />
+        </com.qican.ifarm.view.refresh.PullToRefreshLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_not_link_to_ez"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingBottom="5dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:id="@+id/iv_link"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ez_icon" />
+
+            <TextView
+                android:id="@+id/tv_login_hint"
+                style="@style/MyText.Small"
+                android:layout_below="@id/iv_link"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="暂未关联萤石，点击空白处关联" />
+
+        </RelativeLayout>
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi_list"
+            style="@style/AVLoadingIndicatorView.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:indicatorColor="@color/main_color"
+            app:indicatorName="BallTrianglePathIndicator" />
+
+    </RelativeLayout>
+</LinearLayout>

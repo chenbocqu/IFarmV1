@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.CommonAdapter;
+import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ControlFunction;
 import com.qican.ifarm.bean.Device;
@@ -100,7 +100,7 @@ public class CopyofSelectFarmActivity extends Activity implements View.OnClickLi
         }, 1000);
     }
 
-    class FunForFarmAdapter extends CommonAdapter<Farm> {
+    class FunForFarmAdapter extends ComAdapter<Farm> {
 
         public FunForFarmAdapter(Context context, List<Farm> mDatas, int itemLayoutId) {
             super(context, mDatas, itemLayoutId);
@@ -118,7 +118,7 @@ public class CopyofSelectFarmActivity extends Activity implements View.OnClickLi
                 helper.setImageByUrl(R.id.iv_img, item.getImgUrl());
 
             //TODO: 动画有点bug
-            gridView.setAdapter(new CommonAdapter<Device>(CopyofSelectFarmActivity.this, data, R.layout.item_device) {
+            gridView.setAdapter(new ComAdapter<Device>(CopyofSelectFarmActivity.this, data, R.layout.item_device) {
                 @Override
                 public void convert(ViewHolder helper, Device item) {
                     helper.setText(R.id.tv_item, item.getName());

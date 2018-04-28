@@ -70,4 +70,17 @@
     <declare-styleable name="DragScaleImageView">
         <attr name="scale_image" format="reference|color" />
     </declare-styleable>
+
+    <!-- 物流状态显示线 -->
+    <declare-styleable name="StateLine">
+        <attr name="selectedCircleColor" format="color" />
+        <attr name="unSelectedCircleColor" format="color" />
+
+        <attr name="selectedLineColor" format="color" />
+        <attr name="unSelectedLineColor" format="color" />
+
+        <attr name="text_size" format="dimension"></attr>
+
+    </declare-styleable>
+
 </resources>

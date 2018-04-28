@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.qican.ifarm">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 收短信和读取短信的权限-->
+    <!-- 收短信和读取短信的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
 
@@ -12,11 +13,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
@@ -32,18 +31,15 @@
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
-
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
 
     <application
@@ -54,11 +50,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <!--环信APP_KEY-->
+
+        <!-- 环信APP_KEY -->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1111161229115067#ifarm" />
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ad2bab0dae5fa7f603079e8313af618c" />
@@ -73,7 +69,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.intro.IntroActivity"
             android:screenOrientation="portrait"
@@ -103,19 +98,7 @@
             android:name=".ui.control.SelectFarmActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.login.RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.chat.ChatActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.chat.MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.myfriend.MyFriendActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.ResetPwdActivity"
@@ -191,18 +174,123 @@
             android:name=".ui.control.NewTaskActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.control.TaskPreviewActivity"
+            android:name=".ui.control.TaskPreviewerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.task.TaskInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.camera.VideoFullscreenActivity_"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.login.LoginNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui.find.NewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.find.QuestionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.farm.DeviceDataListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.farm.DeviceDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.qrcode.ScanActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui_v2.farm.DataDownloadActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.control.ControlActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.control.ControlTaskManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.control.ControlTaskInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.controlsys.ControlSysListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.AddTaskActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskInfoV2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.controlsys.ShuiFeiYaoSysListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskListForShuiFeiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.AddTaskForShuiFeiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.userinfo.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.userinfo.HintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.AllTaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskIntegrateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.userinfo.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.RunningTaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.controlsys.ControlSysList4IntegrateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.AddTask4IntegrateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.controlsys.ShuiFeiYaoSysList4IntegrateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.AddShuiFeiTask4IntegrateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskAddInfoListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskModifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.HistoryTaskListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.HistoryTaskinfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui_v2.task.TaskModifyForShuiFeiActivity"
+            android:screenOrientation="portrait" />
+
 
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--android:windowSoftInputMode="stateHidden|adjustResize" />-->
+        <!-- android:windowSoftInputMode="stateHidden|adjustResize" /> -->
 
-        <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name="com.amap.api.location.APSService" />
 
-        <!-- 环信SDK service SDK-->
+        <!-- 环信SDK service SDK -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
@@ -214,6 +302,7 @@
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
             <!-- ??filter -->
@@ -222,11 +311,12 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <!--萤石云登录页-->
+        <!-- 萤石云登录页 -->
         <activity
             android:name="com.videogo.main.EzvizWebViewActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
+
         <receiver
             android:name=".receiver.EzvizBroadcastReceiver"
             android:exported="false">
@@ -235,6 +325,11 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".service.TaskService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/MyText"
+        android:padding="10dp"
+        android:text="基本信息" />
+
+    <LinearLayout style="@style/Wrapper">
+
+        <LinearLayout
+            style="@style/WrapWrap"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="操作位置：" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/MyText"
+                android:hint="暂无信息" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/Wrapper">
+
+        <LinearLayout
+            style="@style/WrapWrap"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="开始时间：" />
+
+            <TextView
+                android:id="@+id/tv_starttime"
+                style="@style/MyText"
+                android:hint="暂无信息" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/Wrapper">
+
+        <LinearLayout
+            style="@style/WrapWrap"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="持续时间：" />
+
+            <TextView
+                android:id="@+id/tv_lasttime"
+                style="@style/MyText"
+                android:hint="暂无信息" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/Wrapper">
+
+        <LinearLayout
+            style="@style/WrapWrap"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                style="@style/MyText.Large.Black"
+                android:text="状        态：" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/LabelText"
+                android:text="等待中" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/MyText"
+        android:padding="10dp"
+        android:text="所有节点" />
+</LinearLayout>

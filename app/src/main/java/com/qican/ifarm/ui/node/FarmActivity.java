@@ -36,7 +36,7 @@ public class FarmActivity extends FragmentActivity implements ViewPager.OnPageCh
     private int tabCnt = 0;
 
     private int mPerScreenWidth;
-    private int initLeftMargin = 0;
+    private int initLeftMargin = 100; // 0
     private int llWidth;
     private CommonTools myTool;
     private Farm myFarm;
@@ -59,7 +59,7 @@ public class FarmActivity extends FragmentActivity implements ViewPager.OnPageCh
      * 屏幕的宽度
      */
     private int screenWidth;
-    private int offset = 55; //测量得重新去做
+    private int offset = 250; //测量得重新去做 ,55
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

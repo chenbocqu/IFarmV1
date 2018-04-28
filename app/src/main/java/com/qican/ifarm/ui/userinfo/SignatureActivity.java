@@ -18,6 +18,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.qican.ifarm.R;
+import com.qican.ifarm.bean.ComUser;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.ConstantValue;
 import com.qican.ifarm.utils.IFarmData;
@@ -34,6 +35,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
     private EditText edtAutograph;
     private SweetAlertDialog mDialog;
     private String signature;
+    private ComUser userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,12 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
     }
 
     private void initData() {
-        edtAutograph.setText(myTool.getSignature());
+        userInfo = myTool.getComUserInfoById(myTool.getUserId());
+        if (userInfo == null) {
+            return;
+        }
+
+        edtAutograph.setText(userInfo.getSignature());
     }
 
     @Override
@@ -82,7 +89,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
         }
 
         signature = edtAutograph.getText().toString();
-        if (signature.equals(myTool.getSignature())) {
+        if (signature.equals(userInfo.getSignature())) {
             myTool.showInfo("签名没有变化");
             return;
         }
@@ -93,7 +100,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
             mDialog.show();
 
             //更改服务器信息
-            String url = ConstantValue.SERVICE_ADDRESS + "user/updateUser";
+            String url = myTool.getServAdd() + "user/updateUser";
             OkHttpUtils.post().url(url)
                     .addParams("userId", myTool.getUserId())
                     .addParams("userSignature", signature)
@@ -101,7 +108,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
                     .execute(new StringCallback() {
                         @Override
                         public void onError(Call call, Exception e, int id) {
-                            mDialog.setTitleText("修改失败")
+                            mDialog.setTitleText("失败")
                                     .setContentText("修改失败，异常信息 e-->[" + e.toString() + "]")
                                     .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                         }
@@ -110,9 +117,8 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
                         public void onResponse(String response, int id) {
                             switch (response) {
                                 case "success":
-                                    myTool.setAutograph(signature);
                                     IFarmData.updateUserInfo(SignatureActivity.this);
-                                    mDialog.setTitleText("修改成功")
+                                    mDialog.setTitleText("成功").setContentText("恭喜，修改成功！")
                                             .setConfirmText("好  的")
                                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                                 @Override
@@ -133,7 +139,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
                                             }).changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                     break;
                                 case "error":
-                                    mDialog.setTitleText("修改失败了！")
+                                    mDialog.setTitleText("失败").setContentText("网络开小差了，请稍后再试！")
                                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                                     break;
                             }
@@ -150,7 +156,7 @@ public class SignatureActivity extends Activity implements View.OnClickListener 
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             super.onAnimationEnd(animation);
-                            edtAutograph.setError("还没有输入昵称哦！");
+                            edtAutograph.setError("还没有输入签名哦！");
                         }
                     })
                     .playOn(edtAutograph);

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/round_item_bg">
+
+        <ImageView
+            android:id="@+id/iv"
+            style="@style/MyImg"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/default_farm_img" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@id/iv"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/MyText.Large.Black"
+                    android:text="新闻题目" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/MyText"
+                    android:layout_alignParentRight="true"
+                    android:text="今天 9:30" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="@style/MyText"
+                android:layout_marginTop="10dp"
+                android:gravity="center|left"
+                android:maxLines="3"
+                android:text="新闻主要内容！" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

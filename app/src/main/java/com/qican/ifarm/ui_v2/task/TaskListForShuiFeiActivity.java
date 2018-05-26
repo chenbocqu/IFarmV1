@@ -358,7 +358,6 @@ public class TaskListForShuiFeiActivity extends CommonListActivity<Task> {
                         try {
                             object = new JSONObject(response);
                             if (!object.has("response")) return;
-
                             String info = object.getString("response");
                             switch (info) {
                                 case "running":

@@ -111,8 +111,10 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
                                 if (obj.has("systemCode"))
                                     sys.setSystemCode(obj.getString("systemCode"));
 
-                                if (obj.has("systemType"))
-                                    sys.setSystemType(obj.getString("systemType"));
+                                // 系统与功能一致
+//                                if (obj.has("systemType"))
+//                                    sys.setSystemType(obj.getString("systemType"));
+                                sys.setSystemType(title + "系统");
 
                                 if (obj.has("systemTypeCode"))
                                     sys.setSystemTypeCode(obj.getString("systemTypeCode"));

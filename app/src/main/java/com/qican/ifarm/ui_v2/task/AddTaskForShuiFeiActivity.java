@@ -266,7 +266,7 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
             @Override
             public void run() {
                 if (!isResponse)
-                    mDialog.setTitleText("超时").setContentText("请求超时，请稍后再试！").changeAlertType(SweetAlertDialog.ERROR_TYPE);
+                    mDialog.setTitleText("未响应").setContentText("服务器正忙，请稍后再试！").changeAlertType(SweetAlertDialog.WARNING_TYPE);
             }
         }, 25000);
     }

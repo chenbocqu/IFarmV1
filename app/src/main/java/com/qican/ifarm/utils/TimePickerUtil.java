@@ -64,8 +64,9 @@ public class TimePickerUtil {
             selectedDate.set(0, 0, 0, 0, 0, 10);
 
         TimePickerView pvTime = new TimePickerView.Builder(context, l)
-//                .setType(TimePickerView.Type.HOURS_MINS)//月日时分
-                .setType(TimePickerView.Type.ALL)//月日时分
+//                .setType(TimePickerView.Type.MONTH_DAY_HOUR_MIN)
+                .setType(TimePickerView.Type.HOURS_MINS)//月日时分
+//                .setType(TimePickerView.Type.ALL)//月日时分
                 .setCancelText("取消")//取消按钮文字
                 .setSubmitText("确定")//确认按钮文字
                 .setContentSize(18)//滚轮文字大小

@@ -54,6 +54,8 @@ public class TimePickerUtil {
         pvTime.show();
     }
 
+
+    // 选择持续时间
     public static void pickLastTime(Context context, String title, Date date, TimePickerView.OnTimeSelectListener l) {
 
         Calendar selectedDate = Calendar.getInstance();

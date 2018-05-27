@@ -131,6 +131,11 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
     // 处理回复信息
     private void dealByResponse(String msg) {
         myTool.log("Add Task Activity Received Msg : " + msg);
+
+        if ("no_auth".equals(msg))
+            mDialog.setTitleText("权限不够").setContentText("无控制权限，请登录有权限的账户！")
+                    .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+
         if (msg == null || msg.length() == 0 || msg.charAt(0) != '{') return;
 
 

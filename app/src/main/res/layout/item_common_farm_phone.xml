@@ -81,11 +81,15 @@
         android:id="@+id/tv_desc"
         style="@style/MyText"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:ellipsize="end"
-        android:lines="3"
-        android:maxLines="3"
-        android:text="场描述场描述场描述述农场描述农场描场描述述农场描述农场描述农场描述场描述场描述述农场描述农场描述农场描述场描述场描述述农场描述农"
+        android:text="场描述场描述场描述述农场描述述场
+        描述述农述场描述述农述场描述述农述场描述述农述
+        场描述述农述场描述述农述场描述述农述场
+        描述述农述场描述述农述场描述述农述场描述述农农\n
+        场描场描述述农场描述农场描述农场描述场描述场描
+        述述农场描述农场描述农场描述场描述场描述述农场描述农"
         android:textColor="@color/text_light" />
 
 </LinearLayout>

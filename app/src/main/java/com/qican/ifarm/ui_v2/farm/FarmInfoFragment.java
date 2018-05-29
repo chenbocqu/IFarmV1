@@ -56,7 +56,7 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
         mFarm = (Farm) getArguments().getSerializable(FarmListsFragment.FARM_KEY);
 
 //        view = inflater.inflate(R.layout.fragment_farminfo, container, false);
-        view = inflater.inflate(R.layout.fragment_farminfo_phone, container, false);
+        view = inflater.inflate(R.layout.fragment_farminfo_pad, container, false);
         initView();
         initDatas();
         initEvent();
@@ -125,6 +125,7 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
         view.findViewById(R.id.ll_share).setOnClickListener(this);
         view.findViewById(R.id.ll_add_photo).setOnClickListener(this);
         view.findViewById(R.id.ll_modify).setOnClickListener(this);
+        ivFarmImg.setOnClickListener(this);
     }
 
     private void initView() {
@@ -140,6 +141,11 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.iv_img:
+                myTool.previewImg(ivFarmImg, mFarm.getImgUrl());
+                break;
+
             case R.id.ll_farm_data:
                 myTool.startActivity(mFarm, DeviceDataListActivity.class);
                 break;

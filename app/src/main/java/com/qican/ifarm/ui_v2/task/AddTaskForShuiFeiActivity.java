@@ -138,7 +138,6 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
 
         if (msg == null || msg.length() == 0 || msg.charAt(0) != '{') return;
 
-
         JSONObject obj = null;
         try {
             obj = new JSONObject(msg);

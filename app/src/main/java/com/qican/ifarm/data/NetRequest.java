@@ -259,18 +259,23 @@ public class NetRequest {
     }
 
     public void getFarmList(final DataAdapter adapter) {
+
+        String uu = "farmsList"; // getFarmColletorsList
+        String url = myTool.getServAdd() + "farm/" + uu;
+
         myTool.log(
-                "URL : " + myTool.getServAdd() + "farm/getFarmColletorsList" +
-                        "\nUserID : " + myTool.getUserId() +
+                "URL : " + url +
+                        "\nuserId : " + myTool.getUserId() +
                         "\nsignature : " + myTool.getToken());
 
-        OkHttpUtils.post().url(myTool.getServAdd() + "farm/getFarmColletorsList")
+        OkHttpUtils.post().url(url)
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()
                 .execute(new BeanCBWithTkCk<List<com.qican.ifarm.beanfromservice.Farm>>() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        myTool.log("getFarmList Err:" + e.getMessage());
                         e.printStackTrace();
                     }
 

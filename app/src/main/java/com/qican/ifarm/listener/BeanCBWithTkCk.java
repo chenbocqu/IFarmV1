@@ -20,7 +20,7 @@ public abstract class BeanCBWithTkCk<T> extends Callback<T> {
     @Override
     public T parseNetworkResponse(Response response, int id) throws Exception {
 
-        Log.i("BeanCBWithTkCk", "parseNetworkResponse: "+response.body().string());
+//        Log.i("BeanCBWithTkCk", "parseNetworkResponse: "+response.body().string());
 
         Type type = this.getClass().getGenericSuperclass();
         if (type instanceof ParameterizedType) {

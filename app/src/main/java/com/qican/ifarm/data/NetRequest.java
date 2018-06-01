@@ -259,7 +259,12 @@ public class NetRequest {
     }
 
     public void getFarmList(final DataAdapter adapter) {
-        OkHttpUtils.post().url(myTool.getServAdd()+ "farm/getFarmColletorsList")
+        myTool.log(
+                "URL : " + myTool.getServAdd() + "farm/getFarmColletorsList" +
+                        "\nUserID : " + myTool.getUserId() +
+                        "\nsignature : " + myTool.getToken());
+
+        OkHttpUtils.post().url(myTool.getServAdd() + "farm/getFarmColletorsList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .build()

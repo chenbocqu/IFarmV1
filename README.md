@@ -7,10 +7,12 @@
     用于XX系统的移动端
 
 首页
-<img src="https://github.com/chenbocqu/IFarmV1/blob/master/doc/UI/home_page.jpg" width="70%"/>
 
-首页
-<img src="https://github.com/chenbocqu/IFarmV1/blob/master/doc/UI/control_funs.jpg" width="70%"/>
+<img src="https://github.com/chenbocqu/IFarmV1/blob/master/doc/UI/home_page.jpg" width="40%"/>
+
+控制
+
+<img src="https://github.com/chenbocqu/IFarmV1/blob/master/doc/UI/control_funs.jpg" width="40%"/>
 
 # 功能
 

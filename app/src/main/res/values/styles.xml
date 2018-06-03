@@ -259,8 +259,4 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="AlignTextView_Default">
-        <item name="align">center</item>
-    </style>
-
 </resources>

@@ -58,7 +58,7 @@
         android:background="@drawable/tab_bg"
         android:orientation="horizontal">
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_one"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -69,7 +69,7 @@
             xuedi:bottom_text="会话"
             xuedi:bottom_text_size="12sp" />
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_two"
             android:layout_width="0dp"
             android:layout_height="fill_parent"

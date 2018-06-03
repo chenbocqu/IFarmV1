@@ -749,4 +749,11 @@ public class CommonTools {
                 .setType(GPreviewBuilder.IndicatorType.Number)
                 .start();
     }
+
+    public void tologin() {
+        if (!isLogin()) {
+            startActivity(LoginNewActivity.class);
+        } else
+            showInfo("账号已登录！");
+    }
 }

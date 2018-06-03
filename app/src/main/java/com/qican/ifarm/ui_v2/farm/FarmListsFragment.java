@@ -7,27 +7,25 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qican.ifarm.R;
-import com.qican.ifarm.adapter.DataAdapter;
 import com.qican.ifarm.bean.Farm;
-import com.qican.ifarm.data.NetRequest;
 import com.qican.ifarm.ui_v2.base.FragmentWithOnResume;
 import com.qican.ifarm.utils.CommonTools;
-import com.wang.avi.AVLoadingIndicatorView;
+import com.qican.ifarm.view.HintView;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import me.kaelaela.verticalviewpager.VerticalViewPager;
+import okhttp3.Call;
 
-public class FarmListsFragment extends FragmentWithOnResume implements View.OnClickListener {
+public class FarmListsFragment extends FragmentWithOnResume {
     private View view;
     private CommonTools myTool;
 
@@ -37,14 +35,9 @@ public class FarmListsFragment extends FragmentWithOnResume implements View.OnCl
     public static final String FARM_KEY = "FARM_KEY";
 
     //下拉刷新
-    NetRequest netRequest;
     VerticalViewPager mViewPage;
     FragmentPagerAdapter mAdapter;
-    RelativeLayout rlNodata;
-
-    TextView tvRefresh;
-    AVLoadingIndicatorView loadView;
-
+    HintView hintView;
 
     @Nullable
     @Override
@@ -55,7 +48,6 @@ public class FarmListsFragment extends FragmentWithOnResume implements View.OnCl
         view = inflater.inflate(R.layout.fragment_farmlists, container, false);
         initView(view);
         initDatas();
-        initEvent();
 
         return view;
     }
@@ -107,85 +99,78 @@ public class FarmListsFragment extends FragmentWithOnResume implements View.OnCl
     }
 
     private void refreshData() {
-        if (netRequest == null) {
-            myTool.log("netRequest is null!");
-            return;
-        }
 
-        myTool.log("refresh Farm data ... ");
+        hintView.showLoading();
 
-        loadView.smoothToShow();
+        String url = myTool.getServAdd() + "farm/farmsList";
 
-        netRequest.getFarmList(new DataAdapter() {
-            @Override
-            public void farmList(List<Farm> farmList) {
+        OkHttpUtils.post().url(url)
+                .addParams("userId", myTool.getUserId())
+                .addParams("signature", myTool.getToken())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
 
-                loadView.smoothToHide();
+                        myTool.log(e.getMessage());
 
-                if (farmList != null) {
-                    mDatas.clear();
-                    mDatas.addAll(farmList);
-                    updateFragmentByData();
-                } else {
-                    myTool.showInfo("网络请求异常！");
-                }
-            }
-        });
+                        hintView.showError(e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                refreshData();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+//                        myTool.log(response);
+
+                        if (response == null) {
+                            myTool.showInfo("数据为空！");
+                            hintView.showContentByData(false);
+                        }
+
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<com.qican.ifarm.beanfromservice.Farm>>() {
+                        }.getType();
+
+                        mDatas.clear();
+
+                        List<com.qican.ifarm.beanfromservice.Farm> zhuFarms = gson.fromJson(response, type);
+
+                        for (com.qican.ifarm.beanfromservice.Farm farm : zhuFarms) {
+                            Farm myFarm = new Farm(farm);
+                            mDatas.add(myFarm);
+                        }
+
+                        hintView.showContentByData(!mDatas.isEmpty());
+
+                        updateFragmentByData();
+                    }
+                });
     }
 
     public void notifyDatasetChanged() {
         mAdapter.notifyDataSetChanged();
         if (mFragments.isEmpty()) {
-            showNoData();
         } else {
-            hideNoData();
-
             for (FragmentWithOnResume fragmentWithOnResume : mFragments)
                 fragmentWithOnResume.update();
         }
     }
 
-    private void showNoData() {
-        rlNodata.setVisibility(View.VISIBLE);
-        YoYo.with(Techniques.FadeIn)
-                .duration(1000)
-                .playOn(rlNodata);
-    }
-
-    private void hideNoData() {
-        YoYo.with(Techniques.FadeOut)
-                .withListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        rlNodata.setVisibility(View.GONE);
-                    }
-                })
-                .duration(100)
-                .playOn(rlNodata);
-    }
-
-    private void initEvent() {
-        tvRefresh.setOnClickListener(this);
-    }
-
     private void initView(View v) {
         mViewPage = (VerticalViewPager) view.findViewById(R.id.view_pager);
+        hintView = new HintView(getActivity(), view.findViewById(R.id.rl_hint));
 
-        netRequest = new NetRequest(getActivity());
-        rlNodata = (RelativeLayout) view.findViewById(R.id.rl_nothing_main);
-        tvRefresh = (TextView) view.findViewById(R.id.tv_refresh);
-
-        loadView = (AVLoadingIndicatorView) view.findViewById(R.id.load_view);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_refresh:
+        // 空白处可以刷新
+        hintView.setRefreshListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 refreshData();
-//                myTool.startActivity(AddFarmActivity_.class);
-                break;
-        }
+            }
+        });
     }
 }

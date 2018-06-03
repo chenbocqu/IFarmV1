@@ -1,5 +1,5 @@
 /**
- * 学递来啦主界面
+ * 智能农场主页面
  *
  * @time：2016-6-29
  */
@@ -17,7 +17,6 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.listener.OnFragmentListener;
 import com.qican.ifarm.ui.find.FindFragment;
 import com.qican.ifarm.ui.login.LoginNewActivity;
-import com.qican.ifarm.ui.node.NodeListFragment;
 import com.qican.ifarm.ui_v2.qrcode.ScanActivity;
 import com.qican.ifarm.ui_v2.base.FragmentWithOnResume;
 import com.qican.ifarm.ui_v2.camera.CameraListFragment;
@@ -25,7 +24,7 @@ import com.qican.ifarm.ui_v2.control.ControlFuncsFragment;
 import com.qican.ifarm.ui_v2.farm.FarmListsFragment;
 import com.qican.ifarm.ui_v2.userinfo.UserInfoFragment;
 import com.qican.ifarm.utils.CommonTools;
-import com.qican.ifarm.view.ChangeColorIconWithText;
+import com.qican.ifarm.view.TabIndicators;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -36,8 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EActivity(R.layout.activity_main)
-public class ComMainActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener, OnFragmentListener {
-    public static final int REQUSET_FOR_CURRENTLOCATION = 1; //请求当前位置
+public class ComMainActivity extends FragmentActivity
+        implements View.OnClickListener, ViewPager.OnPageChangeListener, OnFragmentListener {
 
     @ViewById(R.id.tv_title)
     TextView mTvTitle;
@@ -48,7 +47,15 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     private List<FragmentWithOnResume> mTabs = new ArrayList<FragmentWithOnResume>();
     private String[] mTitles = new String[]{"农场", "控制", "监控", "发现", "个人信息"};
     private FragmentPagerAdapter mAdapter;
-    private NodeListFragment nodeListFragment;
+
+    int tabIds[] = {
+            R.id.id_indicator_one,
+            R.id.id_indicator_two,
+            R.id.id_indicator_camera,
+            R.id.id_indicator_three,
+            R.id.id_indicator_four
+    };
+
     int curIndex = 0, pageIndex = 0;
 
     @ViewById(R.id.ll_login)
@@ -57,11 +64,14 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     @ViewById(R.id.ll_msg)
     LinearLayout llMsg;
 
-    private List<ChangeColorIconWithText> mTabIndicators = new ArrayList<ChangeColorIconWithText>();
+    private List<TabIndicators> mTabIndicators = new ArrayList<TabIndicators>();
     private CommonTools myTool;
 
     @AfterViews
     void doSomeThing() {
+
+        myTool = new CommonTools(this);
+
         initView();
         setFragemnts(); //加载页面及数据
         initEvent();
@@ -76,8 +86,13 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
     }
 
     private void setFragemnts() {
+
         // 载入主UI的几个页面
-        loadFragments();
+        mTabs.add(new FarmListsFragment());     // 农场数据
+        mTabs.add(new ControlFuncsFragment());  // 控制功能
+        mTabs.add(new CameraListFragment());    // 监控视频
+        mTabs.add(new FindFragment());          // 发现
+        mTabs.add(new UserInfoFragment());      // 个人信息
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 
@@ -95,47 +110,17 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
         mViewPager.setAdapter(mAdapter);
     }
 
-    /**
-     * 加载主界面的几个子UI
-     */
-    private void loadFragments() {
-        // 农场数据
-//        nodeListFragment = new NodeListFragment();FarmListForNodeDataFragment
-//        FarmListForNodeDataFragment fg1 = new FarmListForNodeDataFragment();
-        FarmListsFragment fg1 = new FarmListsFragment();
-        mTabs.add(fg1);
-
-        // 控制功能
-//        ControlListFragment tabFragment2 = new ControlListFragment();
-        ControlFuncsFragment tabFragment2 = new ControlFuncsFragment();
-        mTabs.add(tabFragment2);
-
-        // 监控视频
-//        FarmListOfCameraFragment farmListFragment = new FarmListOfCameraFragment();
-        CameraListFragment cameraListFragment = new CameraListFragment();
-        mTabs.add(cameraListFragment);
-
-        // 发现
-//        NearListFragment tabFragment1 = new NearListFragment();
-        FindFragment tabFragment1 = new FindFragment();
-        mTabs.add(tabFragment1);
-
-        // 个人信息，ui包下的类可用，现在测试ui_v2包下的类
-        UserInfoFragment tabFragment3 = new UserInfoFragment();
-        mTabs.add(tabFragment3);
-    }
-
     private void initView() {
-        myTool = new CommonTools(this);
 
-        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_one));
-        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_two));
-        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_camera));
-        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_three));
-        mTabIndicators.add((ChangeColorIconWithText) findViewById(R.id.id_indicator_four));
+        // 添加底部指示器
+        mTabIndicators.add((TabIndicators) findViewById(R.id.id_indicator_one));
+        mTabIndicators.add((TabIndicators) findViewById(R.id.id_indicator_two));
+        mTabIndicators.add((TabIndicators) findViewById(R.id.id_indicator_camera));
+        mTabIndicators.add((TabIndicators) findViewById(R.id.id_indicator_three));
+        mTabIndicators.add((TabIndicators) findViewById(R.id.id_indicator_four));
 
-        // 指示器设置监听
-        for (ChangeColorIconWithText indicator : mTabIndicators)
+        // 指示器设置点击监听
+        for (TabIndicators indicator : mTabIndicators)
             indicator.setOnClickListener(this);
 
         // 默认是首页设置为选中状态，默认首页title
@@ -145,46 +130,16 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        setIndicators(v);
-        doBtnClick(v);
-    }
 
-    /**
-     * 处理按钮的点击事件
-     *
-     * @param v
-     */
-    private void doBtnClick(View v) {
+        // 处理底部tab
+        for (int i = 0; i < tabIds.length; i++)
+            if (v.getId() == tabIds[i])
+                selectPage(i);
+
+        // 处理其他按钮
         switch (v.getId()) {
             case R.id.ll_login:
                 myTool.startActivity(LoginNewActivity.class);
-                break;
-        }
-    }
-
-
-    /**
-     * 设置底部指示器的点击及指示效果
-     *
-     * @param v
-     */
-    private void setIndicators(View v) {
-        // 根据按键切换ViewPager
-        switch (v.getId()) {
-            case R.id.id_indicator_one:
-                selectPage(0);
-                break;
-            case R.id.id_indicator_two:
-                selectPage(1);
-                break;
-            case R.id.id_indicator_camera:
-                selectPage(2);
-                break;
-            case R.id.id_indicator_three:
-                selectPage(3);
-                break;
-            case R.id.id_indicator_four:
-                selectPage(4);
                 break;
         }
     }
@@ -216,8 +171,8 @@ public class ComMainActivity extends FragmentActivity implements View.OnClickLis
         // + positionOffset);
         // 设置指示器，渐变效果
         if (positionOffset > 0) {
-            ChangeColorIconWithText left = mTabIndicators.get(position);
-            ChangeColorIconWithText right = mTabIndicators.get(position + 1);
+            TabIndicators left = mTabIndicators.get(position);
+            TabIndicators right = mTabIndicators.get(position + 1);
             left.setIconAlpha(1 - positionOffset);
             right.setIconAlpha(positionOffset);
         }

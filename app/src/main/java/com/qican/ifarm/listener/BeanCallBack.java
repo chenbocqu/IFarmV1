@@ -5,6 +5,7 @@
 package com.qican.ifarm.listener;
 
 import com.google.gson.Gson;
+import com.qican.ifarm.bean.Farm;
 import com.zhy.http.okhttp.callback.Callback;
 
 import java.lang.reflect.ParameterizedType;

@@ -6,7 +6,7 @@
     <attr name="strokeWidth" format="dimension" />
     <attr name="bGstrokeWidth" format="dimension" />
 
-    <declare-styleable name="ChangeColorIconWithText">
+    <declare-styleable name="TabIndicators">
         <attr name="bottom_icon" format="reference"></attr>
         <attr name="bottom_color" format="color"></attr>
         <attr name="bottom_text" format="string"></attr>

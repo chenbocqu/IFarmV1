@@ -76,7 +76,7 @@
         android:background="@drawable/tab_bg"
         android:orientation="horizontal">
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_one"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -87,7 +87,7 @@
             xuedi:bottom_text="农场"
             xuedi:bottom_text_size="16sp" />
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_two"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -98,7 +98,7 @@
             xuedi:bottom_text="控制"
             xuedi:bottom_text_size="16sp" />
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_camera"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -109,7 +109,7 @@
             xuedi:bottom_text="监控"
             xuedi:bottom_text_size="16sp" />
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_three"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -120,7 +120,7 @@
             xuedi:bottom_text="发现"
             xuedi:bottom_text_size="16sp" />
 
-        <com.qican.ifarm.view.ChangeColorIconWithText
+        <com.qican.ifarm.view.TabIndicators
             android:id="@+id/id_indicator_four"
             android:layout_width="0dp"
             android:layout_height="fill_parent"

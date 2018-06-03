@@ -1,5 +1,6 @@
 /**
- * 底部自定义View，包括图标，颜色，文本
+ * 底部自定义指示器
+ * 上图下文（可自定义图标，颜色，文本）
  */
 package com.qican.ifarm.view;
 
@@ -21,7 +22,7 @@ import android.view.View;
 
 import com.qican.ifarm.R;
 
-public class ChangeColorIconWithText extends View {
+public class TabIndicators extends View {
 
     //自定义属性
     private int mColor = 0xFF10B490;
@@ -41,11 +42,11 @@ public class ChangeColorIconWithText extends View {
     private Rect mTextBound;
     private Paint mTextPaint;
 
-    public ChangeColorIconWithText(Context context) {
+    public TabIndicators(Context context) {
         this(context, null);
     }
 
-    public ChangeColorIconWithText(Context context, AttributeSet attrs) {
+    public TabIndicators(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
@@ -56,27 +57,27 @@ public class ChangeColorIconWithText extends View {
      * @param attrs
      * @param defStyleAttr
      */
-    public ChangeColorIconWithText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public TabIndicators(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.ChangeColorIconWithText);
+                R.styleable.TabIndicators);
 
         int n = a.getIndexCount();
 
         for (int i = 0; i < n; i++) {
             int attr = a.getIndex(i);
             switch (attr) {
-                case R.styleable.ChangeColorIconWithText_bottom_icon:
+                case R.styleable.TabIndicators_bottom_icon:
                     BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
                     mIconBitmap = drawable.getBitmap();
                     break;
-                case R.styleable.ChangeColorIconWithText_bottom_color:
+                case R.styleable.TabIndicators_bottom_color:
                     mColor = a.getColor(attr, 0xFF10B490);
                     break;
-                case R.styleable.ChangeColorIconWithText_bottom_text:
+                case R.styleable.TabIndicators_bottom_text:
                     mText = a.getString(attr);
                     break;
-                case R.styleable.ChangeColorIconWithText_bottom_text_size:
+                case R.styleable.TabIndicators_bottom_text_size:
                     mTextSize = (int) a.getDimension(attr, TypedValue
                             .applyDimension(TypedValue.COMPLEX_UNIT_SP, 12,
                                     getResources().getDisplayMetrics()));

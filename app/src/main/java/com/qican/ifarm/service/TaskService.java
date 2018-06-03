@@ -61,10 +61,13 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
 
     private void connectWithService() {
         try {
+
             myTool.log("+ Websocket 正在建立连接 ：+\n[ userId, " + myTool.getUserId() + " ] \n[ signature, " + myTool.getToken() + " ]");
+
             client = new IFarmClient(new URI(myTool.getSocketAdd() + "controlServer?" +
                     "userId=" + myTool.getUserId() + "&signature=" + myTool.getToken()));
             client.connectBlocking();
+
             myTool.log("+       Websocket 连接成功...       +");
 
             client.setOnClientListener(this);
@@ -123,17 +126,15 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
     @Override
     public void onClose(int i, String s, boolean b) {
 
-        // Token存在则重新连接
-        if (!myTool.isErrorToken()) {
-            myTool.log("Token正确，正在重连···");
-            tryConnectAgain();
-        } else {
-            myTool.log("Token错误，没有回复···");
+        if (myTool.isErrorToken()) {
+            myTool.tologin();
         }
+
     }
 
     @Override
     public void onMessage(String s) {
+
         if (s == null || s.length() == 0) return;
 
         // 判断Token是否过期
@@ -364,7 +365,7 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
      */
     private boolean isJSONObj(String response) {
 
-        myTool.log("response=" + response);
+        myTool.log("response : " + response);
 
         if (response == null || response.length() == 0) return false;
 
@@ -375,28 +376,29 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
     }
 
     private boolean isTokenError(String s) {
-
-        if (!"{".equals(s.charAt(0)))
-            return false;
-
-
-        // 进行JSON转换
-        JSONObject obj = null;
-        try {
-            obj = new JSONObject(s);
-            String response = "";
-
-            if (obj.has("response"))
-                response = obj.getString("response");
-
-            // TODO: 确认 ERROR TOKEN 的返回值
-            if ("error token".equals(response))
-                return true;
-
-        } catch (JSONException e) {
-            myTool.log("JSON Error!");
-        }
-        return false;
+        myTool.log("isTokenError : " + s);
+        return "signature error".equals(s);
+//        if (!"{".equals(s.charAt(0)))
+//            return false;
+//
+//
+//        // 进行JSON转换
+//        JSONObject obj = null;
+//        try {
+//            obj = new JSONObject(s);
+//            String response = "";
+//
+//            if (obj.has("response"))
+//                response = obj.getString("response");
+//
+//            // TODO: 确认 ERROR TOKEN 的返回值
+//            if ("error token".equals(response))
+//                return true;
+//
+//        } catch (JSONException e) {
+//            myTool.log("JSON Error!");
+//        }
+//        return false;
     }
 
 
@@ -500,6 +502,7 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
                 myTool.log("JSON Error for addTaskV2()!");
             } catch (WebsocketNotConnectedException e) {
                 myTool.log("socket 连接失败 ！[ " + e.getMessage() + " ]");
+                myTool.tologin();
             }
         }
 
@@ -711,6 +714,7 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
                 client.send(array.toString());
             } catch (WebsocketNotConnectedException e) {
                 myTool.log("socket 连接失败 ！[ " + e.getMessage() + " ]");
+                myTool.tologin();
             }
         }
 

@@ -130,6 +130,7 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
 
     // 处理回复信息
     private void dealByResponse(String msg) {
+
         myTool.log("Add Task Activity Received Msg : " + msg);
 
         if ("no_auth".equals(msg))

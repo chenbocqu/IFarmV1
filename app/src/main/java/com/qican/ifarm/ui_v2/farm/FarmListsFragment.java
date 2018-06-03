@@ -101,6 +101,9 @@ public class FarmListsFragment extends FragmentWithOnResume {
 
     private void refreshData() {
 
+        mDatas.clear();
+        updateFragmentByData();
+
         hintView.showLoading();
 
         String url = myTool.getServAdd() + "farm/farmsList";

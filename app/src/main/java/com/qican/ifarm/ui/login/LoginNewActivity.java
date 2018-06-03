@@ -33,6 +33,7 @@ import com.qican.ifarm.bean.PhoneInfo;
 import com.qican.ifarm.service.TaskService;
 import com.qican.ifarm.utils.CommonTools;
 import com.qican.ifarm.utils.IFarmData;
+import com.qican.ifarm.utils.ServiceUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -258,7 +259,11 @@ public class LoginNewActivity extends Activity implements View.OnClickListener {
                                 myTool.setErrorToken(false);
                                 IFarmData.updateUserInfo(LoginNewActivity.this);
 
-                                // 开启任务服务
+                                // 如果没有开启服务的话，就开启服务
+                                if (!ServiceUtils.isServiceRunning(LoginNewActivity.this, "com.qican.ifarm.service.TaskService")) {
+                                    myTool.log("!isServiceRunning");
+                                }
+
                                 startService(new Intent(LoginNewActivity.this, TaskService.class));
 
                                 mLoginDialog.setTitleText("登录成功")

@@ -144,13 +144,11 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
         mFarm.setDesc(farmDesc);
         mFarm.setLabels(labelStr);
 
+        mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         mDialog.setTitleText("正在修改···");
+
         mDialog.showContentText(false);
-        if (!mDialog.isShowing()) {
-            mDialog.show();
-        } else {
-            mDialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
-        }
+        mDialog.show();
 
         OkHttpUtils.post().url(myTool.getServAdd() + "farm/updateFarmCollector")
                 .addParams("userId", myTool.getUserId())
@@ -168,7 +166,16 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
 
                     @Override
                     public void onResponse(String response, int id) {
+
+                        // 账号过期
+                        if ("lose efficacy".equals(response)) {
+                            myTool.showInfo("登录过期，请重新登录");
+                            myTool.tologin();
+                            return;
+                        }
+
                         myTool.log("添加农场response：" + response);
+
                         try {
                             JSONObject obj = new JSONObject(response);
 
@@ -185,9 +192,6 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                                     break;
                                 case "error":
                                     modifyFailed("服务器返回失败！");
-                                    break;
-                                case "lose effXXXX":
-                                    //需要重新获取token
                                     break;
                                 default:
                                     modifyFailed(msg);
@@ -279,7 +283,6 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
         labels = new ArrayList<>();
         farmLabel = new Label();
 
-        mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         mPicDialog = new PicChooseDialog(this, R.style.Translucent_NoTitle);
     }
 

@@ -149,6 +149,7 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
             case R.id.ll_farm_data:
                 myTool.startActivity(mFarm, DeviceDataListActivity.class);
                 break;
+
             case R.id.ll_add_photo:
                 try {
                     takePhoto.onPickMultiple(9);

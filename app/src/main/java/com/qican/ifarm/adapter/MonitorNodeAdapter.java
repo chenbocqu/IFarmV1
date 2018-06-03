@@ -17,7 +17,6 @@ import java.util.List;
 
 import cn.bingoogolapple.progressbar.BGAProgressBar;
 
-
 public class MonitorNodeAdapter extends ComAdapter<MonitorNode> {
 
     public MonitorNodeAdapter(Context context, List<MonitorNode> mDatas, int itemLayoutId) {
@@ -50,6 +49,8 @@ public class MonitorNodeAdapter extends ComAdapter<MonitorNode> {
             ivNodata.setVisibility(View.VISIBLE);
             return;
         }
+
+        tvStatus.setText("在线");
 
         llPara.setVisibility(View.VISIBLE);
         ivNodata.setVisibility(View.GONE);

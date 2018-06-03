@@ -18,7 +18,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/tv_nodename"
@@ -53,10 +53,8 @@
         </RelativeLayout>
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/gray" />
+            style="@style/SplitLine"
+            android:layout_marginTop="5dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -99,7 +97,6 @@
                     android:src="@drawable/nodata" />
 
                 <include layout="@layout/paras_layout" />
-
 
             </RelativeLayout>
 

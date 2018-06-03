@@ -82,8 +82,9 @@ public class MonitorNodeAdapter extends ComAdapter<MonitorNode> {
             textViews.get(i).setText(para.getValue() + " " + para.getUnit());
             teNames.get(i).setText(para.getName());
         }
+
         helper
-                .setText(R.id.tv_value_id, "ID:" + node.getId()) // value ID
+//                .setText(R.id.tv_value_id, "ID:" + node.getId()) // value ID
                 .setText(R.id.tv_updatetime, TimeUtils.formatTime(node.getUpdateTime()));
 
         if (node.getImgUrl() != null) {

@@ -41,6 +41,13 @@ public class HintView implements View.OnClickListener {
         rlNoData.setOnClickListener(this);
     }
 
+
+    public void showNoLogin() {
+
+        resetView();
+        rlNoLogin.setVisibility(View.VISIBLE);
+    }
+
     public void showContentByData(boolean hasData) {
 
         if (!isLogin()) return;

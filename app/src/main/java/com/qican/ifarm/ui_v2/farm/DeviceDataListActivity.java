@@ -78,7 +78,9 @@ public class DeviceDataListActivity extends CommonListActivity<MonitorNode> {
     }
 
     private void requestData(final StringCallback callback) {
+
         myTool.log("start get farm data ... ");
+
         OkHttpUtils.post().url(myTool.getServAdd() + "collectorDeviceValue/collectorDeviceCurrentValue")
                 .addParams("farmId", mFarm.getId())
                 .build()

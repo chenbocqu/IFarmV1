@@ -751,9 +751,6 @@ public class CommonTools {
     }
 
     public void tologin() {
-        if (!isLogin()) {
-            startActivity(LoginNewActivity.class);
-        } else
-            showInfo("账号已登录！");
+        startActivity(LoginNewActivity.class);
     }
 }

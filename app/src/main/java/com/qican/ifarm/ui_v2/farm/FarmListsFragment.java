@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.widget.EdgeEffectCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,29 +126,40 @@ public class FarmListsFragment extends FragmentWithOnResume {
                     @Override
                     public void onResponse(String response, int id) {
 
-//                        myTool.log(response);
+                        myTool.log(response);
 
                         if (response == null) {
                             myTool.showInfo("数据为空！");
                             hintView.showContentByData(false);
+                            return;
+                        }
+
+                        // 账号过期
+                        if ("lose efficacy".equals(response)) {
+                            hintView.showNoLogin();
+                            return;
                         }
 
                         Gson gson = new Gson();
                         Type type = new TypeToken<List<com.qican.ifarm.beanfromservice.Farm>>() {
                         }.getType();
 
-                        mDatas.clear();
+                        try {
+                            mDatas.clear();
 
-                        List<com.qican.ifarm.beanfromservice.Farm> zhuFarms = gson.fromJson(response, type);
+                            List<com.qican.ifarm.beanfromservice.Farm> zhuFarms = gson.fromJson(response, type);
+                            for (com.qican.ifarm.beanfromservice.Farm farm : zhuFarms) {
+                                Farm myFarm = new Farm(farm);
+                                mDatas.add(myFarm);
+                            }
 
-                        for (com.qican.ifarm.beanfromservice.Farm farm : zhuFarms) {
-                            Farm myFarm = new Farm(farm);
-                            mDatas.add(myFarm);
+                            hintView.showContentByData(!mDatas.isEmpty());
+
+                            updateFragmentByData();
+
+                        } catch (Exception e) {
+                            hintView.showError(e.getMessage());
                         }
-
-                        hintView.showContentByData(!mDatas.isEmpty());
-
-                        updateFragmentByData();
                     }
                 });
     }

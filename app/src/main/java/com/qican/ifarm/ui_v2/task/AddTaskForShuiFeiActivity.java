@@ -148,6 +148,9 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
             }
 
             String response = obj.getString("response");
+
+            myTool.log(response);
+
             switch (response) {
                 case "error":
                     mDialog.setTitleText("错误").setContentText("网络传输异常，请稍后重试！")
@@ -185,8 +188,9 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
                             })
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                     break;
+
                 default:
-                    mDialog.setTitleText("未知错误").setContentText("发生了不可预料的错误，请稍后重试！")
+                    mDialog.setTitleText("未知错误").setContentText(response)
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
             }
 
@@ -214,6 +218,11 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
 
         if (isEmpty(tvOperation)) {
             myTool.showInfo("请选择操作类型！");
+            return;
+        }
+
+        if (area == null) {
+            myTool.showInfo("请选择操作区域！");
             return;
         }
 
@@ -319,11 +328,6 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         lastTimeDate = date;
-//                        if (date.getHours() != 0)
-//                            tvLastTime.setText(date.getHours() + "小时 " + date.getMinutes() + "分钟");
-//                        else
-//                            tvLastTime.setText(date.getMinutes() + "分钟");
-
                         lastTime = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
                         tvLastTime.setText(TimeUtils.getTimeFromNum(lastTime));
                     }

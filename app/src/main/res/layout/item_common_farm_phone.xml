@@ -77,7 +77,6 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/tv_desc"
         style="@style/MyText"

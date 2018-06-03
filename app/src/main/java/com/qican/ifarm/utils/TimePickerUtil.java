@@ -24,10 +24,11 @@ public class TimePickerUtil {
             selectedDate.setTime(date);
 
         Calendar startDate = Calendar.getInstance();
-        startDate.set(2017, 5, 1); // 起始时间
+//        startDate.set(Calendar.MONTH, 5);
+//        startDate.set(Calendar.DAY_OF_MONTH, 1);
 
         Calendar endDate = Calendar.getInstance();
-        endDate.set(Calendar.getInstance().get(Calendar.YEAR) + 10, 1, 1);
+        endDate.set(Calendar.getInstance().get(Calendar.YEAR) + 1, 1, 1);
 
         TimePickerView pvTime = new TimePickerView.Builder(context, l)
                 .setType(TimePickerView.Type.MONTH_DAY_HOUR_MIN)//月日时分
@@ -63,7 +64,7 @@ public class TimePickerUtil {
         if (date != null)
             selectedDate.set(0, 0, 0, date.getHours(), date.getMinutes(), date.getSeconds());
         else
-            selectedDate.set(0, 0, 0, 0, 0, 10);
+            selectedDate.set(0, 0, 0, 0, 5, 0);
 
         TimePickerView pvTime = new TimePickerView.Builder(context, l)
 //                .setType(TimePickerView.Type.MONTH_DAY_HOUR_MIN)

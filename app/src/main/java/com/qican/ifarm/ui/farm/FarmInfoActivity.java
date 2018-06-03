@@ -35,6 +35,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.ViewsById;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -167,22 +169,35 @@ public class FarmInfoActivity extends TakePhotoActivity implements OnDialogListe
                     @Override
                     public void onResponse(String response, int id) {
                         myTool.log("添加农场response：" + response);
-                        switch (response) {
-                            case "success":
+                        try {
+                            JSONObject obj = new JSONObject(response);
 
-                                Intent intent = new Intent();
-                                intent.putExtra(KEY_FARM_INFO, mFarm);
-                                setResult(RESULT_OK, intent);
+                            String msg = obj.getString("response");
 
-                                modifySuccess();
-                                break;
-                            case "error":
-                                modifyFailed("服务器返回失败！");
-                                break;
-                            case "lose effXXXX":
-                                //需要重新获取token
-                                break;
+                            switch (msg) {
+                                case "success":
+
+                                    Intent intent = new Intent();
+                                    intent.putExtra(KEY_FARM_INFO, mFarm);
+                                    setResult(RESULT_OK, intent);
+
+                                    modifySuccess();
+                                    break;
+                                case "error":
+                                    modifyFailed("服务器返回失败！");
+                                    break;
+                                case "lose effXXXX":
+                                    //需要重新获取token
+                                    break;
+                                default:
+                                    modifyFailed(msg);
+                            }
+
+
+                        } catch (JSONException e) {
+                            modifyFailed(e.getMessage());
                         }
+
                     }
                 });
     }

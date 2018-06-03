@@ -242,6 +242,7 @@ public class MyInfoActivity extends TakePhotoActivity implements View.OnClickLis
         //上传用户头像
         OkHttpUtils.post().url(url)
                 .addParams("userId", myTool.getUserId())
+                .addParams("signature", myTool.getToken())
                 .addParams("flag", flag)//flag=0表示上次头像,1表示背景图像
                 .addFile("mFile", fileName, picFile)
                 .build()

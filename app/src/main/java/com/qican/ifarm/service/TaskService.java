@@ -15,6 +15,7 @@ import com.qican.ifarm.bean.ControlSystem;
 import com.qican.ifarm.bean.Task;
 import com.qican.ifarm.data.IFarmClient;
 import com.qican.ifarm.listener.OnInfoListener;
+import com.qican.ifarm.listener.OnTokenListener;
 import com.qican.ifarm.ui.task.TaskInfoActivity;
 import com.qican.ifarm.ui_v2.task.TaskInfoV2Activity;
 import com.qican.ifarm.utils.CommonTools;
@@ -122,12 +123,13 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
         return mBinder;
     }
 
-    // 监听Websocket,关闭关闭重连
+    // 监听Websocket,关闭重连
     @Override
     public void onClose(int i, String s, boolean b) {
 
+        // 因为Token错误，关闭socket
         if (myTool.isErrorToken()) {
-            myTool.tologin();
+
         }
 
     }
@@ -403,6 +405,13 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
 
 
     public class TaskBinder extends Binder {
+
+        OnTokenListener mTokenListener;
+
+        public void setmTokenListener(OnTokenListener mTokenListener) {
+            this.mTokenListener = mTokenListener;
+        }
+
         public Task getCurrTask() {
             return null;
         }
@@ -467,6 +476,7 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
         public void addTaskV2(Task task) {
 
             myTool.log("addTaskV2 ing ...");
+
             if (client == null) {
                 myTool.log("Task Service ERROR : WebSocket initial fialed !");
                 return;
@@ -501,8 +511,13 @@ public class TaskService extends Service implements IFarmClient.OnClientListener
             } catch (JSONException e) {
                 myTool.log("JSON Error for addTaskV2()!");
             } catch (WebsocketNotConnectedException e) {
+
                 myTool.log("socket 连接失败 ！[ " + e.getMessage() + " ]");
-                myTool.tologin();
+
+                if (mTokenListener != null)
+                    mTokenListener.tokenErr();
+
+//                myTool.tologin();
             }
         }
 

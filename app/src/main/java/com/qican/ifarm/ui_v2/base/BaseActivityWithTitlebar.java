@@ -44,9 +44,17 @@ public abstract class BaseActivityWithTitlebar extends FragmentActivity implemen
     }
 
     protected void setTextById(@IdRes int id, String info) {
+
         TextView tv = (TextView) findViewById(id);
-        if (info != null && tv != null)
+        if (tv == null) return;
+
+        if (info != null) {
+
+            if (tv.getVisibility() == View.GONE)
+                tv.setVisibility(View.VISIBLE);
+
             tv.setText(info);
+        }
     }
 
     private void initData() {

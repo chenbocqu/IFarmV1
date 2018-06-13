@@ -16,6 +16,7 @@ import com.qican.ifarm.bean.ControlSys;
 import com.qican.ifarm.bean.Operations;
 import com.qican.ifarm.bean.Task;
 import com.qican.ifarm.listener.OnInfoListener;
+import com.qican.ifarm.listener.OnTokenListener;
 import com.qican.ifarm.listener.PopwindowListener;
 import com.qican.ifarm.service.TaskService;
 import com.qican.ifarm.ui_v2.base.BaseActivityWithTitlebar;
@@ -108,7 +109,9 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            myTool.log("onServiceConnected : ");
             taskBinder = (TaskService.TaskBinder) service;
+
             taskBinder.setOnTaskMsgListener(new OnInfoListener<String>() {
                 @Override
                 public void onInfoChanged(final String msg) {
@@ -120,11 +123,40 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
                     });
                 }
             });
+
+            taskBinder.setmTokenListener(new OnTokenListener() {
+                @Override
+                public void tokenErr() {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (mDialog == null)
+                                mDialog = new SweetAlertDialog(AddTaskForShuiFeiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+
+                            mDialog
+                                    .setTitleText("提示")
+                                    .setContentText("Token已失效，请重新登录")
+                                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                        @Override
+                                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                        }
+                                    })
+                                    .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                        }
+                    });
+                }
+            });
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
+            myTool.log("onServiceDisconnected : ");
+
+            myTool.showInfo("断开连接！");
         }
     };
 
@@ -203,8 +235,10 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // 绑定任务服务
         bindService(new Intent(this, TaskService.class), connection, BIND_AUTO_CREATE);
+
     }
 
     @Override
@@ -273,6 +307,7 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
 
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("正在添加...");
         mDialog.show();
+
         taskBinder.addTaskV2(mTask);
 
         // 25秒超时处理

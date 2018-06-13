@@ -31,23 +31,30 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
     TaskTimeDisplayer taskDisplayerUtil;
     SwipeRefreshLayout srl;
 
+
     @Override
     public String getUITitle() {
         return "任务详情";
     }
 
     @Override
+    protected int getContentView() {
+        return R.layout.activity_task_info;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        // 查询剩余时间
         requestRemainTime();
     }
 
     private void requestRemainTime() {
+        // 查询任务状态（如果运行中，则会返回剩余时间）
         srl.setRefreshing(true);
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlTaskStrategy")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
+                .addParams("controlType", mTask.getControlType())
                 .addParams("command", "execute")
                 .addParams("commandCategory", "query")
                 .addParams("controllerLogId", mTask.getControllerLogId())
@@ -55,26 +62,41 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
+                        myTool.log(e);
+
                         myTool.showInfo("网络异常，稍后再试！");
                         srl.setRefreshing(false);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        myTool.showInfo("数据已更新！");
+
+                        myTool.log("response : " + response);
+
                         srl.setRefreshing(false);
                         if (response == null || "[]".equals(response)) return;
                         if (response.length() == 0 || response.charAt(0) != '{') return;
 
                         JSONObject obj = null;
+
                         try {
+
                             obj = new JSONObject(response);
+
                             if (!obj.has("response")) return;
                             String info = obj.getString("response");
+
                             if ("noTask".equals(info)) {
-                                toExitWithInfo("当前任务已失效！");
+
+                                setTextById(R.id.tv_msg, "已失效");
+
                             } else if ("error".equals(info)) {
-                                toExitWithInfo("出现异常错误！");
+
+                                setTextById(R.id.tv_msg, "请求异常");
+
+                                myTool.showInfo("请求异常，请稍后再试！");
+
                             } else {
 
                                 JSONObject taskObj = obj.getJSONObject("response");
@@ -92,6 +114,8 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
                                     mTask.setSystemType(obj.getString("systemType"));
 
                                 initTaskInfo();
+
+                                myTool.showInfo("数据已更新！");
 
                                 if (!taskObj.has("remainExecutionTime")) return;
                                 int remainTime = taskObj.getInt("remainExecutionTime");
@@ -136,6 +160,7 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
 
     @Override
     public void init() {
+
         mTask = new Task();
         mTask = (Task) myTool.getParam(Task.class);
 
@@ -169,8 +194,11 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
     }
 
     private void setStatus() {
+
         String status = null;
+
         if (mTask.getTaskState() == null) return;
+
         switch (mTask.getTaskState()) {
             case "WAITTING":
                 status = "等待中";
@@ -210,11 +238,6 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
 
     void initEvent() {
         srl.setOnRefreshListener(this);
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_task_info;
     }
 
     @Override

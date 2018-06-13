@@ -83,6 +83,12 @@ public class TaskListForShuiFeiActivity extends CommonListActivity<Task> {
                         hideProgress();
                         myTool.log(response);
 
+                        if ("lose efficacy".equals(response)) {
+                            myTool.showInfo("Token已失效，请重新登录！");
+                            myTool.tologin();
+                            return;
+                        }
+
                         if (response == null || "[]".equals(response)) {
                             return;
                         }
@@ -156,8 +162,8 @@ public class TaskListForShuiFeiActivity extends CommonListActivity<Task> {
                                 mData.add(task);
                             }
                             notifyDatasetChanged();
-                            
-                            
+
+
                         } catch (JSONException e) {
                             myTool.showInfo(e.getMessage());
                         }

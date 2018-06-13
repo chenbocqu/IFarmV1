@@ -13,6 +13,7 @@ import com.qican.ifarm.bean.ControlSys;
 import com.qican.ifarm.ui_v2.base.CommonListActivity;
 import com.qican.ifarm.ui_v2.task.TaskListForShuiFeiActivity;
 import com.qican.ifarm.utils.TimeUtils;
+import com.qican.ifarm.view.HintView;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -32,6 +33,7 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
     String title, error = "Error", controlOpera;
     private String systemCode;
     Bitmap bitmap;
+    HintView hintView;
 
     @Override
     public String getUITitle() {
@@ -42,6 +44,8 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
     public void init() {
         title = (String) myTool.getParam(String.class);
         if (title == null) title = error;
+
+        hintView = new HintView(this, findViewById(R.id.rl_hint));
 
         mData = new ArrayList<>();
 
@@ -90,6 +94,13 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
                     public void onResponse(String response, int id) {
                         hideProgress();
                         myTool.log(response);
+
+                        if ("lose efficacy".equals(response)) {
+                            myTool.showInfo("Token已失效，请重新登录！");
+                            myTool.tologin();
+                            return;
+                        }
+
                         if (response == null || "[]".equals(response)) return;
 
 

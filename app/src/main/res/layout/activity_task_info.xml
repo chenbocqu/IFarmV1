@@ -40,10 +40,25 @@
                     <include layout="@layout/task_status" />
                 </RelativeLayout>
 
-                <TextView
-                    style="@style/MyText"
-                    android:padding="10dp"
-                    android:text="详细信息" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        style="@style/MyText"
+                        android:text="详细信息" />
+
+                    <TextView
+                        android:id="@+id/tv_msg"
+                        style="@style/MyText"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/label_bg_blue"
+                        android:text="已失效"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     style="@style/Wrapper"

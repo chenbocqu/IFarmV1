@@ -753,4 +753,8 @@ public class CommonTools {
     public void tologin() {
         startActivity(LoginNewActivity.class);
     }
+
+    public void log(Exception e) {
+        log("Exception msg : " + e.getMessage());
+    }
 }

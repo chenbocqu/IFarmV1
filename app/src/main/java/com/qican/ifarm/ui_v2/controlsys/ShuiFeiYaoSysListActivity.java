@@ -10,7 +10,7 @@ import com.qican.ifarm.R;
 import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ControlSys;
-import com.qican.ifarm.ui_v2.base.CommonListActivity;
+import com.qican.ifarm.ui_v2.base.CommonListV2Activity;
 import com.qican.ifarm.ui_v2.task.TaskListForShuiFeiActivity;
 import com.qican.ifarm.utils.TimeUtils;
 import com.qican.ifarm.view.HintView;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import okhttp3.Call;
 
-public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
+public class ShuiFeiYaoSysListActivity extends CommonListV2Activity<ControlSys> {
 
     List<ControlSys> mData;
     String title, error = "Error", controlOpera;
@@ -73,11 +73,12 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
 
     private void requestData() {
 
-        showProgress();
-
         // 请求数据
         myTool.log("systemCode: " + systemCode);
 
+        mData.clear();
+
+        showLoading();
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/wfmControlSystemList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -85,24 +86,31 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        hideProgress();
-                        showError();
-                        myTool.log(e.getMessage());
+
+                        // 点击空白处重新刷新
+                        showErr(e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                requestData();
+                            }
+                        });
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        hideProgress();
+
                         myTool.log(response);
 
                         if ("lose efficacy".equals(response)) {
-                            myTool.showInfo("Token已失效，请重新登录！");
-                            myTool.tologin();
+                            showNoLogin();
                             return;
                         }
 
-                        if (response == null || "[]".equals(response)) return;
-
+                        if (response == null || "[]".equals(response)) {
+                            showContentByData(false);
+                            return;
+                        }
 
                         JSONArray array = null;
                         try {
@@ -167,10 +175,19 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
                                 myTool.log(sys.toString());
                                 mData.add(sys);
                             }
+
                             notifyDatasetChanged();
 
                         } catch (JSONException e) {
-                            myTool.showInfo(e.getMessage());
+
+                            // 点击空白处重新刷新
+                            showErr(e.getMessage(), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    requestData();
+                                }
+                            });
+
                         }
 
                     }
@@ -209,7 +226,7 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
             public void run() {
                 l.refreshFinish(true);
             }
-        }, 1000);
+        }, 1500);
     }
 
     @Override
@@ -218,6 +235,7 @@ public class ShuiFeiYaoSysListActivity extends CommonListActivity<ControlSys> {
             @Override
             public void run() {
                 l.loadMoreFinish(true);
+                myTool.showInfo("列表已更新！");
             }
         }, 1000);
     }

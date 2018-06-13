@@ -14,15 +14,6 @@
         android:layout_height="match_parent"
         android:background="@color/gray">
 
-        <include layout="@layout/view_nodata" />
-
-        <ImageView
-            android:id="@+id/iv_net_error"
-            style="@style/MyImg"
-            android:layout_centerInParent="true"
-            android:src="@drawable/net_error"
-            android:visibility="gone" />
-
         <com.qican.ifarm.view.refresh.PullToRefreshLayout
             android:id="@+id/pullToRefreshLayout"
             android:layout_width="match_parent"
@@ -39,15 +30,7 @@
                 android:scrollingCache="false" />
         </com.qican.ifarm.view.refresh.PullToRefreshLayout>
 
-        <com.wang.avi.AVLoadingIndicatorView
-            android:id="@+id/avi"
-            style="@style/AVLoadingIndicatorView.Large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            app:indicatorColor="@color/main_color"
-            app:indicatorName="BallTrianglePathIndicator" />
+        <include layout="@layout/hint_view" />
 
     </RelativeLayout>
 

@@ -264,6 +264,7 @@ public class AllTaskListActivity extends CommonListActivity<Task> {
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlTaskStrategy")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
+                .addParams("controlType",task.getControlType())
                 .addParams("command", "delete")
                 .addParams("controllerLogId", task.getControllerLogId())
                 .build()

@@ -137,11 +137,15 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
 
                             mDialog
                                     .setTitleText("提示")
-                                    .setContentText("Token已失效，请重新登录")
+                                    .setContentText("Token已失效，请重新登录认证！")
                                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
 
+                                            myTool.tologin();
+                                            mDialog.dismissWithAnimation();
+
+                                            finish();
                                         }
                                     })
                                     .changeAlertType(SweetAlertDialog.WARNING_TYPE);
@@ -185,10 +189,12 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
             myTool.log(response);
 
             switch (response) {
+
                 case "error":
                     mDialog.setTitleText("错误").setContentText("网络传输异常，请稍后重试！")
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                     break;
+
                 case "running":
                     mDialog.setTitleText("成功").setContentText("恭喜，任务添加成功！")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -211,6 +217,7 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
                             })
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                     break;
+
                 case "currentRunning":
                     mDialog.setTitleText("添加失败").setContentText("与正在执行的任务相冲突！")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
@@ -222,8 +229,25 @@ public class AddTaskForShuiFeiActivity extends BaseActivityWithTitlebar implemen
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
                     break;
 
+                case "executionTimeout":
+                    mDialog.setTitleText("提示").setContentText("执行时间不合法，请注意检查！")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                }
+                            })
+                            .changeAlertType(SweetAlertDialog.WARNING_TYPE);
+                    break;
+
                 default:
                     mDialog.setTitleText("未知错误").setContentText(response)
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                }
+                            })
                             .changeAlertType(SweetAlertDialog.ERROR_TYPE);
             }
 

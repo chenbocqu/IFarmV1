@@ -41,6 +41,7 @@ public abstract class CommonListV2Activity<T> extends Activity implements View.O
     private int iconResId = 0;
     private ImageView ivIconMenu;
     protected HintView hintView;
+    View.OnClickListener refreshListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public abstract class CommonListV2Activity<T> extends Activity implements View.O
 
     private void initData() {
         init();
+
+        if (this.refreshListener != null)
+            hintView.setRefreshListener(refreshListener);
 
         initTitleBar();
 
@@ -109,6 +113,7 @@ public abstract class CommonListV2Activity<T> extends Activity implements View.O
         // header
         if (getHeadLayout() != 0)
             vHeader = View.inflate(this, getHeadLayout(), null);
+
     }
 
     protected void showLoading() {
@@ -127,6 +132,10 @@ public abstract class CommonListV2Activity<T> extends Activity implements View.O
 
     }
 
+    protected void setRefreshListener(View.OnClickListener l) {
+        this.refreshListener = l;
+    }
+
     protected void showNoLogin() {
 
         if (hintView != null)
@@ -135,8 +144,10 @@ public abstract class CommonListV2Activity<T> extends Activity implements View.O
     }
 
     protected void showContentByData(boolean hasData) {
+
         if (hintView != null)
             hintView.showContentByData(hasData);
+
     }
 
     public void notifyDatasetChanged() {

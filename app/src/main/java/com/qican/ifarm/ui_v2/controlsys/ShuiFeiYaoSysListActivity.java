@@ -45,8 +45,6 @@ public class ShuiFeiYaoSysListActivity extends CommonListV2Activity<ControlSys> 
         title = (String) myTool.getParam(String.class);
         if (title == null) title = error;
 
-        hintView = new HintView(this, findViewById(R.id.rl_hint));
-
         mData = new ArrayList<>();
 
         switch (title) {
@@ -69,6 +67,13 @@ public class ShuiFeiYaoSysListActivity extends CommonListV2Activity<ControlSys> 
         }
 
         requestData();
+
+        setRefreshListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestData();
+            }
+        });
     }
 
     private void requestData() {

@@ -72,6 +72,8 @@ public class AddTaskActivity extends BaseActivityWithTitlebar implements Popwind
             mSys.setSystemType("error");
         }
 
+        myTool.log(mSys.toString());
+
         tvStartTime = (TextView) findViewById(R.id.tv_starttime);
         tvLastTime = (TextView) findViewById(R.id.tv_lasttime);
         tvOperation = (TextView) findViewById(R.id.tv_operate);
@@ -253,6 +255,11 @@ public class AddTaskActivity extends BaseActivityWithTitlebar implements Popwind
 
         popWin4SelectOperation = new PopWin4SelectOperation(this, operationses);
 
+        myTool.log("请求功能 url :" + myTool.getServAdd() + "farmControl/farmControlOperationList\n"
+                + "userId:" + myTool.getUserId() + "\n" +
+                "signature:" + myTool.getToken() + "\n" +
+                "systemId:" + mSys.getSystemId());
+
         // 从服务器请求选项
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlOperationList")
                 .addParams("userId", myTool.getUserId())
@@ -267,6 +274,9 @@ public class AddTaskActivity extends BaseActivityWithTitlebar implements Popwind
 
                     @Override
                     public void onResponse(String response, int id) {
+
+                        myTool.log("请求功能res : " + response);
+
                         if (response == null || "{}".equals(response)) return;
 
                         JSONArray array = null;

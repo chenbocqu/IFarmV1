@@ -12,6 +12,7 @@ import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ControlSys;
 import com.qican.ifarm.bean.Task;
 import com.qican.ifarm.ui_v2.base.CommonListActivity;
+import com.qican.ifarm.ui_v2.base.CommonListV2Activity;
 import com.qican.ifarm.utils.TimeUtils;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -27,7 +28,7 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 
-public class TaskListActivity extends CommonListActivity<Task> {
+public class TaskListActivity extends CommonListV2Activity<Task> {
 
     ControlSys mSys;
     List<Task> mData;
@@ -55,17 +56,26 @@ public class TaskListActivity extends CommonListActivity<Task> {
                 myTool.startActivity(mSys, AddTaskActivity.class);
             }
         });
+
+        setRefreshListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refreshData();
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         // 请求数据
         refreshData();
     }
 
     private void refreshData() {
-        showProgress();
+
+        showLoading();
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlTaskStrategy")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
@@ -75,15 +85,31 @@ public class TaskListActivity extends CommonListActivity<Task> {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        showError();
+
+                        pullToRefreshLayout.refreshFinish(true);
+
+                        showErr(e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                refreshData();
+                            }
+                        });
+
                     }
 
                     @Override
-                    public void onResponse(String response, int id) {
-                        hideProgress();
+                    public void onResponse(final String response, int id) {
+
                         myTool.log(response);
+                        pullToRefreshLayout.refreshFinish(true);
+
+                        if ("lose efficacy".equals(response)) {
+                            showNoLogin();
+                            return;
+                        }
 
                         if (response == null || "[]".equals(response)) {
+                            showContentByData(false);
                             return;
                         }
 
@@ -155,11 +181,18 @@ public class TaskListActivity extends CommonListActivity<Task> {
 
                                 mData.add(task);
                             }
+
                             notifyDatasetChanged();
 
-
                         } catch (JSONException e) {
-                            myTool.showInfo(e.getMessage());
+
+                            showErr(e.getMessage(), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    refreshData();
+                                }
+                            });
+
                         }
 
                     }
@@ -271,6 +304,7 @@ public class TaskListActivity extends CommonListActivity<Task> {
     }
 
     private void delTask(Task task) {
+
         mDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE).setTitleText("正在撤销任务...");
         mDialog.show();
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlTaskStrategy")

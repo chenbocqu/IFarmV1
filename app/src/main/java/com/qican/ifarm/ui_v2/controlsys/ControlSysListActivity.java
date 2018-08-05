@@ -11,6 +11,7 @@ import com.qican.ifarm.adapter.ComAdapter;
 import com.qican.ifarm.adapter.ViewHolder;
 import com.qican.ifarm.bean.ControlSys;
 import com.qican.ifarm.ui_v2.base.CommonListActivity;
+import com.qican.ifarm.ui_v2.base.CommonListV2Activity;
 import com.qican.ifarm.ui_v2.task.TaskListActivity;
 import com.qican.ifarm.utils.TimeUtils;
 import com.qican.ifarm.view.refresh.PullToRefreshLayout;
@@ -26,7 +27,7 @@ import java.util.List;
 
 import okhttp3.Call;
 
-public class ControlSysListActivity extends CommonListActivity<ControlSys> {
+public class ControlSysListActivity extends CommonListV2Activity<ControlSys> {
 
     List<ControlSys> mData;
     String title, error = "Error";
@@ -86,6 +87,12 @@ public class ControlSysListActivity extends CommonListActivity<ControlSys> {
         }
 
         requestData();
+        setRefreshListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestData();
+            }
+        });
     }
 
     private void requestData() {
@@ -93,7 +100,9 @@ public class ControlSysListActivity extends CommonListActivity<ControlSys> {
         // 请求数据
         myTool.log("systemCode: " + systemCode);
 
-        OkHttpUtils.post().url(myTool.getServAdd()+ "farmControl/controlSystemList")
+        showLoading();
+
+        OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/controlSystemList")
                 .addParams("userId", myTool.getUserId())
                 .addParams("signature", myTool.getToken())
                 .addParams("systemCode", systemCode)
@@ -101,13 +110,29 @@ public class ControlSysListActivity extends CommonListActivity<ControlSys> {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        myTool.log(e.getMessage());
+                        // 点击空白处重新刷新
+                        showErr(e.getMessage(), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                requestData();
+                            }
+                        });
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
+
                         myTool.log(response);
-                        if (response == null || "[]".equals(response)) return;
+
+                        if ("lose efficacy".equals(response)) {
+                            showNoLogin();
+                            return;
+                        }
+
+                        if (response == null || "[]".equals(response)) {
+                            showContentByData(false);
+                            return;
+                        }
 
                         JSONArray array = null;
                         try {
@@ -157,6 +182,7 @@ public class ControlSysListActivity extends CommonListActivity<ControlSys> {
                                 myTool.log(sys.toString());
                                 mData.add(sys);
                             }
+
                             notifyDatasetChanged();
 
 
@@ -211,4 +237,5 @@ public class ControlSysListActivity extends CommonListActivity<ControlSys> {
             }
         }, 1000);
     }
+
 }

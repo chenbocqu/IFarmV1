@@ -30,6 +30,7 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
     Task mTask;
     TaskTimeDisplayer taskDisplayerUtil;
     SwipeRefreshLayout srl;
+    boolean isRequested = false;
 
 
     @Override
@@ -49,6 +50,9 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
     }
 
     private void requestRemainTime() {
+
+        if (isRequested) return;
+
         // 查询任务状态（如果运行中，则会返回剩余时间）
         srl.setRefreshing(true);
         OkHttpUtils.post().url(myTool.getServAdd() + "farmControl/farmControlTaskStrategy")
@@ -154,6 +158,7 @@ public class TaskInfoV2Activity extends BaseActivityWithTitlebar implements Swip
             public void onFinish() {
                 setText(R.id.tv_remaining_time, "执行完毕");
                 requestRemainTime();
+                isRequested = true;
             }
         }.start();
     }

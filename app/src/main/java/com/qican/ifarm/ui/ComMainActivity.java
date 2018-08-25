@@ -223,7 +223,7 @@ public class ComMainActivity extends FragmentActivity
                 if (!mTabs.isEmpty())
                     mTabs.get(curIndex).update();
             }
-        }, 500);
+        }, 1000);
     }
 
     private void initDatas() {

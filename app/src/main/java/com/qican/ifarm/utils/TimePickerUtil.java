@@ -24,8 +24,8 @@ public class TimePickerUtil {
             selectedDate.setTime(date);
 
         Calendar startDate = Calendar.getInstance();
-//        startDate.set(Calendar.MONTH, 5);
-//        startDate.set(Calendar.DAY_OF_MONTH, 1);
+        startDate.set(Calendar.MONTH, Calendar.getInstance().get(Calendar.MONTH) - 5); // 5个月前
+        startDate.set(Calendar.DAY_OF_MONTH, 1);
 
         Calendar endDate = Calendar.getInstance();
         endDate.set(Calendar.getInstance().get(Calendar.YEAR) + 1, 1, 1);
@@ -44,7 +44,7 @@ public class TimePickerUtil {
                 .setCancelColor(0xff636363)//取消按钮文字颜色
                 .setTitleBgColor(0xffe7e7e7)//标题背景颜色 Night mode
                 .setBgColor(0xffffffff)//滚轮背景颜色 Night mode
-//                .setRange(Calendar.getInstance().get(Calendar.YEAR) - 10, Calendar.getInstance().get(Calendar.YEAR) + 10)//默认是1900-2100年
+//                .setRange(Calendar.getInstance().get(Calendar.YEAR) - 2, Calendar.getInstance().get(Calendar.YEAR) + 2)//默认是1900-2100年
                 .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
                 .setRangDate(startDate, endDate)//起始终止年月日设定
                 .setLabel("年", "月", "日", "时", "分", "秒")

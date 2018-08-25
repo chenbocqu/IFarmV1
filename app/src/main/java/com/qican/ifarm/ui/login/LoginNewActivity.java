@@ -146,25 +146,34 @@ public class LoginNewActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.tv_ipmodify:
                 ipModifyDialog.show();
                 break;
+
             case R.id.iv_back:
                 finish();
                 break;
+
             case R.id.iv_del_username:
                 edtUserName.setText("");
+                edtUserName.requestFocus();
                 break;
+
             case R.id.iv_del_password:
                 edtPassword.setText("");
+                edtPassword.requestFocus();
                 break;
+
             case R.id.btn_login:
                 toLogin();//登录
                 break;
+
             case R.id.btn_register:
                 // 注册的手机验证
                 verifyPhone(REGISTER);
                 break;
+
             case R.id.btn_resetpwd:
                 //重置密码的手机验证
                 verifyPhone(RESETPWD);

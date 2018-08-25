@@ -29,6 +29,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -75,6 +76,18 @@ public class DataDownloadActivity extends Activity {
 
     void initData() {
         tvTitle.setText("数据下载中心");
+
+        Calendar calendar = Calendar.getInstance();
+        endTimeDate = new Date();
+        endTimeDate.setTime(calendar.getTimeInMillis());
+
+        // 开始时间为1月前
+        calendar.set(Calendar.MONTH, Calendar.getInstance().get(Calendar.MONTH) - 1); // 5个月前
+        starTimeDate = new Date();
+        starTimeDate.setTime(calendar.getTimeInMillis());
+
+        tvStartTime.setText(TimeUtils.formatDateTime(getTime(starTimeDate)));
+        tvEndTime.setText(TimeUtils.formatDateTime(getTime(endTimeDate)));
 
         mNode = (MonitorNode) myTool.getParam(MonitorNode.class);
         if (mNode == null || mNode.getDeviceId() == null) return;

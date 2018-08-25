@@ -3,7 +3,9 @@ package com.qican.ifarm.ui_v2.farm;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,36 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
 
     List<String> mPaths;
     List<ImageView> ivList;
+    String TAG = "DEBUG";
+
+    @Override
+    public void update() {
+        super.update();
+        mFarm = (Farm) getArguments().getSerializable(FarmListsFragment.FARM_KEY);
+        Log.i("DEBUG", "FarmInfoFragment update(), getView()" + view);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: " + view);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            myTool.log("onHiddenChanged");
+            initDatas();
+        }
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.i(TAG, "onViewCreated: " + view);
+    }
 
     @Nullable
     @Override
@@ -66,7 +98,10 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
 
     private void initDatas() {
 
-        if (myTool == null) return;
+        if (myTool == null) {
+            Log.i("DEBUG", "Farm info fragment myTool == null!");
+            return;
+        }
 
         mUrls = new ArrayList<>();
         mPaths = new ArrayList<>();
@@ -81,7 +116,9 @@ public class FarmInfoFragment extends FragmentWithOnResume implements View.OnCli
         mUrls.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=793198046,4140276775&fm=200&gp=0.jpg");
         mUrls.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=4227489361,534897407&fm=200&gp=0.jpg");
 
+        Log.i("DEBUG", "initDatas: " + mUrls);
         myTool.showImage(mFarm.getImgUrl(), ivFarmImg, R.mipmap.default_farm_img);
+
         tvName.setText(mFarm.getName());
         tvDesc.setText(mFarm.getDesc());
         tvTime.setText(TimeUtils.formatDateTime(mFarm.getTime()));

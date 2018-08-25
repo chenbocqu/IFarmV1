@@ -55,6 +55,7 @@ public class FarmListsFragment extends FragmentWithOnResume {
 
     @Override
     public void update() {
+        myTool.log("FarmList Fragment update()...");
         refreshData();
     }
 
@@ -76,8 +77,8 @@ public class FarmListsFragment extends FragmentWithOnResume {
         };
         mViewPage.setAdapter(mAdapter);
 
-//        updateFragmentByData();
-//        refreshData();
+        updateFragmentByData();
+        refreshData();
     }
 
     private void updateFragmentByData() {
@@ -168,12 +169,20 @@ public class FarmListsFragment extends FragmentWithOnResume {
     }
 
     public void notifyDatasetChanged() {
+
         mAdapter.notifyDataSetChanged();
+
         if (mFragments.isEmpty()) {
         } else {
             for (FragmentWithOnResume fragmentWithOnResume : mFragments)
+            {
                 fragmentWithOnResume.update();
+                fragmentWithOnResume.onResume();
+            }
+
         }
+        
+        mAdapter.notifyDataSetChanged();
     }
 
     private void initView(View v) {

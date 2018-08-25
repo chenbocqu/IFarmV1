@@ -112,12 +112,15 @@ public class DeviceDataListActivity extends CommonListActivity<MonitorNode> {
                             // for different device type
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject obj = array.getJSONObject(i);
+
                                 // 类型名称
                                 String type = obj.getString("type");
+                                String typeName = obj.getString("typeName");
+
                                 // code
-                                String code = obj.getString("code");
-                                String header = obj.getString("header");
                                 String unit = obj.getString("unit");
+                                String code = obj.getString("code");        // 对应的键值
+                                String header = obj.getString("header");    // 中文名称
 
                                 String[] codes = code.split(",");
                                 String[] headers = header.split(",");
@@ -132,6 +135,7 @@ public class DeviceDataListActivity extends CommonListActivity<MonitorNode> {
                                     JSONObject nodeObj = dataArray.getJSONObject(index);
 
                                     if (!nodeObj.has("deviceId")) continue;
+
                                     // device info
                                     node.setDeviceId(nodeObj.getString("deviceId"));
                                     node.setOrderNo(nodeObj.getString("deviceOrderNo"));
@@ -140,15 +144,14 @@ public class DeviceDataListActivity extends CommonListActivity<MonitorNode> {
                                     node.setType(nodeObj.getString("deviceType"));
 
                                     // to check has data or not ...
-                                    if (!nodeObj.has("deviceValueId")) {
-                                        node.setHashData(false);
-                                        mDatas.add(node);
-                                        continue; // for next data ...
-                                    }
+//                                    if (!nodeObj.has("deviceValueId")) {
+//                                        node.setHashData(false);
+//                                        mDatas.add(node);
+//                                        continue; // for next data ...
+//                                    }
 
                                     // exist data value, start wraping data ...
                                     node.setHashData(true);
-                                    node.setId(nodeObj.getString("deviceValueId"));
 
                                     List<DevicePara> paras = new ArrayList<DevicePara>();
                                     // paras in data ...
@@ -169,6 +172,7 @@ public class DeviceDataListActivity extends CommonListActivity<MonitorNode> {
 
                                         node.setNodeDatas(paras);
                                     }
+
                                     // other data ...
                                     node.setUpdateTime(nodeObj.getString("updateTime"));
 

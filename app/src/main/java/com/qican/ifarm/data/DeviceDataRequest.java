@@ -24,6 +24,7 @@ import okhttp3.Call;
 
 public class DeviceDataRequest {
     public static void getNodeInfoById(Context context, MonitorNode node, final InfoRequestListener<MonitorNode> l) {
+
         final CommonTools myTool = new CommonTools(context);
         OkHttpUtils.post().url(myTool.getServAdd() + "collectorDeviceValue/collectorDeviceCurrentValue")
                 .addParams("deviceId", node.getDeviceId())
@@ -38,6 +39,8 @@ public class DeviceDataRequest {
                     @Override
                     public void onResponse(String response, int id) {
 
+                        myTool.log(response);
+
                         if (response == null) return;
 
                         JSONArray array = null;
@@ -45,7 +48,7 @@ public class DeviceDataRequest {
                             array = new JSONArray(response);
                             if (array.length() == 0) {
                                 // TODO: 当前无数据
-                                if (l != null) l.onFail(new Exception());
+                                if (l != null) l.onFail(new Exception("当前无数据"));
                                 return;
                             }
 
@@ -80,16 +83,8 @@ public class DeviceDataRequest {
                                     node.setType(nodeObj.getString("deviceType"));
 
                                     // to check has data or not ...
-                                    if (!nodeObj.has("deviceValueId")) {
-                                        node.setHashData(false);
-                                        if (l != null)
-                                            l.onSuccess(node);
-                                        continue; // for next data ...
-                                    }
-
                                     // exist data value, start wraping data ...
                                     node.setHashData(true);
-                                    node.setId(nodeObj.getString("deviceValueId"));
 
                                     List<DevicePara> paras = new ArrayList<DevicePara>();
                                     // paras in data ...

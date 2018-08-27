@@ -176,6 +176,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
                     @Override
                     public void onResponse(String response, int id) {
+
+                        myTool.log(response);
+                        if ("lose efficacy".equals(response)) {
+
+                        }
+
                         JSONObject object = null;
                         try {
                             object = new JSONObject(response);
